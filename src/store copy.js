@@ -91,7 +91,7 @@ export const store = configureStore({
     data_center: getDataCenterReducer,
     update_data_center: updateDataCenterReducer,
 
-    // AWS Customer
+    // AWS Customerr
     create_aws_customer: awsCustomerCreateReducer,
     aws_customer: getAWSCustomerReducer,
     update_aws_customer: updateAWSCustomerReducer,
