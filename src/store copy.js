@@ -29,7 +29,9 @@ import { mitreReducer } from './slices/Mitreslice'
 import { createDataCenterReducer, getAllDataCentersReducer, getDataCenterReducer, updateDataCenterReducer } from './slices/DataCenterslice'
 import { awsCustomerCreateReducer, getAllAWSCustomersReducer, getAWSCustomerReducer, updateAWSCustomerReducer } from './slices/AWSCustomerslice'
 import { O365CustomerSliceReducer } from './slices/O365Customerslice'
-
+import { V1CustomerProductReducer } from './slices/V1CustomerProduct'
+import { V1CustomerReducer } from './slices/V1Customerslice'
+import { V1ProductReducer } from './slices/V1Productslice'
 
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
@@ -54,30 +56,30 @@ export const store = configureStore({
     theme: themeReducer,
     rightSidebarShow: rightSidebarReducer,
     sideBarShow: sidebarReducer,
-    
+
     // SOAR Customer
     createSOARCustomer: createSOARCustomerReducer,
     allSOARCustomers: getAllSOARCustomersReducer,
     SOARCustomer: getSOARCustomerReducer,
     updateSOARCustomer: updateSOARCustomerReducer,
-    
+
     // SOAR Product
     soarProducts: soarProductReducer,
-    
+
     // RSS Feed
     create_rss_feed: RssFeedReducer,
     configured_rss_feed: RssFeedReducer,
     rss_feeds: RssFeedReducer,
     rss_feed: RssFeedReducer,
     update_rss_feed: RssFeedReducer,
-    
+
     // Artifact
     create_artifact: createArtifactReducer,
     artifacts: getArtifactsReducer,
     artifact: getArtifactReducer,
     update_artifact: updateArtifactReducer,
     test_artifacts: testArtifactsReducer,
-    
+
     // ML Model, Tags, and Mitre
     ml_model: mlModelReducer,
     all_tags: tagsReducer,
@@ -94,7 +96,7 @@ export const store = configureStore({
     aws_customer: getAWSCustomerReducer,
     update_aws_customer: updateAWSCustomerReducer,
     all_aws_customers: getAllAWSCustomersReducer,
-    
+
     // O365 Customer
     create_O365_customer: O365CustomerSliceReducer,
     O365_customers: O365CustomerSliceReducer,
@@ -106,28 +108,31 @@ export const store = configureStore({
     rightSidebarShow: rightSidebarReducer,
     sideBarShow: sidebarReducer,
 
+    create_V1_customer_product: V1CustomerProductReducer,
+    V1_customer_products_for_customer: V1CustomerProductReducer,
+    V1_customer_product: V1CustomerProductReducer,
+    update_V1_customer_product: V1CustomerProductReducer,
+
+    create_V1_customer: V1CustomerReducer,
+    V1_customers: V1CustomerReducer,
+    V1_customer: V1CustomerReducer,
+    update_V1_customer: V1CustomerReducer,
+
+    create_V1_product: V1ProductReducer,
+    V1_products: V1ProductReducer,
+    V1_product: V1ProductReducer,
+    update_V1_product: V1ProductReducer,
+
     // Other slices can be commented out or removed
     /*
 
 
     // V1 Customer
-    create_V1_customer: v1CustomerReducer,
-    V1_customers: v1CustomerReducer,
-    V1_customer: v1CustomerReducer,
-    update_V1_customer: v1CustomerReducer,
 
     // V1 Customer Product
-    create_V1_customer_product: v1CustomerProductReducer,
-    V1_customer_products_for_customer: v1CustomerProductReducer,
-    V1_customer_product: v1CustomerProductReducer,
-    update_V1_customer_product: v1CustomerProductReducer,
 
 
     // V1 Product
-    create_V1_product: v1ProductReducer,
-    V1_products: v1ProductReducer,
-    V1_product: v1ProductReducer,
-    update_V1_product: v1ProductReducer,
 
 
 
