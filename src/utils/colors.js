@@ -1,0 +1,22 @@
+export const Colors = {
+  LINK: '#2a8bfa',
+  BLUE: '#3860d9',
+  BLUE_DARK: '#426CFF',
+  BLUE_BG: '#3B82F6',
+  WHITE: '#fff',
+  LIGHT_GRAY: '#3C3C3C',
+  GRAY: 'gray',
+  RATINGS: {
+    GREEN: '#14B8A6',
+    YELLOW: '#E4A234',
+  },
+  DARK: '#242424',
+  RED: '#DC646A',
+  GREEN: '#22C55E',
+  TRANSPARENT: 'transparent',
+  BG_LIGHT: '#303030',
+  BG_LIGHT_2: '#242424',
+  WHITE_70: '#b3b3b3',
+  PINK: '#E74382',
+  INPUT_BORDER: '#323a49',
+}

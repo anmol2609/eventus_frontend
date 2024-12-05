@@ -1,0 +1,50 @@
+:root {
+  --cui-table-bg: red
+}
+
+thead, tbody {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.table-responsive {
+  background-color: #141414 !important;
+}
+
+table, td, th {
+  background-color: #141414 !important;
+}
+
+.table_updated {
+  background-color: rgb(26, 26, 26) !important;
+}
+
+.no-border-table {
+  border-style: none !important;
+}
+
+th {
+  min-width: 100px !important;
+  height: 40px;
+}
+
+td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 340px;
+}
+
+.btn-configure:hover {
+  color: white !important;
+}
+
+.edit-icon:hover, .rss-feed-view:hover, .download-btn:hover, .clickable-row:hover, .response-btn:hover, .clickable:hover {
+  cursor: pointer;
+}
+
+.feed-entry-title, .link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

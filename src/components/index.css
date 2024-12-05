@@ -1,0 +1,69 @@
+.pagination {
+  background-color: #141414 !important;
+  margin: 0px !important;
+}
+
+.page-link {
+  background-color: #141414 !important;
+  color: rgb(44, 122, 238) !important;
+}
+
+.active > .page-link{
+  background-color: rgb(44, 122, 238) !important;
+  color: white !important;
+  border: 0px;
+}
+
+.input-group {
+  background-color: rgb(31, 31, 31) !important;
+}
+
+.custom-input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.company-name {
+  background: linear-gradient(90deg, #F84A85, #5354FA);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 32px;
+}
+
+.sidebar-custom-header {
+  padding: 0 1rem !important;
+}
+
+/* 
+  Below 3 classes have been added for increasing AppRightSidebarBar width
+  big-sidebar is the class which handles it. Just pass a prop to AppRightSidebar component
+*/
+
+.sidebar.sidebar-overlaid.show.big-sidebar {
+  margin-right: 0 !important;
+}
+
+.sidebar.sidebar-overlaid.big-sidebar {
+  margin-right: -650px !important;
+}
+
+.big-sidebar {
+  width: 650px !important;
+}
+
+/*
+  Below 2 classes handle the custom backdrop for desktop view for the AppRightSidebar
+*/
+
+.sidebar-backdrop.show {
+  opacity: 0.5;
+}
+
+.sidebar-backdrop {
+  top: 0;
+  left: 0;
+  z-index: 1036;
+  width: 100vw;
+  height: 100vh;
+  background-color: #080a0c;
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package interface;
+
+service InterfaceService {
+    rpc SendRequest(InterfaceRequest) returns (InterfaceResponse);
+}
+
+message InterfaceRequest {
+
+    string app_id = 1;
+    string resource_path = 2;
+    string request_data = 3;  
+}
+
+message InterfaceResponse {
+    bool status = 1;
+    string message = 2;
+    string response_data = 3;
+}
