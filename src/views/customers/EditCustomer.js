@@ -14,15 +14,15 @@ import {
 } from '../../actions/CustomerActions'
 import SelectBox from '../../components/Form/SelectBox'
 import TextInput from '../../components/Form/TextInput'
-import { getAllDataCenters } from '../../actions/DataCenterActions'
+//import { getAllDataCenters } from '../../actions/DataCenterActions'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
-
+import { getAllDataCenters } from '../../slices/DataCenterslice'
 export default function EditCustomer() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { error, isUpdated, loading } = useSelector((state) => state.update_customer)
-  const { data_centers, loading: data_center_loading } = useSelector((state) => state.data_centers)
+  const { data_centers, loading: data_center_loading } = useSelector((state) => state.data_center)
   const { customer } = useSelector((state) => state.customer)
   const { l0_customers } = useSelector((state) => state.l0_customers)
   const { l1_customers } = useSelector((state) => state.l1_customers)

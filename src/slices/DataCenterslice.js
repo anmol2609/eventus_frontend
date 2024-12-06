@@ -1,114 +1,203 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { managementAxiosInstance } from 'src/config/Axios'
+//async function for get All Data Centers Data
+export const getAllDataCenters = createAsyncThunk(
+  'getAllDataCenters',
+  async (_, { rejectWithValue }) => {
+    try {
+      // Simulate an API call
+      const { data } = await managementAxiosInstance.get(`/data_center/all`)
+      return data.data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.message)
+    }
+  },
+)
+//async function for create Data Center
+export const createDataCenter = createAsyncThunk(
+  'createDataCenter',
+  async (payload, { rejectWithValue }) => {
+    try {
+      // Simulate an API call
+      const { data } = await managementAxiosInstance.post(`/data_center/new`, payload)
+      console.log(data,"datadatadata")
+      return data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.data.message)
+    }
+  },
+) 
+//async function for update Data Center
+export const updateDataCenter = createAsyncThunk(
+  'updateDataCenter',
+  async (payload, { rejectWithValue }) => {
+    try {
+      const data = await managementAxiosInstance.put(`/data_center/${payload.id}/update`, payload.dataCenter)
+      return data.data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.data.message)
+    }
+  },
+) 
 
-// Create Data Center Slice
-const createDataCenterSlice = createSlice({
-  name: 'createDataCenter',
-  initialState: { data_center: {}, loading: false, success: false, error: null },
+//async function for filter Data Center
+export const filterDataCenter = createAsyncThunk(
+  'filterDataCenter',
+  async (filters, { rejectWithValue }) => {
+    try {
+      // Simulate an API call
+      
+      const { data } = await managementAxiosInstance.get(`/data_center/filter`, {
+        params: filters,
+      })
+      return data.data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.data.message)
+    }
+  },
+)
+//async function for search User Data
+export const searchDataCenter = createAsyncThunk(
+  'searchDataCenter',
+  async (term, { rejectWithValue }) => {
+    try {
+      // Simulate an API call
+      
+      const { data } = await managementAxiosInstance.get(`/data_center/search`, {
+        params: { term },
+      })
+      return data.data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.data.message) //
+    }
+  },
+)
+
+//async function for search User Data
+export const getDataCenter = createAsyncThunk(
+  'getDataCenter',
+  async (id, { rejectWithValue }) => {
+    try {
+      // Simulate an API call
+      const { data } = await managementAxiosInstance.get(`/data_center/${id}/get`)
+      return data.data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.data.message) //
+    }
+  },
+)
+// Slice setup
+const dataCenterSlice = createSlice({
+  name: 'dataCenterSlice',
+  initialState: {
+    data_centers: [],
+    loading: false,
+    success: false,
+    error: null,
+    createdDataCenterStatus: false, 
+    updatedDataCenterStatus: false,
+    fetch_data_center_status:false,
+    data_center: {}
+  },
   reducers: {
-    dataCenterCreateRequest: (state) => {
-      state.loading = true
-    },
-    dataCenterCreateSuccess: (state, action) => {
-      state.loading = false
-      state.success = true
-      state.data_center = action.payload
-    },
-    dataCenterCreateFail: (state, action) => {
-      state.loading = false
-      state.success = false
-      state.error = action.payload
-    },
-    clearErrors: (state) => {
+    clearDataCenterErrors: (state) => {
       state.error = null
       state.success = false
-    }
-  }
+      state.updatedDataCenterStatus = false
+      state.createdDataCenterStatus = false
+      state.fetch_data_center_status = false
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      //get All Data Centers
+      .addCase(getAllDataCenters.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(getAllDataCenters.fulfilled, (state, action) => {
+        
+        state.loading = false
+        state.success = true
+        state.data_centers = action.payload
+      })
+      .addCase(getAllDataCenters.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload
+      })
+    
+      //search Data Center
+      .addCase(searchDataCenter.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(searchDataCenter.fulfilled, (state, action) => {
+        
+        state.loading = false
+        state.success = true
+        state.userList = action.payload
+      })
+      .addCase(searchDataCenter.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload
+      })
+
+      //filter Data Center
+      .addCase(filterDataCenter.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(filterDataCenter.fulfilled, (state, action) => {
+        state.loading = false
+        state.success = true
+        state.userList = action.payload
+      })
+      .addCase(filterDataCenter.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload
+      })
+      
+      //create Data Center
+      .addCase(createDataCenter.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(createDataCenter.fulfilled, (state, action) => {
+        state.loading = false
+        state.createdDataCenterStatus = true
+        state.success = true
+      })
+      .addCase(createDataCenter.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload.message
+      })
+
+      //update Data Center
+      .addCase(updateDataCenter.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(updateDataCenter.fulfilled, (state, action) => {
+        state.loading = false
+        state.updatedDataCenterStatus = true
+        state.success = true
+      })
+      .addCase(updateDataCenter.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload
+      })
+    //get User By Tenant 
+      .addCase(getDataCenter.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(getDataCenter.fulfilled, (state, action) => {
+        state.loading = false
+        state.success = true
+        state.fetch_data_center_status = true
+        state.data_center = action.payload
+      })
+      .addCase(getDataCenter.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload.message
+      })
+  },
 })
 
-// Get All Data Centers Slice
-const getAllDataCentersSlice = createSlice({
-  name: 'getAllDataCenters',
-  initialState: { data_centers: [], loading: false, success: false, error: null },
-  reducers: {
-    dataCentersRequest: (state) => {
-      state.loading = true
-    },
-    dataCentersSuccess: (state, action) => {
-      state.loading = false
-      state.success = true
-      state.data_centers = action.payload
-    },
-    dataCentersFail: (state, action) => {
-      state.loading = false
-      state.success = false
-      state.error = action.payload
-    },
-    clearErrors: (state) => {
-      state.error = null
-    }
-  }
-})
+export const { clearDataCenterErrors } = dataCenterSlice.actions
+export const dataCenterReducer = dataCenterSlice.reducer
 
-// Get Single Data Center Slice
-const getDataCenterSlice = createSlice({
-  name: 'getDataCenter',
-  initialState: { data_center: null, loading: false, success: false, error: null },
-  reducers: {
-    getDataCenterRequest: (state) => {
-      state.loading = true
-    },
-    getDataCenterSuccess: (state, action) => {
-      state.loading = false
-      state.success = true
-      state.data_center = action.payload
-    },
-    getDataCenterFail: (state, action) => {
-      state.loading = false
-      state.success = false
-      state.error = action.payload
-    },
-    clearErrors: (state) => {
-      state.error = null
-      state.success = false
-    }
-  }
-})
-
-// Update Data Center Slice
-const updateDataCenterSlice = createSlice({
-  name: 'updateDataCenter',
-  initialState: { data_center: {}, loading: false, success: false, isUpdated: false, error: null },
-  reducers: {
-    updateDataCenterRequest: (state) => {
-      state.loading = true
-    },
-    updateDataCenterSuccess: (state, action) => {
-      state.loading = false
-      state.success = true
-      state.isUpdated = true
-      state.data_center = action.payload
-    },
-    updateDataCenterFail: (state, action) => {
-      state.loading = false
-      state.success = false
-      state.isUpdated = false
-      state.error = action.payload
-    },
-    clearErrors: (state) => {
-      state.error = null
-      state.isUpdated = false
-      state.success = false
-    }
-  }
-})
-
-// Export actions and reducers for each slice
-export const { dataCenterCreateRequest, dataCenterCreateSuccess, dataCenterCreateFail, clearErrors: clearCreateErrors } = createDataCenterSlice.actions
-export const { dataCentersRequest, dataCentersSuccess, dataCentersFail, clearErrors: clearGetAllErrors } = getAllDataCentersSlice.actions
-export const { getDataCenterRequest, getDataCenterSuccess, getDataCenterFail, clearErrors: clearGetErrors } = getDataCenterSlice.actions
-export const { updateDataCenterRequest, updateDataCenterSuccess, updateDataCenterFail, clearErrors: clearUpdateErrors } = updateDataCenterSlice.actions
-
-export const createDataCenterReducer = createDataCenterSlice.reducer
-export const getAllDataCentersReducer = getAllDataCentersSlice.reducer
-export const getDataCenterReducer = getDataCenterSlice.reducer
-export const updateDataCenterReducer = updateDataCenterSlice.reducer

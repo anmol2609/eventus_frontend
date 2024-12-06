@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { managementAxiosInstance } from 'src/config/Axios'
-// Make async functions for API calls, replace with real API calls in your app
+//async function for get All Users Data
 export const getAllUsersData = createAsyncThunk(
   'getUserList',
   async (_, { rejectWithValue }) => {
@@ -13,6 +13,7 @@ export const getAllUsersData = createAsyncThunk(
     }
   },
 )
+//async function for create User By Tenant
 export const createUserByTenant = createAsyncThunk(
   'createUser',
   async (payload, { rejectWithValue }) => {
@@ -25,7 +26,7 @@ export const createUserByTenant = createAsyncThunk(
     }
   },
 ) 
-
+//async function for update User By Tenant
 export const updateUserByTenant = createAsyncThunk(
   'updateUser',
   async (payload, { rejectWithValue }) => {
@@ -38,7 +39,7 @@ export const updateUserByTenant = createAsyncThunk(
     }
   },
 ) 
-
+//async function for get User By Tenant
 export const getUserByTenant = createAsyncThunk(
   'getUserByTenant',
   async (id, { rejectWithValue }) => {
@@ -51,6 +52,7 @@ export const getUserByTenant = createAsyncThunk(
     }
   },
 )
+//async function for delete User Data
 export const deleteUserData = createAsyncThunk(
   'deleteUser',
   async (id, { rejectWithValue }) => {
@@ -66,7 +68,7 @@ export const deleteUserData = createAsyncThunk(
     }
   },
 )
-
+//async function for filter User Data
 export const filterUserData = createAsyncThunk(
   'filterUser',
   async (filters, { rejectWithValue }) => {
@@ -80,7 +82,7 @@ export const filterUserData = createAsyncThunk(
     }
   },
 )
-
+//async function for search User Data
 export const searchUserData = createAsyncThunk(
   'searchUser',
   async (email, { rejectWithValue }) => {
@@ -118,6 +120,7 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      //get users 
       .addCase(getAllUsersData.pending, (state) => {
         state.loading = true
       })

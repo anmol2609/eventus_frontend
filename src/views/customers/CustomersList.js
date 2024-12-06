@@ -51,7 +51,7 @@ export default function CustomersList() {
   const { userList, loading: user_list_loading, error: userListError} = useSelector((state) => state.user)
   const { deletedUserStatus:delete_success} = useSelector((state) => state.user)
   const { customer } = useSelector((state) => state.update_customer)
-  const { data_centers } = useSelector((state) => state.data_centers)
+  const { data_centers } = useSelector((state) => state.data_center)
   const rightSidebarShow = useSelector((state) => state.rightSidebarShow)
   const initial_filters = {
     name: searchParams.get('name') || '',

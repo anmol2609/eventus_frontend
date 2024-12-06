@@ -8,14 +8,14 @@ import SelectBox from '../../components/Form/SelectBox'
 import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import TextArea from '../../components/Form/TextArea'
-import { clearErrors, getDataCenter, updateDataCenter } from '../../actions/DataCenterActions'
+import { clearDataCenterErrors, getDataCenter, updateDataCenter } from '../../slices/DataCenterslice'
 import Loader from '../../components/Loader'
 
 export default function EditDataCenter() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { data_center, loading: data_center_loading } = useSelector((state) => state.data_center)
-  const { error, isUpdated, loading } = useSelector((state) => state.update_data_center)
+  const { data_center, fetch_data_center_status: data_center_loading } = useSelector((state) => state.data_center)
+  const { error, updatedDataCenterStatus:isUpdated, loading } = useSelector((state) => state.data_center)
   const { id } = useParams()
 
   let initial_state = {
@@ -34,13 +34,13 @@ export default function EditDataCenter() {
 
   useEffect(() => {
     if (isUpdated) {
-      dispatch(clearErrors())
+      dispatch(clearDataCenterErrors())
       navigate('/data_centers')
     }
 
     if (error) {
       setTimeout(() => {
-        dispatch(clearErrors())
+        dispatch(clearDataCenterErrors())
       }, 2000)
     }
   }, [dispatch, isUpdated, error])
@@ -59,13 +59,17 @@ export default function EditDataCenter() {
   }, [data_center])
 
   const submit = () => {
-    if (validate_required_keys(dataCenter, setValidationError))
-      dispatch(updateDataCenter(id, dataCenter))
+    if (validate_required_keys(dataCenter, setValidationError)){
+      let data ={
+        id, dataCenter
+      }
+      dispatch(updateDataCenter(data))
+    }
   }
 
   return (
     <>
-      {loading || data_center_loading ? (
+      {loading || !data_center_loading ? (
         <Loader />
       ) : (
         <CRow>
