@@ -18,17 +18,19 @@ import { getAllDataCenters } from '../../actions/DataCenterActions'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import {
-  clearErrors,
+  clearUserErrors,
   createUserByTenant,
+} from '../../slices/userSlice'
+import {
   getTenantByTenancyLevel
-} from '../../actions/UserActions'
+} from '../../slices/tenantsSlice'
 export default function NewCustomer() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
 
-  const { error, success, loading } = useSelector((state) => state.create_user)
-  const {tenants, loading: tenants_loading } = useSelector((state) => state.tenant_by_tenancy_level)
+  const { error:created_user_error, createdUserStatus, loading } = useSelector((state) => state.user)
+  const {tenants, loading: tenants_loading } = useSelector((state) => state.tenants_by_tenancy_level)
   let initial_state = {
     firstName: '',
     lastName: '',
@@ -49,23 +51,23 @@ export default function NewCustomer() {
   )
 
   useEffect(() => {
-    if (success || error) {
+    if (createdUserStatus || created_user_error) {
       setTimeout(() => {
-        dispatch(clearErrors())
+        dispatch(clearUserErrors())
 
-        if (success) {
+        if (createdUserStatus) {
           navigate(
             `/customers?selectedView=${2}`,
           )
-          dispatch(clearErrors())
+          dispatch(clearUserErrors())
         }
       }, 1000) // clearing the success / error state so that the pop up disappears
 
-      if (success) {
+      if (createdUserStatus) {
         setUser(initial_state)
       }
     }
-  }, [dispatch, error, success])
+  }, [dispatch, created_user_error, createdUserStatus])
 
   const submit = () => {
     let info = user.user_type === 'IDP' 
@@ -112,14 +114,14 @@ export default function NewCustomer() {
         <CRow>
           <CCol xs>
             <Alert
-              showAlert={success || error || validationError}
-              variant={success ? 'success' : 'danger'}
+              showAlert={createdUserStatus || created_user_error || validationError}
+              variant={createdUserStatus ? 'success' : 'danger'}
               message={
-                success
+                createdUserStatus
                   ? 'Customer Created Successfully'
                   : validationError
                     ? validationError
-                    : error
+                    : created_user_error
               }
             />
             <CCard

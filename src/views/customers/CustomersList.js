@@ -42,14 +42,15 @@ import deleteIcon from '../../assets/images/deleteIcon.svg'
 import editIcon from '../../assets/images/editIcon.svg'
 import { updateCustomer } from '../../actions/CustomerActions'
 import { filterUser, getAllUsers,searchUserByEmail,DeleteUser } from '../../actions/UserActions'
+import { getAllUsersData, deleteUserData, clearUserErrors, filterUserData, searchUserData} from '../../slices/userSlice'
 
 export default function CustomersList() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const { users, loading } = useSelector((state) => state.customers)
-  const { userList, loading: user_list_loading, error: userListError} = useSelector((state) => state.userList)
-  const { success:delete_success} = useSelector((state) => state.deleteUserReducer)
+  const { userList, loading: user_list_loading, error: userListError} = useSelector((state) => state.user)
+  const { deletedUserStatus:delete_success} = useSelector((state) => state.user)
   const { customer } = useSelector((state) => state.update_customer)
   const { data_centers } = useSelector((state) => state.data_centers)
   const rightSidebarShow = useSelector((state) => state.rightSidebarShow)
@@ -68,18 +69,22 @@ export default function CustomersList() {
   const [searchEmail, setSearchEmail] = useState('')
   
   useEffect(() => {
+    if(delete_success){
+      dispatch(clearUserErrors());
+    }
     setSearchParams({
       ...searchParams,
       selectedView,
     })
-    selectedView === 2 && dispatch(getAllUsers())
+    selectedView === 2 && dispatch(getAllUsersData())
+    
   }, [selectedView,delete_success])
 
   const search_data = () => {
     dispatch(searchCustomer(searchTerm))
   }
   const search_email_data = () => {
-    dispatch(searchUserByEmail(searchEmail))
+    dispatch(searchUserData(searchEmail))
   }
   
 
@@ -97,7 +102,7 @@ export default function CustomersList() {
         delete filters[key]
       }
     })
-    dispatch(filterUser(filters))
+    dispatch(filterUserData(filters))
     dispatch(toggleRightSidebar(!rightSidebarShow.rightSidebarShow))
   }
   useEffect(() => {
@@ -130,8 +135,8 @@ export default function CustomersList() {
   const submit = (id, data) => {
     dispatch(updateCustomer(id, data))
   }
-  const deleteUserData = (id) => {
-    dispatch(DeleteUser(id))
+  const deleteUserHandler = (id) => {
+    dispatch(deleteUserData(id))
   }
   const partnerUser = users
     ? users.filter((user) => user.type === CONSTANTS.CUSTOMER_TYPE.PARTNER)
@@ -184,7 +189,6 @@ export default function CustomersList() {
     : []
   const partnerUser_length = partnerUser ? partnerUser.length : 0
   const partnerUser_pages = Math.ceil(partnerUser_length / itemsPerPage)
-
   const organizationUser_items = organizationUser
     ? organizationUser
         .sort((a, b) => {
@@ -903,7 +907,7 @@ export default function CustomersList() {
                 }}
                 className={userList && userList.length === 0 ? 'mt-3' : 'mb-0'}
               >
-                {typeof userListError !== 'undefined' || userList.length === 0 ? (
+                { userList.length === 0 ? (
                   <CTableHead className="text-center" style={{ fontSize: 16 }}>
                     No User Found
                   </CTableHead>
@@ -957,7 +961,7 @@ export default function CustomersList() {
                                   'Are you sure you want to delete this?',
                                 )
                                 if (isConfirmed) {
-                                  deleteUserData(user._id)
+                                  deleteUserHandler(user._id)
                                 }
                               }}
                             >

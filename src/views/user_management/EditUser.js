@@ -18,21 +18,22 @@ import { getAllDataCenters } from '../../actions/DataCenterActions'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import {
-  clearErrors,
+  clearUserErrors,
   updateUserByTenant,
-  getTenantByTenancyLevel,
   getUserByTenant
-} from '../../actions/UserActions'
+} from '../../slices/userSlice'
+import {
+  getTenantByTenancyLevel
+} from '../../slices/tenantsSlice'
+
 export default function NewCustomer() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
   const { id } = useParams()
-  //const { error:update_customer_error , isUpdated, loading: update_customer_loading } = useSelector((state) => state.update_user)
-  const { error,isUpdated, success } = useSelector((state) => state.update_user)
-  const {tenants, loading: tenants_loading } = useSelector((state) => state.tenant_by_tenancy_level)
-  const { userByTenant, loading:data_loading } = useSelector((state) => state.user_by_tenant)
-  //const{user: userByTenantData } =userByTenant
+  const { userByTenant, loading:data_loading } = useSelector((state) => state.user)
+  const { error, updatedUserStatus:isUpdated,success } = useSelector((state) => state.user)
+  const {tenants, loading: tenants_loading } = useSelector((state) => state.tenants_by_tenancy_level)
   let initial_state = {
     firstName: '',
     lastName: '',
@@ -55,7 +56,7 @@ export default function NewCustomer() {
 
   useEffect(() => {
     if (isUpdated) {
-      dispatch(clearErrors())
+      dispatch(clearUserErrors())
       navigate(
         `/customers?selectedView=${2}`,
       )
@@ -63,7 +64,8 @@ export default function NewCustomer() {
 
     if (error) {
       setTimeout(() => {
-        dispatch(clearErrors())
+        dispatch(clearUserErrors())
+        dispatch(getUserByTenant(id))
       }, 2000)
     }
   }, [dispatch, isUpdated, error])
@@ -145,10 +147,10 @@ export default function NewCustomer() {
         <CRow>
           <CCol xs>
             <Alert
-              showAlert={success || error || validationError}
-              variant={success ? 'success' : 'danger'}
+              showAlert={isUpdated || error || validationError}
+              variant={isUpdated ? 'success' : 'danger'}
               message={
-                success
+                isUpdated
                   ? 'Customer Updated Successfully'
                   : validationError
                     ? validationError
