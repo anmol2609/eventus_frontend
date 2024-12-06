@@ -15,10 +15,10 @@ import {
 import TextInput from '../../components/Form/TextInput'
 import SelectBox from '../../components/Form/SelectBox'
 import { v4 as uuidv4 } from 'uuid'
-import { getAllDataCenters } from '../../actions/DataCenterActions'
+//import { getAllDataCenters } from '../../actions/DataCenterActions'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
-
+import { getAllDataCenters } from '../../slices/DataCenterslice'
 export default function NewCustomer() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -29,7 +29,7 @@ export default function NewCustomer() {
   const { l0_customers } = useSelector((state) => state.l0_customers)
   const { l1_customers } = useSelector((state) => state.l1_customers)
   const { l2_customers } = useSelector((state) => state.l2_customers)
-  const { data_centers, loading: data_centers_loading } = useSelector((state) => state.data_centers)
+  const { data_centers, loading: data_centers_loading } = useSelector((state) => state.data_center)
 
   let initial_state = {
     type: customer_type,

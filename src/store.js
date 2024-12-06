@@ -26,12 +26,14 @@ import { createArtifactReducer, getArtifactReducer, getArtifactsReducer, testArt
 import { mlModelReducer } from './slices/MIModelslice'
 import { tagsReducer } from './slices/Tagsslice'
 import { mitreReducer } from './slices/Mitreslice'
-import { createDataCenterReducer, getAllDataCentersReducer, getDataCenterReducer, updateDataCenterReducer } from './slices/DataCenterslice'
+//import { createDataCenterReducer, getAllDataCentersReducer, getDataCenterReducer, updateDataCenterReducer } from './slices/DataCenterslice'
 import { awsCustomerCreateReducer, getAllAWSCustomersReducer, getAWSCustomerReducer, updateAWSCustomerReducer } from './slices/AWSCustomerslice'
 import { O365CustomerSliceReducer } from './slices/O365Customerslice'
 
-import {userSliceReducer} from './slices/userSlice'
-import {tenantsSliceReducer} from './slices/tenantsSlice'
+import { userSliceReducer } from './slices/userSlice'
+import { tenantsSliceReducer } from './slices/tenantsSlice'
+import { dataCenterReducer } from './slices/DataCenterslice'
+
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
   reducer: {
@@ -85,10 +87,10 @@ export const store = configureStore({
     all_mitre: mitreReducer,
 
     // Data Center
-    create_data_center: createDataCenterReducer,
-    data_centers: getAllDataCentersReducer,
-    data_center: getDataCenterReducer,
-    update_data_center: updateDataCenterReducer,
+    // create_data_center: createDataCenterReducer,
+    // data_centers: getAllDataCentersReducer,
+    // data_center: getDataCenterReducer,
+    // update_data_center: updateDataCenterReducer,
 
     // AWS Customer
     create_aws_customer: awsCustomerCreateReducer,
@@ -103,7 +105,8 @@ export const store = configureStore({
     update_O365_customer: O365CustomerSliceReducer,
 
     user:userSliceReducer,
-    tenants_by_tenancy_level:tenantsSliceReducer
+    tenants_by_tenancy_level:tenantsSliceReducer,
+    data_center:dataCenterReducer
     // Other slices can be commented out or removed
     /*
 

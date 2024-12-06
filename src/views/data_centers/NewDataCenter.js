@@ -7,14 +7,14 @@ import { CForm, CCol, CRow, CButton, CCard, CCardBody, CCardHeader } from '@core
 import TextInput from '../../components/Form/TextInput'
 import SelectBox from '../../components/Form/SelectBox'
 import { validate_required_keys } from '../../utils/validators/required_key'
-import { clearErrors, createDataCenter } from '../../actions/DataCenterActions'
+import { clearDataCenterErrors, createDataCenter } from '../../slices/DataCenterslice'
 import TextArea from '../../components/Form/TextArea'
 import Loader from '../../components/Loader'
 
 export default function NewDataCenter() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { error, success, loading } = useSelector((state) => state.create_data_center)
+  const { error:created_data_center_error, createdDataCenterStatus, loading } = useSelector((state) => state.data_center)
 
   let initial_state = {
     name: '',
@@ -26,26 +26,23 @@ export default function NewDataCenter() {
   const [dataCenter, setDataCenter] = useState(initial_state)
   const [validationError, setValidationError] = useState('')
 
+
   useEffect(() => {
-    if (success || error) {
-      setTimeout(
-        () => {
-          dispatch(clearErrors())
+    if (createdDataCenterStatus || created_data_center_error) {
+      setTimeout(() => {
+        dispatch(clearDataCenterErrors())
 
-          if (success) {
-            navigate('/data_centers')
-            dispatch(clearErrors())
-          }
-        },
-        success ? 1000 : 2000,
-      ) // clearing the success / error state so that the pop up disappears
+        if (createdDataCenterStatus) {
+          navigate('/data_centers')
+          setDataCenter(clearDataCenterErrors())
+        }
+      }, 1000) // clearing the success / error state so that the pop up disappears
 
-      if (success) {
+      if (createdDataCenterStatus) {
         setDataCenter(initial_state)
       }
     }
-  }, [dispatch, error, success])
-
+  }, [dispatch, created_data_center_error, createdDataCenterStatus])
   const submit = () => {
     if (validate_required_keys(dataCenter, setValidationError)) {
       dispatch(createDataCenter(dataCenter))
@@ -60,14 +57,14 @@ export default function NewDataCenter() {
         <CRow>
           <CCol xs>
             <Alert
-              showAlert={success || error || validationError}
-              variant={success ? 'success' : 'danger'}
+              showAlert={createdDataCenterStatus || created_data_center_error || validationError}
+              variant={createdDataCenterStatus ? 'success' : 'danger'}
               message={
-                success
+                createdDataCenterStatus
                   ? 'Data Center Created Successfully'
                   : validationError
                     ? validationError
-                    : error
+                    : created_data_center_error
               }
             />
             <CCard

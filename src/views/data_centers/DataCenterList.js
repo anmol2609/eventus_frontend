@@ -22,12 +22,12 @@ import Enums from '../../utils/Enums'
 import { readableDateFromString } from '../../helpers/DateHelpers'
 import { toggleRightSidebar } from '../../actions/ThemeActions'
 import '../index.css'
-import {
-  filterDataCenter,
-  getAllDataCenters,
-  searchDataCenter,
-  updateDataCenter,
-} from '../../actions/DataCenterActions'
+// import {
+//   filterDataCenter,
+//   getAllDataCenters,
+//   searchDataCenter,
+//   updateDataCenter,
+// } from '../../actions/DataCenterActions'
 import Loader from '../../components/Loader'
 import { cilMagnifyingGlass } from '@coreui/icons'
 import ShowAllFilters from '../../components/ShowAllFilters'
@@ -40,13 +40,20 @@ import editIcon from '../../assets/images/editIcon.svg'
 import { SubHeaders } from '../../helpers/SubHeaders'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
-
+import {
+  filterDataCenter,
+  getAllDataCenters,
+  searchDataCenter,
+  updateDataCenter,
+  clearDataCenterErrors,
+} from '../../slices/DataCenterslice'
 export default function DataCenterList() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
-  const { data_centers, loading } = useSelector((state) => state.data_centers)
-  const { data_center } = useSelector((state) => state.update_data_center)
+  const { error,data_centers,updatedDataCenterStatus:isUpdated, loading } = useSelector((state) => state.data_center)
+  const { data_center } = useSelector((state) => state.data_center)
+  //const { updatedDataCenterStatus } = useSelector((state) => state.data_center)
   const rightSidebarShow = useSelector((state) => state.rightSidebarShow)
 
   const initial_filters = {
@@ -63,6 +70,12 @@ export default function DataCenterList() {
   const search_data = () => {
     dispatch(searchDataCenter(searchTerm))
   }
+  useEffect(() => {
+    if (isUpdated) {
+      dispatch(clearDataCenterErrors())
+      dispatch(getAllDataCenters())
+    }
+  }, [dispatch, isUpdated, error])
 
   const filter = () => {
     navigate({
@@ -92,7 +105,10 @@ export default function DataCenterList() {
   const search_params_for_list = getSearchParams(searchParams)
 
   const submit = (id, dataCenter) => {
-    dispatch(updateDataCenter(id, dataCenter))
+    let data ={
+      id, dataCenter
+    }
+    dispatch(updateDataCenter(data))
   }
   const columnToDataMap = [
     {
