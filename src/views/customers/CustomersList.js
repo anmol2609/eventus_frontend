@@ -22,7 +22,6 @@ import { CONSTANTS } from '../../utils/constants'
 import Enums from '../../utils/Enums'
 import { filterCustomer, getAllCustomers, searchCustomer } from '../../actions/CustomerActions'
 import { readableDateFromString } from '../../helpers/DateHelpers'
-import { toggleRightSidebar } from '../../actions/ThemeActions'
 import { getAllDataCenters } from '../../actions/DataCenterActions'
 import '../index.css'
 import Loader from '../../components/Loader'
@@ -41,7 +40,7 @@ import { cilPlus } from '@coreui/icons'
 import deleteIcon from '../../assets/images/deleteIcon.svg'
 import editIcon from '../../assets/images/editIcon.svg'
 import { updateCustomer } from '../../actions/CustomerActions'
-import { filterUser, getAllUsers,searchUserByEmail,DeleteUser } from '../../actions/UserActions'
+import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import { getAllUsersData, deleteUserData, clearUserErrors, filterUserData, searchUserData} from '../../slices/userSlice'
 
 export default function CustomersList() {
@@ -56,6 +55,8 @@ export default function CustomersList() {
   const rightSidebarShow = useSelector((state) => state.rightSidebarShow)
   const initial_filters = {
     name: searchParams.get('name') || '',
+    firstName: searchParams.get('firstName') || '',
+    lastName: searchParams.get('lastName') || '',
     email: searchParams.get('email') || '',
     tenant_code: searchParams.get('tenant_code') || '',
     tenancy_level: searchParams.get('tenancy_level') || '',
@@ -102,7 +103,7 @@ export default function CustomersList() {
         delete filters[key]
       }
     })
-    dispatch(filterUserData(filters))
+    Object.keys(filters).length !== 0 && dispatch(filterUserData(filters))
     dispatch(toggleRightSidebar(!rightSidebarShow.rightSidebarShow))
   }
   useEffect(() => {
@@ -120,6 +121,8 @@ export default function CustomersList() {
         filterCustomer({
           name: searchParams.get('name'),
           email: searchParams.get('email'),
+          firstName: searchParams.get('firstName'),
+          lastName: searchParams.get('lastName'),
           tenant_code: searchParams.get('tenant_code'),
           tenancy_level: searchParams.get('tenancy_level'),
           status: searchParams.get('status'),
@@ -344,9 +347,20 @@ export default function CustomersList() {
                     <TextInput
                       type="text"
                       placeholder="First Name"
-                      value={filters.name}
-                      onChange={(e) => setFilters({ ...filters, name: e.target.value })}
+                      value={filters.firstName}
+                      onChange={(e) => setFilters({ ...filters, firstName: e.target.value })}
                       id="firstName"
+                    />
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol>
+                    <TextInput
+                      type="text"
+                      placeholder="Last Name"
+                      value={filters.lastName}
+                      onChange={(e) => setFilters({ ...filters, lastName: e.target.value })}
+                      id="lastName"
                     />
                   </CCol>
                 </CRow>

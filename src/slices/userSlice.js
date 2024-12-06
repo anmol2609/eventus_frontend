@@ -74,7 +74,7 @@ export const filterUserData = createAsyncThunk(
       // Simulate an API call
       
       const { data } = await managementAxiosInstance.post(`/user/filter_users`,filters )
-      return data // Return product data on success
+      return data.users // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.data)
     }
@@ -88,7 +88,7 @@ export const searchUserData = createAsyncThunk(
       // Simulate an API call
       
       const { data } = await managementAxiosInstance.post(`/user/get_user_email`,{"user_email" : email})
-      return data.users // Return product data on success
+      return data.user // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.data)
     }

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react'
 import { CSidebar, CSidebarHeader, CSidebarBrand, CCloseButton } from '@coreui/react'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleRightSidebar } from '../actions/ThemeActions'
+import { toggleRightSidebar } from '../slices/ThemeSlice'
 import './index.css'
 
 export default function AppRightSidebar({ children, bigSidebar, showBackdrop }) {
