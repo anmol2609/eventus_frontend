@@ -1,20 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 export const themeSlice = createSlice({
-    name: "theme",
-    initialState: { theme: "dark" },
-    reducers: {
-        setDarkTheme: (state) => {
-            state.theme = "dark"
-        },
-        setLightTheme: (state) => {
-            state.theme = "light"
-        },
+  name: 'theme',
+  initialState: { theme: 'dark' },
+  reducers: {
+    setDarkTheme: (state) => {
+      state.theme = 'dark'
     },
+    setLightTheme: (state) => {
+      state.theme = 'light'
+    },
+  },
 })
 
-export const { setDarkTheme, setLightTheme } = themeSlice.actions;
+export const { setDarkTheme, setLightTheme } = themeSlice.actions
 export const themeReducer = themeSlice.reducer
+
 
 export const rightSidebarSlice = createSlice({
   name: 'rightSidebar',
@@ -27,18 +28,25 @@ export const rightSidebarSlice = createSlice({
 })
 
 export const { toggleRightSidebar } = rightSidebarSlice.actions
-export const rightSidebarReducer = rightSidebarSlice.reducer;
+export const rightSidebarReducer = rightSidebarSlice.reducer
+
 
 export const sidebarSlice = createSlice({
-    name: "sidebar",
-    initialState: { sidebarShow: false },
-    reducers: {
-        toggleSidebar: (state, action) => {
-            state.sidebarShow = action.payload
-        }
-    }
+  name: 'sidebar',
+  initialState: { sidebarShow: false },
+  reducers: {
+    toggleSidebar: (state, action) => {
+      state.sidebarShow = action.payload
+    },
+  },
 })
 
 export const { toggleSidebar } = sidebarSlice.actions
 export const sidebarReducer = sidebarSlice.reducer
 
+
+export default {
+  theme: themeReducer,
+  rightSidebar: rightSidebarReducer,
+  sidebar: sidebarReducer,
+}
