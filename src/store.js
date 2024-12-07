@@ -22,7 +22,7 @@ import { rightSidebarReducer, sidebarReducer, themeReducer } from './slices/Them
 import { createSOARCustomerReducer, getAllSOARCustomersReducer, getSOARCustomerReducer, updateSOARCustomerReducer } from './slices/soarCustomerSlice'
 import soarProductReducer from './slices/soarProductSlice'; // make sure this path is correct
 import { RssFeedReducer } from './slices/rssFeedSlice'
-import { createArtifactReducer, getArtifactReducer, getArtifactsReducer, testArtifactsReducer, updateArtifactReducer } from './slices/Artifactslice'
+//import { createArtifactReducer, getArtifactReducer, getArtifactsReducer, testArtifactsReducer, updateArtifactReducer } from './slices/Artifactslice'
 import { mlModelReducer } from './slices/MIModelslice'
 import { tagsReducer } from './slices/tags/Tagsslice'
 import { mitreReducer } from './slices/Mitreslice'
@@ -44,6 +44,13 @@ import { createAWSCustomerReducer } from './slices/awsCustomer/CreateAWSCustomer
 import { getAWSCustomerReducer } from './slices/awsCustomer/GetAWSCustomerSlice'
 import { getAllAWSCustomersReducer } from './slices/awsCustomer/GetAllAWSCustomersSlice'
 import { updateAWSCustomerReducer } from './slices/awsCustomer/UpdateAWSCustomerSlice'
+
+import { createArtifactReducer } from './slices/Artifact/CreateArtifactSlice'
+import { getAllArtifactsReducer } from './slices/Artifact/GetAllArtifactsSlice'
+import { getArtifactReducer } from './slices/Artifact/GetArtifactSlice'
+import { testArtifactReducer } from './slices/Artifact/TestArtifactSlice'
+import { updateArtifactReducer } from './slices/Artifact/UpdateArtifactSlice'
+
 
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
@@ -87,10 +94,16 @@ export const store = configureStore({
     
     // Artifact
     create_artifact: createArtifactReducer,
-    artifacts: getArtifactsReducer,
+    artifacts: getAllArtifactsReducer,
     artifact: getArtifactReducer,
     update_artifact: updateArtifactReducer,
-    test_artifacts: testArtifactsReducer,
+    test_artifacts: testArtifactReducer,
+    
+    // create_artifact: createArtifactReducer,
+    // artifacts: getArtifactsReducer,
+    // artifact: getArtifactReducer,
+    // update_artifact: updateArtifactReducer,
+    // test_artifacts: testArtifactsReducer,
     
     // ML Model, Tags, and Mitre
     ml_model: mlModelReducer,

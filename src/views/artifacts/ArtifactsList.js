@@ -18,7 +18,7 @@ import { AppRightSidebar } from '../../components'
 import TextInput from '../../components/Form/TextInput'
 import Enums from '../../utils/Enums'
 import { readableDateFromString } from '../../helpers/DateHelpers'
-import { toggleRightSidebar } from '../../actions/ThemeActions'
+import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import '../index.css'
 import Loader from '../../components/Loader'
 import { getSearchParams } from '../../helpers/GetSearchParams'
@@ -27,7 +27,7 @@ import {
   filterArtifact,
   getArtifactByFeedEntry,
   searchArtifact,
-} from '../../actions/ArtifactActions'
+} from '../../slices/Artifact/GetAllArtifactsSlice'
 import SelectBox from '../../components/Form/SelectBox'
 import { CONSTANTS } from '../../utils/constants'
 

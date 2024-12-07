@@ -7,7 +7,8 @@ import { CForm, CCol, CRow, CButton, CCard, CCardBody, CCardHeader } from '@core
 import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
-import { clearErrors, createArtifact } from '../../actions/ArtifactActions'
+import { clearErrors, createArtifact } from '../../slices/Artifact/CreateArtifactSlice'
+
 import SelectBox from '../../components/Form/SelectBox'
 
 export default function NewArtifact() {
