@@ -9,7 +9,8 @@ import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import TextArea from '../../components/Form/TextArea'
-import { clearErrors, getArtifact, updateArtifact } from '../../actions/ArtifactActions'
+import { clearErrors, updateArtifact } from '../../slices/Artifact/UpdateArtifactSlice'
+import { clearErrors, getArtifact } from '../../slices/Artifact/GetArtifactSlice'
 
 export default function EditArtifacts() {
   const dispatch = useDispatch()
