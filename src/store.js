@@ -24,7 +24,7 @@ import soarProductReducer from './slices/soarProductSlice'; // make sure this pa
 import { RssFeedReducer } from './slices/rssFeedSlice'
 import { createArtifactReducer, getArtifactReducer, getArtifactsReducer, testArtifactsReducer, updateArtifactReducer } from './slices/Artifactslice'
 import { mlModelReducer } from './slices/MIModelslice'
-import { tagsReducer } from './slices/Tagsslice'
+import { tagsReducer } from './slices/tags/Tagsslice'
 import { mitreReducer } from './slices/Mitreslice'
 //import { createDataCenterReducer, getAllDataCentersReducer, getDataCenterReducer, updateDataCenterReducer } from './slices/DataCenterslice'
 //import { awsCustomerCreateReducer, getAllAWSCustomersReducer, getAWSCustomerReducer, updateAWSCustomerReducer } from './slices/AWSCustomerslice'
