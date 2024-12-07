@@ -17,11 +17,11 @@ import {
   filterAWSCustomer,
   getAllAWSCustomers,
   searchAWSCustomer,
-} from '../../actions/AWSCustomerActions'
+} from '../../slices/awsCustomer/GetAllAWSCustomersSlice'
 import { readableDateFromString } from '../../helpers/DateHelpers'
 import Enums from '../../utils/Enums'
 import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom'
-import { toggleRightSidebar } from '../../actions/ThemeActions'
+import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import { AppRightSidebar } from '../../components'
 import { CONSTANTS } from '../../utils/constants'
 import '../index.css'

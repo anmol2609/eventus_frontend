@@ -27,7 +27,7 @@ import { mlModelReducer } from './slices/MIModelslice'
 import { tagsReducer } from './slices/Tagsslice'
 import { mitreReducer } from './slices/Mitreslice'
 //import { createDataCenterReducer, getAllDataCentersReducer, getDataCenterReducer, updateDataCenterReducer } from './slices/DataCenterslice'
-import { awsCustomerCreateReducer, getAllAWSCustomersReducer, getAWSCustomerReducer, updateAWSCustomerReducer } from './slices/AWSCustomerslice'
+//import { awsCustomerCreateReducer, getAllAWSCustomersReducer, getAWSCustomerReducer, updateAWSCustomerReducer } from './slices/AWSCustomerslice'
 import { O365CustomerSliceReducer } from './slices/O365Customerslice'
 
 import { userSliceReducer } from './slices/userSlice'
@@ -38,6 +38,12 @@ import { customerReducer } from './slices/customerSlice'
 import { l0CustomersReducer } from './slices/l0CustomerSlice'
 import { l1CustomersReducer } from './slices/l1CustomerSlice'
 import { l2CustomersReducer } from './slices/l2CustomerSlice'
+import { l3CustomersReducer } from './slices/l3CustomerSlice'
+
+import { createAWSCustomerReducer } from './slices/awsCustomer/CreateAWSCustomerSlice'
+import { getAWSCustomerReducer } from './slices/awsCustomer/GetAWSCustomerSlice'
+import { getAllAWSCustomersReducer } from './slices/awsCustomer/GetAllAWSCustomersSlice'
+import { updateAWSCustomerReducer } from './slices/awsCustomer/UpdateAWSCustomerSlice'
 
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
@@ -98,7 +104,7 @@ export const store = configureStore({
     // update_data_center: updateDataCenterReducer,
 
     // AWS Customer
-    create_aws_customer: awsCustomerCreateReducer,
+    create_aws_customer: createAWSCustomerReducer,
     aws_customer: getAWSCustomerReducer,
     update_aws_customer: updateAWSCustomerReducer,
     all_aws_customers: getAllAWSCustomersReducer,
@@ -116,6 +122,7 @@ export const store = configureStore({
     l0_customer: l0CustomersReducer,
     l1_customer: l1CustomersReducer,
     l2_customer: l2CustomersReducer,
+    l3_customer: l3CustomersReducer
     // Other slices can be commented out or removed
     /*
 
