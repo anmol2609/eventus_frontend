@@ -6,11 +6,11 @@ import { CONSTANTS } from '../../utils/constants'
 import Alert from '../../components/Alerts/Alert'
 import { CForm, CCol, CRow, CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
 import {
-  clearErrors,
-  createCustomer,
-  getL0Customer,
-  getL1Customer,
-  getL2Customer,
+  //clearCustomerErrors,
+  //createCustomer,
+  // getL0Customer,
+  // getL1Customer,
+  // getL2Customer,
 } from '../../actions/CustomerActions'
 import TextInput from '../../components/Form/TextInput'
 import SelectBox from '../../components/Form/SelectBox'
@@ -19,18 +19,33 @@ import { v4 as uuidv4 } from 'uuid'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import { getAllDataCenters } from '../../slices/DataCenterslice'
+import {
+  clearCustomerErrors,
+   createCustomer
+} from '../../slices/customerSlice'
+import {
+  getL0Customer
+} from '../../slices/l0CustomerSlice'
+import {
+  getL1Customer
+} from '../../slices/l1CustomerSlice'
+import {
+  getL2Customer
+} from '../../slices/l2CustomerSlice'
 export default function NewCustomer() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
 
   const customer_type = location.state.customer_type || CONSTANTS.CUSTOMER_TYPE.PARTNER
-  const { error, success, loading } = useSelector((state) => state.create_customer)
-  const { l0_customers } = useSelector((state) => state.l0_customers)
-  const { l1_customers } = useSelector((state) => state.l1_customers)
-  const { l2_customers } = useSelector((state) => state.l2_customers)
+  const { error:created_cutomer_error, createdCustomerStatus, loading } = useSelector((state) => state.customer)
+  const { l0_customers } = useSelector((state) => state.l0_customer)
+  const { l1_customers } = useSelector((state) => state.l1_customer)
+  const { l2_customers } = useSelector((state) => state.l2_customer)
   const { data_centers, loading: data_centers_loading } = useSelector((state) => state.data_center)
 
+  const data = useSelector((state) => state.customer)
+  console.log(data,createdCustomerStatus,loading)
   let initial_state = {
     type: customer_type,
     name: '',
@@ -55,23 +70,23 @@ export default function NewCustomer() {
   }, [])
 
   useEffect(() => {
-    if (success || error) {
+    if (createdCustomerStatus || created_cutomer_error) {
       setTimeout(() => {
-        dispatch(clearErrors())
+        dispatch(clearCustomerErrors())
 
-        if (success) {
+        if (createdCustomerStatus) {
           navigate(
             `/customers?selectedView=${user.type === CONSTANTS.CUSTOMER_TYPE.ORGANIZATION ? 1 : 0}`,
           )
-          dispatch(clearErrors())
+          dispatch(clearCustomerErrors())
         }
-      }, 1000) // clearing the success / error state so that the pop up disappears
+      }, 1000) // clearing the createdCustomerStatus / error state so that the pop up disappears
 
-      if (success) {
+      if (createdCustomerStatus) {
         setUser(initial_state)
       }
     }
-  }, [dispatch, error, success])
+  }, [dispatch, created_cutomer_error, createdCustomerStatus])
 
   const submit = () => {
     if (validate_required_keys(user, setValidationError)) {
@@ -87,14 +102,14 @@ export default function NewCustomer() {
         <CRow>
           <CCol xs>
             <Alert
-              showAlert={success || error || validationError}
-              variant={success ? 'success' : 'danger'}
+              showAlert={createdCustomerStatus || created_cutomer_error || validationError}
+              variant={createdCustomerStatus ? 'success' : 'danger'}
               message={
-                success
+                createdCustomerStatus
                   ? 'Customer Created Successfully'
                   : validationError
                     ? validationError
-                    : error
+                    : created_cutomer_error
               }
             />
             <CCard

@@ -20,7 +20,7 @@ import { AppRightSidebar } from '../../components'
 import TextInput from '../../components/Form/TextInput'
 import { CONSTANTS } from '../../utils/constants'
 import Enums from '../../utils/Enums'
-import { filterCustomer, getAllCustomers, searchCustomer } from '../../actions/CustomerActions'
+//import { filterCustomer, getAllCustomers, searchCustomer } from '../../actions/CustomerActions'
 import { readableDateFromString } from '../../helpers/DateHelpers'
 import { getAllDataCenters } from '../../actions/DataCenterActions'
 import '../index.css'
@@ -42,17 +42,20 @@ import editIcon from '../../assets/images/editIcon.svg'
 import { updateCustomer } from '../../actions/CustomerActions'
 import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import { getAllUsersData, deleteUserData, clearUserErrors, filterUserData, searchUserData} from '../../slices/userSlice'
+import { filterCustomer, getAllCustomers, searchCustomer,clearCustomerErrors } from '../../slices/customerSlice'
 
 export default function CustomersList() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
-  const { users, loading } = useSelector((state) => state.customers)
+  const { customers:users, loading } = useSelector((state) => state.customer)
   const { userList, loading: user_list_loading, error: userListError} = useSelector((state) => state.user)
   const { deletedUserStatus:delete_success} = useSelector((state) => state.user)
-  const { customer } = useSelector((state) => state.update_customer)
+  const { updatedCustomerStatus:isUpdated } = useSelector((state) => state.customer)
   const { data_centers } = useSelector((state) => state.data_center)
   const rightSidebarShow = useSelector((state) => state.rightSidebarShow)
+  const data = useSelector((state) => state)
+  console.log(data,"users")
   const initial_filters = {
     name: searchParams.get('name') || '',
     firstName: searchParams.get('firstName') || '',
@@ -72,6 +75,7 @@ export default function CustomersList() {
   useEffect(() => {
     if(delete_success){
       dispatch(clearUserErrors());
+      dispatch(clearCustomerErrors())
     }
     setSearchParams({
       ...searchParams,
@@ -113,7 +117,7 @@ export default function CustomersList() {
 
   useEffect(() => {
     dispatch(getAllCustomers())
-  }, [customer])
+  }, [isUpdated])
 
   useEffect(() => {
     if (searchParams.size > 0) {
