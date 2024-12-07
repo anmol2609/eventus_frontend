@@ -4,31 +4,46 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { CRow, CCol, CCard, CCardBody, CCardHeader, CButton, CForm } from '@coreui/react'
 import Alert from '../../components/Alerts/Alert'
 import { CONSTANTS } from '../../utils/constants'
-import {
-  clearErrors,
-  getCustomer,
-  getL0Customer,
-  getL1Customer,
-  getL2Customer,
-  updateCustomer,
-} from '../../actions/CustomerActions'
+// import {
+//   clearCustomerErrors,
+//   getCustomer,
+//   getL0Customer,
+//   getL1Customer,
+//   getL2Customer,
+//   updateCustomer,
+// } from '../../actions/CustomerActions'
 import SelectBox from '../../components/Form/SelectBox'
 import TextInput from '../../components/Form/TextInput'
 //import { getAllDataCenters } from '../../actions/DataCenterActions'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import { getAllDataCenters } from '../../slices/DataCenterslice'
+import {
+  clearCustomerErrors,
+  updateCustomer,
+  getCustomer
+} from '../../slices/customerSlice'
+import {
+  getL0Customer
+} from '../../slices/l0CustomerSlice'
+import {
+  getL1Customer
+} from '../../slices/l1CustomerSlice'
+import {
+  getL2Customer
+} from '../../slices/l2CustomerSlice'
 export default function EditCustomer() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { error, isUpdated, loading } = useSelector((state) => state.update_customer)
+  const { error, updatedCustomerStatus:isUpdated, loading } = useSelector((state) => state.customer)
   const { data_centers, loading: data_center_loading } = useSelector((state) => state.data_center)
   const { customer } = useSelector((state) => state.customer)
-  const { l0_customers } = useSelector((state) => state.l0_customers)
-  const { l1_customers } = useSelector((state) => state.l1_customers)
-  const { l2_customers } = useSelector((state) => state.l2_customers)
+  const { l0_customers } = useSelector((state) => state.l0_customer)
+  const { l1_customers } = useSelector((state) => state.l1_customer)
+  const { l2_customers } = useSelector((state) => state.l2_customer)
+  const data = useSelector((state) => state)
   const { id } = useParams()
-
+  console.log(data,"datadatadatadata",loading)
   let initial_state = {
     type: '',
     name: '',
@@ -52,7 +67,7 @@ export default function EditCustomer() {
 
   useEffect(() => {
     if (isUpdated) {
-      dispatch(clearErrors())
+      dispatch(clearCustomerErrors())
       navigate(
         `/customers?selectedView=${user.type === CONSTANTS.CUSTOMER_TYPE.ORGANIZATION ? 1 : 0}`,
       )
@@ -60,25 +75,27 @@ export default function EditCustomer() {
 
     if (error) {
       setTimeout(() => {
-        dispatch(clearErrors())
+        dispatch(clearCustomerErrors())
       }, 2000)
     }
   }, [dispatch, isUpdated, error])
 
   useEffect(() => {
+    console.log('useEffectCustomer', customer)
     if (customer) {
+      
       setUser({
         ...user,
-        type: customer.type,
-        name: customer.name,
-        tenancy_level: customer.tenancy_level,
-        tenant_code: customer.tenant_code,
-        data_center: customer.data_center._id,
-        uuid: customer.uuid,
-        l0_tenancy_partner: customer.l0_tenancy_partner,
-        l1_tenancy_partner: customer.l1_tenancy_partner,
-        l2_tenancy_partner: customer.l2_tenancy_partner,
-        status: customer.status,
+        type: customer?.type,
+        name: customer?.name,
+        tenancy_level: customer?.tenancy_level,
+        tenant_code: customer?.tenant_code,
+        data_center: customer?.data_center?._id,
+        uuid: customer?.uuid,
+        l0_tenancy_partner: customer?.l0_tenancy_partner,
+        l1_tenancy_partner: customer?.l1_tenancy_partner,
+        l2_tenancy_partner: customer?.l2_tenancy_partner,
+        status: customer?.status,
       })
       setIsTenancyDisabled(customer.type === CONSTANTS.CUSTOMER_TYPE.ORGANIZATION)
     }
@@ -94,7 +111,11 @@ export default function EditCustomer() {
       }, {})
 
     if (validate_required_keys(validation_keys, setValidationError))
-      dispatch(updateCustomer(id, user))
+      console.log("updateCustomer")
+    let data ={
+      id, user
+    }
+      dispatch(updateCustomer(data))
   }
 
   return (

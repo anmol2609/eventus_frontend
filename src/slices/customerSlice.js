@@ -1,211 +1,204 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { managementAxiosInstance } from 'src/config/Axios'
+//async function for get All Customers
+export const getAllCustomers = createAsyncThunk(
+  'getAllCustomers',
+  async (_, { rejectWithValue }) => {
+    try {
+      // Simulate an API call
+      const { data } = await managementAxiosInstance.get(`/user/all`)
+      console.log(data,"datadatadatadatadata")
+      return data.data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.message)
+    }
+  },
+)
+//async function for create Customer
+export const createCustomer = createAsyncThunk(
+  'createCustomer',
+  async (payload, { rejectWithValue }) => {
+    try {
+      // Simulate an API call
+      const { data } = await managementAxiosInstance.post(`/user/register`, payload)
+      return data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.data.message)
+    }
+  },
+) 
+//async function for update Customer
+export const updateCustomer = createAsyncThunk(
+  'updateCustomer',
+  async (payload, { rejectWithValue }) => {
+    try {
+      console.log(payload)
+      const data = await managementAxiosInstance.put(`/user/${payload.id}/update`, payload.user);
+      return data.data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.data.message)
+    }
+  },
+) 
 
-// Create Customer Slice
-const createCustomerSlice = createSlice({
-  name: 'createCustomer',
+//async function for filter Customer
+export const filterCustomer = createAsyncThunk(
+  'filterCustomer',
+  async (filters, { rejectWithValue }) => {
+    try {
+      // Simulate an API call
+      
+      const { data } = await managementAxiosInstance.get(`/user/filter`, {
+        params: filters,
+      })
+      return data.data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.data.message)
+    }
+  },
+)
+//async function for search Customer
+export const searchCustomer = createAsyncThunk(
+  'searchCustomer',
+  async (term, { rejectWithValue }) => {
+    try {
+      // Simulate an API call
+      
+      const { data } = await managementAxiosInstance.get(`/user/search`, {
+        params: { term },
+      })
+      return data.data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.data.message) //
+    }
+  },
+)
+
+//async function for get Customer
+export const getCustomer = createAsyncThunk(
+  'getCustomer',
+  async (id, { rejectWithValue }) => {
+    try {
+      // Simulate an API call
+      const { data } = await managementAxiosInstance.get(`/user/${id}/get`)
+      return data.data // Return product data on success
+    } catch (error) {
+      return rejectWithValue(error.response.data.message) //
+    }
+  },
+)
+// Slice setup
+const customerSlice = createSlice({
+  name: 'customerSlice',
   initialState: {
-    customer: {},
+    customers: [],
     loading: false,
     success: false,
     error: null,
+    createdCustomerStatus: false, 
+    updatedCustomerStatus: false,
+    fetch_customer_status:false,
+    customer: {}
   },
   reducers: {
-    createCustomerRequest: (state) => {
-      state.loading = true
-    },
-    createCustomerSuccess: (state, action) => {
-      state.loading = false
-      state.success = true
-      state.customer = action.payload
-    },
-    createCustomerFail: (state, action) => {
-      state.loading = false
-      state.success = false
-      state.error = action.payload
-    },
-    clearCreateErrors: (state) => {
-      state.error = null
-      state.success = false
-    },
-  },
-})
-
-// Get All Customers Slice
-const getAllCustomersSlice = createSlice({
-  name: 'allCustomers',
-  initialState: {
-    users: [],
-    loading: false,
-    success: false,
-    error: null,
-  },
-  reducers: {
-    getAllCustomersRequest: (state) => {
-      state.loading = true
-    },
-    getAllCustomersSuccess: (state, action) => {
-      state.loading = false
-      state.success = true
-      state.users = action.payload
-    },
-    getAllCustomersFail: (state, action) => {
-      state.loading = false
-      state.success = false
-      state.error = action.payload
-    },
-    clearAllCustomersErrors: (state) => {
-      state.error = null
-    },
-  },
-})
-
-// Get Single Customer Slice
-const getCustomerSlice = createSlice({
-  name: 'customer',
-  initialState: {
-    customer: null,
-    loading: false,
-    success: false,
-    error: null,
-  },
-  reducers: {
-    getCustomerRequest: (state) => {
-      state.loading = true
-    },
-    getCustomerSuccess: (state, action) => {
-      state.loading = false
-      state.success = true
-      state.customer = action.payload
-    },
-    getCustomerFail: (state, action) => {
-      state.loading = false
-      state.success = false
-      state.error = action.payload
-    },
     clearCustomerErrors: (state) => {
       state.error = null
       state.success = false
+      state.updatedCustomerStatus = false
+      state.createdCustomerStatus = false
+      state.fetch_customer_status = false
     },
   },
-})
-
-// Update Customer Slice
-const updateCustomerSlice = createSlice({
-  name: 'updateCustomer',
-  initialState: {
-    customer: {},
-    loading: false,
-    success: false,
-    error: null,
-    isUpdated: false,
-  },
-  reducers: {
-    updateCustomerRequest: (state) => {
-      state.loading = true
-    },
-    updateCustomerSuccess: (state, action) => {
-      state.loading = false
-      state.success = true
-      state.isUpdated = true
-      state.customer = action.payload
-    },
-    clearUpdateErrors: (state) => {
-      state.error = null
-      state.isUpdated = false
-      state.success = false
-    },
-  },
-})
-
-// Export actions
-
-
-// Customer Levels Slices
-const createLevelSlice = (name) => {
-  return createSlice({
-    name: name,
-    initialState: {
-      customers: [],
-      loading: false,
-      success: false,
-      error: null,
-    },
-    reducers: {
-      getCustomerRequest: (state) => {
+  extraReducers: (builder) => {
+    builder
+      //get All Data Centers
+      .addCase(getAllCustomers.pending, (state) => {
         state.loading = true
-      },
-      getCustomerSuccess: (state, action) => {
+      })
+      .addCase(getAllCustomers.fulfilled, (state, action) => {
+        
         state.loading = false
         state.success = true
         state.customers = action.payload
-      },
-      getCustomerFail: (state, action) => {
+      })
+      .addCase(getAllCustomers.rejected, (state, action) => {
         state.loading = false
-        state.success = false
         state.error = action.payload
-      },
-      clearErrors: (state) => {
-        state.error = null
-        state.success = false
-      },
-    },
-  })
-}
+      })
+    
+      //search Data Center
+      .addCase(searchCustomer.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(searchCustomer.fulfilled, (state, action) => {
+        
+        state.loading = false
+        state.success = true
+        state.customers = action.payload
+      })
+      .addCase(searchCustomer.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload
+      })
 
-const l0CustomerSlice = createLevelSlice('l0Customers')
-const l1CustomerSlice = createLevelSlice('l1Customers')
-const l2CustomerSlice = createLevelSlice('l2Customers')
+      //filter Data Center
+      .addCase(filterCustomer.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(filterCustomer.fulfilled, (state, action) => {
+        state.loading = false
+        state.success = true
+        state.customers = action.payload
+      })
+      .addCase(filterCustomer.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload
+      })
+      
+      //create Data Center
+      .addCase(createCustomer.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(createCustomer.fulfilled, (state, action) => {
+        state.loading = false
+        state.createdCustomerStatus = true
+        state.success = true
+      })
+      .addCase(createCustomer.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload.message
+      })
 
-// Export actions
-export const {
-  createCustomerRequest,
-  createCustomerSuccess,
-  createCustomerFail,
-  clearCreateErrors,
-} = createCustomerSlice.actions
+      //update Data Center
+      .addCase(updateCustomer.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(updateCustomer.fulfilled, (state, action) => {
+        state.loading = false
+        state.updatedCustomerStatus = true
+        state.success = true
+      })
+      .addCase(updateCustomer.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload
+      })
+    //get User By Tenant 
+      .addCase(getCustomer.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(getCustomer.fulfilled, (state, action) => {
+        state.loading = false
+        state.success = true
+        state.fetch_customer_status = true
+        state.customer = action.payload
+      })
+      .addCase(getCustomer.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload.message
+      })
+  },
+})
 
-export const {
-  getAllCustomersRequest,
-  getAllCustomersSuccess,
-  getAllCustomersFail,
-  clearAllCustomersErrors,
-} = getAllCustomersSlice.actions
+export const { clearCustomerErrors } = customerSlice.actions
+export const customerReducer = customerSlice.reducer
 
-export const { getCustomerRequest, getCustomerSuccess, getCustomerFail, clearCustomerErrors } =
-  getCustomerSlice.actions
-
-  export const { updateCustomerRequest, updateCustomerSuccess, clearUpdateErrors } =
-    updateCustomerSlice.actions
-
-
-
-
-export const {
-  getCustomerRequest: getL0CustomerRequest,
-  getCustomerSuccess: getL0CustomerSuccess,
-  getCustomerFail: getL0CustomerFail,
-  clearErrors: clearL0Errors,
-} = l0CustomerSlice.actions
-
-export const {
-  getCustomerRequest: getL1CustomerRequest,
-  getCustomerSuccess: getL1CustomerSuccess,
-  getCustomerFail: getL1CustomerFail,
-  clearErrors: clearL1Errors,
-} = l1CustomerSlice.actions
-
-export const {
-  getCustomerRequest: getL2CustomerRequest,
-  getCustomerSuccess: getL2CustomerSuccess,
-  getCustomerFail: getL2CustomerFail,
-  clearErrors: clearL2Errors,
-} = l2CustomerSlice.actions
-
-// Export reducers
-export const createCustomerReducer = createCustomerSlice.reducer
-export const getAllCustomersReducer = getAllCustomersSlice.reducer
-export const getCustomerReducer = getCustomerSlice.reducer
-export const updateCustomerReducer = updateCustomerSlice.reducer
-export const l0CustomerReducer = l0CustomerSlice.reducer
-export const l1CustomerReducer = l1CustomerSlice.reducer
-export const l2CustomerReducer = l2CustomerSlice.reducer

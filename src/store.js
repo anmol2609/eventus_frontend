@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 // Importing only the necessary reducers for customer and feed entry
-import {
-  createCustomerReducer,
-  getAllCustomersReducer,
-  getCustomerReducer,
-  l0CustomerReducer,
-  l1CustomerReducer,
-  l2CustomerReducer,
-  updateCustomerReducer,
-} from './slices/customerSlice'
+// import {
+//   createCustomerReducer,
+//   getAllCustomersReducer,
+//   getCustomerReducer,
+//   l0CustomerReducer,
+//   l1CustomerReducer,
+//   l2CustomerReducer,
+//   updateCustomerReducer,
+// } from './slices/customerSlice'
 import {
   createFeedEntryReducer,
   getAllFeedEntriesReducer,
@@ -33,18 +33,23 @@ import { O365CustomerSliceReducer } from './slices/O365Customerslice'
 import { userSliceReducer } from './slices/userSlice'
 import { tenantsSliceReducer } from './slices/tenantsSlice'
 import { dataCenterReducer } from './slices/DataCenterslice'
+import { customerReducer } from './slices/customerSlice'
+
+import { l0CustomersReducer } from './slices/l0CustomerSlice'
+import { l1CustomersReducer } from './slices/l1CustomerSlice'
+import { l2CustomersReducer } from './slices/l2CustomerSlice'
 
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
   reducer: {
-    // Customer
-    create_customer: createCustomerReducer,
-    customer: getCustomerReducer,
-    customers: getAllCustomersReducer,
-    update_customer: updateCustomerReducer,
-    l0_customers: l0CustomerReducer,
-    l1_customers: l1CustomerReducer,
-    l2_customers: l2CustomerReducer,
+    // // Customer
+    // create_customer: createCustomerReducer,
+    // customer: getCustomerReducer,
+    // customers: getAllCustomersReducer,
+    // update_customer: updateCustomerReducer,
+    // l0_customers: l0CustomerReducer,
+    // l1_customers: l1CustomerReducer,
+    // l2_customers: l2CustomerReducer,
 
     // Feed Entry
     create_feed_entry: createFeedEntryReducer,
@@ -106,7 +111,11 @@ export const store = configureStore({
 
     user:userSliceReducer,
     tenants_by_tenancy_level:tenantsSliceReducer,
-    data_center:dataCenterReducer
+    data_center:dataCenterReducer,
+    customer:customerReducer,
+    l0_customer: l0CustomersReducer,
+    l1_customer: l1CustomersReducer,
+    l2_customer: l2CustomersReducer,
     // Other slices can be commented out or removed
     /*
 
