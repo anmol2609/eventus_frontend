@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {  getAWSCustomer, updateAWSCustomer } from '../../slices/awsCustomer/UpdateAWSCustomerSlice'
+import {   updateAWSCustomer } from '../../slices/awsCustomer/UpdateAWSCustomerSlice'
 import { clearErrors ,getAWSCustomer  } from '../../slices/awsCustomer/GetAWSCustomerSlice'
 // import { useNavigate, useParams } from 'react-router-dom'
 import { CRow, CCol, CButton, CForm, CCloseButton } from '@coreui/react'

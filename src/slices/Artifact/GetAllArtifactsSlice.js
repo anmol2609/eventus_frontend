@@ -45,7 +45,7 @@ export const filterArtifact = createAsyncThunk(
 )
 
 export const getArtifactByFeedEntry = createAsyncThunk(
-  'filterArtifact',
+  'getArtifactByFeedEntry',
   async (feed_id, { rejectWithValue }) => {
     try {
       // Simulate an API call
@@ -73,15 +73,15 @@ const getAllArtifactsSlice = createSlice({
     },
     extraReducers: (builder) => {
       builder
-      .addCase(getArtifactByFeedEntry.pending, (state) => {
+      .addCase(getAllArtifacts.pending, (state) => {
         state.loading = true
       })
-      .addCase(getArtifactByFeedEntry.fulfilled, (state, action) => {
+      .addCase(getAllArtifacts.fulfilled, (state, action) => {
         state.loading = false
         state.success = true
         state.artifacts = action.payload
       })
-      .addCase(getArtifactByFeedEntry.rejected, (state, action) => {
+      .addCase(getAllArtifacts.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload
       })
