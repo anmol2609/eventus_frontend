@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 // Importing only the necessary reducers for customer and feed entry
-import {
-  createCustomerReducer,
-  getAllCustomersReducer,
-  getCustomerReducer,
-  l0CustomerReducer,
-  l1CustomerReducer,
-  l2CustomerReducer,
-  updateCustomerReducer,
-} from './slices/customerSlice'
+// import {
+//   createCustomerReducer,
+//   getAllCustomersReducer,
+//   getCustomerReducer,
+//   l0CustomerReducer,
+//   l1CustomerReducer,
+//   l2CustomerReducer,
+//   updateCustomerReducer,
+// } from './slices/customerSlice'
 import {
   createFeedEntryReducer,
   getAllFeedEntriesReducer,
@@ -22,29 +22,50 @@ import { rightSidebarReducer, sidebarReducer, themeReducer } from './slices/Them
 import { createSOARCustomerReducer, getAllSOARCustomersReducer, getSOARCustomerReducer, updateSOARCustomerReducer } from './slices/soarCustomerSlice'
 import soarProductReducer from './slices/soarProductSlice'; // make sure this path is correct
 import { RssFeedReducer } from './slices/rssFeedSlice'
-import { createArtifactReducer, getArtifactReducer, getArtifactsReducer, testArtifactsReducer, updateArtifactReducer } from './slices/Artifactslice'
+//import { createArtifactReducer, getArtifactReducer, getArtifactsReducer, testArtifactsReducer, updateArtifactReducer } from './slices/Artifactslice'
 import { mlModelReducer } from './slices/MIModelslice'
-import { tagsReducer } from './slices/Tagsslice'
+import { tagsReducer } from './slices/tags/Tagsslice'
 import { mitreReducer } from './slices/Mitreslice'
 //import { createDataCenterReducer, getAllDataCentersReducer, getDataCenterReducer, updateDataCenterReducer } from './slices/DataCenterslice'
-import { awsCustomerCreateReducer, getAllAWSCustomersReducer, getAWSCustomerReducer, updateAWSCustomerReducer } from './slices/AWSCustomerslice'
+//import { awsCustomerCreateReducer, getAllAWSCustomersReducer, getAWSCustomerReducer, updateAWSCustomerReducer } from './slices/AWSCustomerslice'
 import { O365CustomerSliceReducer } from './slices/O365Customerslice'
 
 import { userSliceReducer } from './slices/userSlice'
 import { tenantsSliceReducer } from './slices/tenantsSlice'
 import { dataCenterReducer } from './slices/DataCenterslice'
+import { customerReducer } from './slices/customerSlice'
+
+import { l0CustomersReducer } from './slices/l0CustomerSlice'
+import { l1CustomersReducer } from './slices/l1CustomerSlice'
+import { l2CustomersReducer } from './slices/l2CustomerSlice'
+import { create_V1_customer, update_V1_customer, V1_customer, V1_customers, V1CustomerReducer } from './slices/V1Customerslice';
+import { V1CustomerProductReducer } from './slices/V1CustomerProduct';
+=======
+import { l3CustomersReducer } from './slices/l3CustomerSlice'
+
+import { createAWSCustomerReducer } from './slices/awsCustomer/CreateAWSCustomerSlice'
+import { getAWSCustomerReducer } from './slices/awsCustomer/GetAWSCustomerSlice'
+import { getAllAWSCustomersReducer } from './slices/awsCustomer/GetAllAWSCustomersSlice'
+import { updateAWSCustomerReducer } from './slices/awsCustomer/UpdateAWSCustomerSlice'
+
+import { createArtifactReducer } from './slices/Artifact/CreateArtifactSlice'
+import { getAllArtifactsReducer } from './slices/Artifact/GetAllArtifactsSlice'
+import { getArtifactReducer } from './slices/Artifact/GetArtifactSlice'
+import { testArtifactReducer } from './slices/Artifact/TestArtifactSlice'
+import { updateArtifactReducer } from './slices/Artifact/UpdateArtifactSlice'
+
 
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
   reducer: {
-    // Customer
-    create_customer: createCustomerReducer,
-    customer: getCustomerReducer,
-    customers: getAllCustomersReducer,
-    update_customer: updateCustomerReducer,
-    l0_customers: l0CustomerReducer,
-    l1_customers: l1CustomerReducer,
-    l2_customers: l2CustomerReducer,
+    // // Customer
+    // create_customer: createCustomerReducer,
+    // customer: getCustomerReducer,
+    // customers: getAllCustomersReducer,
+    // update_customer: updateCustomerReducer,
+    // l0_customers: l0CustomerReducer,
+    // l1_customers: l1CustomerReducer,
+    // l2_customers: l2CustomerReducer,
 
     // Feed Entry
     create_feed_entry: createFeedEntryReducer,
@@ -57,29 +78,37 @@ export const store = configureStore({
     theme: themeReducer,
     rightSidebarShow: rightSidebarReducer,
     sideBarShow: sidebarReducer,
-    
+
     // SOAR Customer
     createSOARCustomer: createSOARCustomerReducer,
     allSOARCustomers: getAllSOARCustomersReducer,
     SOARCustomer: getSOARCustomerReducer,
     updateSOARCustomer: updateSOARCustomerReducer,
-    
+
     // SOAR Product
     soarProducts: soarProductReducer,
-    
+
     // RSS Feed
     create_rss_feed: RssFeedReducer,
     configured_rss_feed: RssFeedReducer,
     rss_feeds: RssFeedReducer,
     rss_feed: RssFeedReducer,
     update_rss_feed: RssFeedReducer,
-    
+
     // Artifact
     create_artifact: createArtifactReducer,
-    artifacts: getArtifactsReducer,
+    artifacts: getAllArtifactsReducer,
     artifact: getArtifactReducer,
     update_artifact: updateArtifactReducer,
     test_artifacts: testArtifactsReducer,
+
+    test_artifacts: testArtifactReducer,
+    
+    // create_artifact: createArtifactReducer,
+    // artifacts: getArtifactsReducer,
+    // artifact: getArtifactReducer,
+    // update_artifact: updateArtifactReducer,
+    // test_artifacts: testArtifactsReducer,
     
     // ML Model, Tags, and Mitre
     ml_model: mlModelReducer,
@@ -93,42 +122,50 @@ export const store = configureStore({
     // update_data_center: updateDataCenterReducer,
 
     // AWS Customer
-    create_aws_customer: awsCustomerCreateReducer,
+    create_aws_customer: createAWSCustomerReducer,
     aws_customer: getAWSCustomerReducer,
     update_aws_customer: updateAWSCustomerReducer,
     all_aws_customers: getAllAWSCustomersReducer,
-    
+
     // O365 Customer
     create_O365_customer: O365CustomerSliceReducer,
     O365_customers: O365CustomerSliceReducer,
     O365_customer: O365CustomerSliceReducer,
     update_O365_customer: O365CustomerSliceReducer,
 
-    user:userSliceReducer,
-    tenants_by_tenancy_level:tenantsSliceReducer,
-    data_center:dataCenterReducer
+    user: userSliceReducer,
+    tenants_by_tenancy_level: tenantsSliceReducer,
+    data_center: dataCenterReducer,
+    customer: customerReducer,
+    l0_customer: l0CustomersReducer,
+    l1_customer: l1CustomersReducer,
+    l2_customer: l2CustomersReducer,
+    l3_customer: l3CustomersReducer
     // Other slices can be commented out or removed
     /*
 
 
     // V1 Customer
-    create_V1_customer: v1CustomerReducer,
-    V1_customers: v1CustomerReducer,
-    V1_customer: v1CustomerReducer,
-    update_V1_customer: v1CustomerReducer,
+    create_V1_customer: create_V1_customer,
+    V1_customers: V1_customers,
+    V1_customer: V1_customer,
+    update_V1_customer: update_V1_customer,
 
     // V1 Customer Product
-    create_V1_customer_product: v1CustomerProductReducer,
-    V1_customer_products_for_customer: v1CustomerProductReducer,
-    V1_customer_product: v1CustomerProductReducer,
-    update_V1_customer_product: v1CustomerProductReducer,
-
+    create_V1_customer_product: V1CustomerProductReducer,
+    V1_customer_products_for_customer: V1CustomerProductReducer,
+    V1_customer_product: V1CustomerProductReducer,
+    update_V1_customer_product: V1CustomerProductReducer,
 
     // V1 Product
     create_V1_product: v1ProductReducer,
     V1_products: v1ProductReducer,
     V1_product: v1ProductReducer,
     update_V1_product: v1ProductReducer,
+    // Other slices can be commented out or removed
+    /*
+
+
 
 
 

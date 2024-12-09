@@ -1,85 +1,69 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { managementAxiosInstance } from 'src/config/Axios'
 
-
+// Initial state
 const initialState = {
-  V1_customer: {},
-  V1_customers: [],
+  customer: {},
+  customers: [],
   loading: false,
   success: false,
   error: null,
   isUpdated: false,
 }
 
-// Async Thunks
-export const createV1Customer = createAsyncThunk(
+// Async thunks
+export const create_V1_customer = createAsyncThunk(
   'V1Customer/create',
   async (customerData, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/v1/customer', {
-        method: 'POST',
-        body: JSON.stringify(customerData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.message || 'Failed to create customer')
+      const { data } = await managementAxiosInstance.post('/api/v1/customer', customerData)
       return data
     } catch (error) {
-      return rejectWithValue(error.message)
+      return rejectWithValue(error.response?.data?.message || 'Failed to create customer')
     }
   },
 )
 
-export const getAllV1Customers = createAsyncThunk(
+export const V1_customers = createAsyncThunk(
   'V1Customer/getAll',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/v1/customers')
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.message || 'Failed to fetch customers')
+      const { data } = await managementAxiosInstance.get('/api/v1/customers')
       return data
     } catch (error) {
-      return rejectWithValue(error.message)
+      return rejectWithValue(error.response?.data?.message || 'Failed to fetch customers')
     }
   },
 )
 
-export const getV1Customer = createAsyncThunk(
+export const V1_customer = createAsyncThunk(
   'V1Customer/getSingle',
   async (customerId, { rejectWithValue }) => {
     try {
-      const response = await fetch(`/api/v1/customer/${customerId}`)
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.message || 'Failed to fetch customer')
+      const { data } = await managementAxiosInstance.get(`/api/v1/customer/${customerId}`)
       return data
     } catch (error) {
-      return rejectWithValue(error.message)
+      return rejectWithValue(error.response?.data?.message || 'Failed to fetch customer')
     }
   },
 )
 
-export const updateV1Customer = createAsyncThunk(
+export const update_V1_customer = createAsyncThunk(
   'V1Customer/update',
   async ({ customerId, updateData }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`/api/v1/customer/${customerId}`, {
-        method: 'PUT',
-        body: JSON.stringify(updateData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.message || 'Failed to update customer')
+      const { data } = await managementAxiosInstance.put(
+        `/api/v1/customer/${customerId}`,
+        updateData,
+      )
       return data
     } catch (error) {
-      return rejectWithValue(error.message)
+      return rejectWithValue(error.response?.data?.message || 'Failed to update customer')
     }
   },
 )
 
-
+// Slice setup
 const V1CustomerSlice = createSlice({
   name: 'V1Customer',
   initialState,
@@ -92,74 +76,67 @@ const V1CustomerSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
-      .addCase(createV1Customer.pending, (state) => {
+      // Create customer
+      .addCase(create_V1_customer.pending, (state) => {
         state.loading = true
-        state.success = false
       })
-      .addCase(createV1Customer.fulfilled, (state, action) => {
+      .addCase(create_V1_customer.fulfilled, (state, action) => {
         state.loading = false
         state.success = true
-        state.V1_customer = action.payload
+        state.customer = action.payload
       })
-      .addCase(createV1Customer.rejected, (state, action) => {
+      .addCase(create_V1_customer.rejected, (state, action) => {
         state.loading = false
-        state.success = false
         state.error = action.payload
       })
 
-
-      .addCase(getAllV1Customers.pending, (state) => {
+      // Get all customers
+      .addCase(V1_customers.pending, (state) => {
         state.loading = true
       })
-      .addCase(getAllV1Customers.fulfilled, (state, action) => {
+      .addCase(V1_customers.fulfilled, (state, action) => {
         state.loading = false
         state.success = true
-        state.V1_customers = action.payload
+        state.customers = action.payload
       })
-      .addCase(getAllV1Customers.rejected, (state, action) => {
+      .addCase(V1_customers.rejected, (state, action) => {
         state.loading = false
-        state.success = false
         state.error = action.payload
       })
 
-
-      .addCase(getV1Customer.pending, (state) => {
+      // Get single customer
+      .addCase(V1_customer.pending, (state) => {
         state.loading = true
       })
-      .addCase(getV1Customer.fulfilled, (state, action) => {
+      .addCase(V1_customer.fulfilled, (state, action) => {
         state.loading = false
         state.success = true
-        state.V1_customer = action.payload
+        state.customer = action.payload
       })
-      .addCase(getV1Customer.rejected, (state, action) => {
+      .addCase(V1_customer.rejected, (state, action) => {
         state.loading = false
-        state.success = false
         state.error = action.payload
       })
 
-
-      .addCase(updateV1Customer.pending, (state) => {
+      // Update customer
+      .addCase(update_V1_customer.pending, (state) => {
         state.loading = true
-        state.isUpdated = false
       })
-      .addCase(updateV1Customer.fulfilled, (state, action) => {
+      .addCase(update_V1_customer.fulfilled, (state, action) => {
         state.loading = false
         state.success = true
         state.isUpdated = true
-        state.V1_customer = action.payload
+        state.customer = action.payload
       })
-      .addCase(updateV1Customer.rejected, (state, action) => {
+      .addCase(update_V1_customer.rejected, (state, action) => {
         state.loading = false
-        state.success = false
-        state.isUpdated = false
         state.error = action.payload
+        state.isUpdated = false
       })
   },
 })
 
-
 export const { clearErrors } = V1CustomerSlice.actions
 export const V1CustomerReducer = V1CustomerSlice.reducer
 
-export { createV1Customer, getAllV1Customers, getV1Customer, updateV1Customer }
+export { create_V1_customer, V1_customers, V1_customer, update_V1_customer }
