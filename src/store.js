@@ -38,6 +38,9 @@ import { customerReducer } from './slices/customerSlice'
 import { l0CustomersReducer } from './slices/l0CustomerSlice'
 import { l1CustomersReducer } from './slices/l1CustomerSlice'
 import { l2CustomersReducer } from './slices/l2CustomerSlice'
+import { create_V1_customer, update_V1_customer, V1_customer, V1_customers, V1CustomerReducer } from './slices/V1Customerslice';
+import { V1CustomerProductReducer } from './slices/V1CustomerProduct';
+=======
 import { l3CustomersReducer } from './slices/l3CustomerSlice'
 
 import { createAWSCustomerReducer } from './slices/awsCustomer/CreateAWSCustomerSlice'
@@ -75,28 +78,30 @@ export const store = configureStore({
     theme: themeReducer,
     rightSidebarShow: rightSidebarReducer,
     sideBarShow: sidebarReducer,
-    
+
     // SOAR Customer
     createSOARCustomer: createSOARCustomerReducer,
     allSOARCustomers: getAllSOARCustomersReducer,
     SOARCustomer: getSOARCustomerReducer,
     updateSOARCustomer: updateSOARCustomerReducer,
-    
+
     // SOAR Product
     soarProducts: soarProductReducer,
-    
+
     // RSS Feed
     create_rss_feed: RssFeedReducer,
     configured_rss_feed: RssFeedReducer,
     rss_feeds: RssFeedReducer,
     rss_feed: RssFeedReducer,
     update_rss_feed: RssFeedReducer,
-    
+
     // Artifact
     create_artifact: createArtifactReducer,
     artifacts: getAllArtifactsReducer,
     artifact: getArtifactReducer,
     update_artifact: updateArtifactReducer,
+    test_artifacts: testArtifactsReducer,
+
     test_artifacts: testArtifactReducer,
     
     // create_artifact: createArtifactReducer,
@@ -121,17 +126,17 @@ export const store = configureStore({
     aws_customer: getAWSCustomerReducer,
     update_aws_customer: updateAWSCustomerReducer,
     all_aws_customers: getAllAWSCustomersReducer,
-    
+
     // O365 Customer
     create_O365_customer: O365CustomerSliceReducer,
     O365_customers: O365CustomerSliceReducer,
     O365_customer: O365CustomerSliceReducer,
     update_O365_customer: O365CustomerSliceReducer,
 
-    user:userSliceReducer,
-    tenants_by_tenancy_level:tenantsSliceReducer,
-    data_center:dataCenterReducer,
-    customer:customerReducer,
+    user: userSliceReducer,
+    tenants_by_tenancy_level: tenantsSliceReducer,
+    data_center: dataCenterReducer,
+    customer: customerReducer,
     l0_customer: l0CustomersReducer,
     l1_customer: l1CustomersReducer,
     l2_customer: l2CustomersReducer,
@@ -141,23 +146,26 @@ export const store = configureStore({
 
 
     // V1 Customer
-    create_V1_customer: v1CustomerReducer,
-    V1_customers: v1CustomerReducer,
-    V1_customer: v1CustomerReducer,
-    update_V1_customer: v1CustomerReducer,
+    create_V1_customer: create_V1_customer,
+    V1_customers: V1_customers,
+    V1_customer: V1_customer,
+    update_V1_customer: update_V1_customer,
 
     // V1 Customer Product
-    create_V1_customer_product: v1CustomerProductReducer,
-    V1_customer_products_for_customer: v1CustomerProductReducer,
-    V1_customer_product: v1CustomerProductReducer,
-    update_V1_customer_product: v1CustomerProductReducer,
-
+    create_V1_customer_product: V1CustomerProductReducer,
+    V1_customer_products_for_customer: V1CustomerProductReducer,
+    V1_customer_product: V1CustomerProductReducer,
+    update_V1_customer_product: V1CustomerProductReducer,
 
     // V1 Product
     create_V1_product: v1ProductReducer,
     V1_products: v1ProductReducer,
     V1_product: v1ProductReducer,
     update_V1_product: v1ProductReducer,
+    // Other slices can be commented out or removed
+    /*
+
+
 
 
 
