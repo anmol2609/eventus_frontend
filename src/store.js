@@ -22,12 +22,12 @@ import { rightSidebarReducer, sidebarReducer, themeReducer } from './slices/Them
 import { createSOARCustomerReducer, getAllSOARCustomersReducer, getSOARCustomerReducer, updateSOARCustomerReducer } from './slices/soarCustomerSlice'
 import soarProductReducer from './slices/soarProductSlice'; // make sure this path is correct
 import { RssFeedReducer } from './slices/rssFeedSlice'
-import { createArtifactReducer, getArtifactReducer, getArtifactsReducer, testArtifactsReducer, updateArtifactReducer } from './slices/Artifactslice'
+//import { createArtifactReducer, getArtifactReducer, getArtifactsReducer, testArtifactsReducer, updateArtifactReducer } from './slices/Artifactslice'
 import { mlModelReducer } from './slices/MIModelslice'
-import { tagsReducer } from './slices/Tagsslice'
+import { tagsReducer } from './slices/tags/Tagsslice'
 import { mitreReducer } from './slices/Mitreslice'
 //import { createDataCenterReducer, getAllDataCentersReducer, getDataCenterReducer, updateDataCenterReducer } from './slices/DataCenterslice'
-import { awsCustomerCreateReducer, getAllAWSCustomersReducer, getAWSCustomerReducer, updateAWSCustomerReducer } from './slices/AWSCustomerslice'
+//import { awsCustomerCreateReducer, getAllAWSCustomersReducer, getAWSCustomerReducer, updateAWSCustomerReducer } from './slices/AWSCustomerslice'
 import { O365CustomerSliceReducer } from './slices/O365Customerslice'
 
 import { userSliceReducer } from './slices/userSlice'
@@ -40,6 +40,20 @@ import { l1CustomersReducer } from './slices/l1CustomerSlice'
 import { l2CustomersReducer } from './slices/l2CustomerSlice'
 import { create_V1_customer, update_V1_customer, V1_customer, V1_customers, V1CustomerReducer } from './slices/V1Customerslice';
 import { V1CustomerProductReducer } from './slices/V1CustomerProduct';
+=======
+import { l3CustomersReducer } from './slices/l3CustomerSlice'
+
+import { createAWSCustomerReducer } from './slices/awsCustomer/CreateAWSCustomerSlice'
+import { getAWSCustomerReducer } from './slices/awsCustomer/GetAWSCustomerSlice'
+import { getAllAWSCustomersReducer } from './slices/awsCustomer/GetAllAWSCustomersSlice'
+import { updateAWSCustomerReducer } from './slices/awsCustomer/UpdateAWSCustomerSlice'
+
+import { createArtifactReducer } from './slices/Artifact/CreateArtifactSlice'
+import { getAllArtifactsReducer } from './slices/Artifact/GetAllArtifactsSlice'
+import { getArtifactReducer } from './slices/Artifact/GetArtifactSlice'
+import { testArtifactReducer } from './slices/Artifact/TestArtifactSlice'
+import { updateArtifactReducer } from './slices/Artifact/UpdateArtifactSlice'
+
 
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
@@ -83,11 +97,19 @@ export const store = configureStore({
 
     // Artifact
     create_artifact: createArtifactReducer,
-    artifacts: getArtifactsReducer,
+    artifacts: getAllArtifactsReducer,
     artifact: getArtifactReducer,
     update_artifact: updateArtifactReducer,
     test_artifacts: testArtifactsReducer,
 
+    test_artifacts: testArtifactReducer,
+    
+    // create_artifact: createArtifactReducer,
+    // artifacts: getArtifactsReducer,
+    // artifact: getArtifactReducer,
+    // update_artifact: updateArtifactReducer,
+    // test_artifacts: testArtifactsReducer,
+    
     // ML Model, Tags, and Mitre
     ml_model: mlModelReducer,
     all_tags: tagsReducer,
@@ -100,7 +122,7 @@ export const store = configureStore({
     // update_data_center: updateDataCenterReducer,
 
     // AWS Customer
-    create_aws_customer: awsCustomerCreateReducer,
+    create_aws_customer: createAWSCustomerReducer,
     aws_customer: getAWSCustomerReducer,
     update_aws_customer: updateAWSCustomerReducer,
     all_aws_customers: getAllAWSCustomersReducer,
@@ -118,6 +140,11 @@ export const store = configureStore({
     l0_customer: l0CustomersReducer,
     l1_customer: l1CustomersReducer,
     l2_customer: l2CustomersReducer,
+    l3_customer: l3CustomersReducer
+    // Other slices can be commented out or removed
+    /*
+
+
     // V1 Customer
     create_V1_customer: create_V1_customer,
     V1_customers: V1_customers,
