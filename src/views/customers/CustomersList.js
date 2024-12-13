@@ -43,7 +43,8 @@ import { updateCustomer } from '../../actions/CustomerActions'
 import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import { getUsersByTenant, clearUserByTenantErrors, filterUsersByTenant, searchUsersByTenant} from '../../slices/userManagement/GetAllUsersByTenantSlice'
 
-import { deleteUserByTenant } from '../../slices/userManagement/DeleteUserBytenantSlice'
+import { deleteUserByTenant,clearDeleteUserByTenantError } from '../../slices/userManagement/DeleteUserBytenantSlice'
+//import { deleteUserByTenant } from '../../slices/userSlice'
 
 import { filterCustomer, getAllCustomers, searchCustomer,clearCustomerErrors } from '../../slices/customerSlice'
 
@@ -53,12 +54,10 @@ export default function CustomersList() {
   const [searchParams, setSearchParams] = useSearchParams()
   const { customers:users, loading } = useSelector((state) => state.customer)
   const { users_by_tenant:userList, loading: user_list_loading, error: userListError} = useSelector((state) => state.users_by_tenant)
-  const { deletedUserStatus:delete_success} = useSelector((state) => state.user)
+  const { success:delete_success} = useSelector((state) => state.delete_user_by_tenant)
   const { updatedCustomerStatus:isUpdated } = useSelector((state) => state.customer)
   const { data_centers } = useSelector((state) => state.data_center)
   const rightSidebarShow = useSelector((state) => state.rightSidebarShow)
-  const data = useSelector((state) => state)
-  console.log(data,"users")
   const initial_filters = {
     name: searchParams.get('name') || '',
     firstName: searchParams.get('firstName') || '',
@@ -78,7 +77,8 @@ export default function CustomersList() {
   useEffect(() => {
     if(delete_success){
       dispatch(clearUserByTenantErrors());
-      dispatch(clearCustomerErrors())
+      dispatch(clearCustomerErrors());
+      dispatch(clearDeleteUserByTenantError());
     }
     setSearchParams({
       ...searchParams,

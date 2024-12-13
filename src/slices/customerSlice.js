@@ -7,7 +7,6 @@ export const getAllCustomers = createAsyncThunk(
     try {
       // Simulate an API call
       const { data } = await managementAxiosInstance.get(`/user/all`)
-      console.log(data,"datadatadatadatadata")
       return data.data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.message)
@@ -32,7 +31,6 @@ export const updateCustomer = createAsyncThunk(
   'updateCustomer',
   async (payload, { rejectWithValue }) => {
     try {
-      console.log(payload)
       const data = await managementAxiosInstance.put(`/user/${payload.id}/update`, payload.user);
       return data.data // Return product data on success
     } catch (error) {

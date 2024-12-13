@@ -20,7 +20,6 @@ export const createDataCenter = createAsyncThunk(
     try {
       // Simulate an API call
       const { data } = await managementAxiosInstance.post(`/data_center/new`, payload)
-      console.log(data,"datadatadata")
       return data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.data.message)

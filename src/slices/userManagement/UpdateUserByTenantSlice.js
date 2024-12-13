@@ -44,5 +44,5 @@ const updateUserByTenantSlice = createSlice({
       })
     }
   })
-export const { clearErrors } = updateUserByTenantSlice.actions
+export const { clearErrors:clearUpdateUserByTenantErrors } = updateUserByTenantSlice.actions
 export const updateUserByTenantReducer = updateUserByTenantSlice.reducer

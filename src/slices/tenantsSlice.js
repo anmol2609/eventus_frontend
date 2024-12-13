@@ -9,7 +9,6 @@ export const getTenantByTenancyLevel = createAsyncThunk(
       // Simulate an API call
       const { data } = await managementAxiosInstance.get(`/tenants/tenancy?tenancy_level=${level}`)
       
-      console.log(data,"createAsyncThunk")
       return data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.data)

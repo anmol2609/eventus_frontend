@@ -5,23 +5,18 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { CONSTANTS } from '../../utils/constants'
 import Alert from '../../components/Alerts/Alert'
 import { CForm, CCol, CRow, CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
-import {
-  createCustomer,
-  getL0Customer,
-  getL1Customer,
-  getL2Customer
-} from '../../actions/CustomerActions'
 import TextInput from '../../components/Form/TextInput'
 import SelectBox from '../../components/Form/SelectBox'
-import { v4 as uuidv4 } from 'uuid'
-import { getAllDataCenters } from '../../actions/DataCenterActions'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import {
-  clearUserErrors,
+  clearUpdateUserByTenantErrors,
   updateUserByTenant,
+} from '../../slices/userManagement/UpdateUserByTenantSlice'
+import {
+  clearGetUserByTenantError,
   getUserByTenant
-} from '../../slices/userSlice'
+} from '../../slices/userManagement/GetUserByTenantSlice'
 import {
   getTenantByTenancyLevel
 } from '../../slices/tenantsSlice'
@@ -31,8 +26,8 @@ export default function NewCustomer() {
   const navigate = useNavigate()
   const location = useLocation()
   const { id } = useParams()
-  const { userByTenant, loading:data_loading } = useSelector((state) => state.user)
-  const { error, updatedUserStatus:isUpdated,success } = useSelector((state) => state.user)
+  const { user_by_tenant:userByTenant, loading:data_loading } = useSelector((state) => state.user_by_tenant)
+  const { error, success:isUpdated } = useSelector((state) => state.update_user_by_tenant)
   const {tenants, loading: tenants_loading } = useSelector((state) => state.tenants_by_tenancy_level)
   let initial_state = {
     firstName: '',
@@ -56,7 +51,8 @@ export default function NewCustomer() {
 
   useEffect(() => {
     if (isUpdated) {
-      dispatch(clearUserErrors())
+      dispatch(clearUpdateUserByTenantErrors())
+      dispatch(clearGetUserByTenantError())
       navigate(
         `/customers?selectedView=${2}`,
       )
@@ -125,7 +121,6 @@ export default function NewCustomer() {
         user_id: user._id,
         update_fields: info
       }
-      console.log(user,updatedFieldRecords)
       dispatch(updateUserByTenant(updatedFieldRecords))
     }
   }

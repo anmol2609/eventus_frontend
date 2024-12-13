@@ -44,8 +44,6 @@ export default function NewCustomer() {
   const { l2_customers } = useSelector((state) => state.l2_customer)
   const { data_centers, loading: data_centers_loading } = useSelector((state) => state.data_center)
 
-  const data = useSelector((state) => state.customer)
-  console.log(data,createdCustomerStatus,loading)
   let initial_state = {
     type: customer_type,
     name: '',

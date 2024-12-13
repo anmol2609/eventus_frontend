@@ -18,9 +18,10 @@ import { getAllDataCenters } from '../../actions/DataCenterActions'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import {
-  clearUserErrors,
+  clearCreateUserByTenantErrors,
   createUserByTenant,
-} from '../../slices/userSlice'
+} from '../../slices/userManagement/CreateUserByTenantDataSlice'
+
 import {
   getTenantByTenancyLevel
 } from '../../slices/tenantsSlice'
@@ -29,7 +30,7 @@ export default function NewCustomer() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const { error:created_user_error, createdUserStatus, loading } = useSelector((state) => state.user)
+  const { error:created_user_error, success:createdUserStatus, loading } = useSelector((state) => state.create_user_by_tenant)
   const {tenants, loading: tenants_loading } = useSelector((state) => state.tenants_by_tenancy_level)
   let initial_state = {
     firstName: '',
@@ -53,13 +54,13 @@ export default function NewCustomer() {
   useEffect(() => {
     if (createdUserStatus || created_user_error) {
       setTimeout(() => {
-        dispatch(clearUserErrors())
+        dispatch(clearCreateUserByTenantErrors())
 
         if (createdUserStatus) {
           navigate(
             `/customers?selectedView=${2}`,
           )
-          dispatch(clearUserErrors())
+          dispatch(clearCreateUserByTenantErrors())
         }
       }, 1000) // clearing the success / error state so that the pop up disappears
 
@@ -202,7 +203,6 @@ export default function NewCustomer() {
                           disabled={!user.tenancy_level && tenants_loading}
                         />
                       </CCol>
-                      {console.log(tenants)}
                       <CCol sm={4}>
                         <SelectBox
                           id="user_type"

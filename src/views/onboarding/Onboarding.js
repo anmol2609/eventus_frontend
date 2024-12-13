@@ -83,8 +83,6 @@ export default function Onboarding() {
   const navigate = useNavigate()
 
   const [searchParams, setSearchParams] = useSearchParams()
-  const data = useSelector((state) => state)
-  console.log(data,"onboarding")
   const { aws_customer: create_aws_customer } = useSelector((state) => state.create_aws_customer)
   const { loading: aws_customer_loading, aws_customers } = useSelector(
     (state) => state.all_aws_customers,

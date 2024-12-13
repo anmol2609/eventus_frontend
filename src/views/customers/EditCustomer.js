@@ -41,9 +41,7 @@ export default function EditCustomer() {
   const { l0_customers } = useSelector((state) => state.l0_customer)
   const { l1_customers } = useSelector((state) => state.l1_customer)
   const { l2_customers } = useSelector((state) => state.l2_customer)
-  const data = useSelector((state) => state)
   const { id } = useParams()
-  console.log(data,"datadatadatadata",loading)
   let initial_state = {
     type: '',
     name: '',
@@ -81,7 +79,6 @@ export default function EditCustomer() {
   }, [dispatch, isUpdated, error])
 
   useEffect(() => {
-    console.log('useEffectCustomer', customer)
     if (customer) {
       
       setUser({
