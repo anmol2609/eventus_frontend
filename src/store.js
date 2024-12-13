@@ -88,6 +88,12 @@ import {  getLoggerProductReducer } from './slices/logger/GetLoggerProductSlice'
 import { updateLoggerCustomerReducer   } from './slices/logger/UpdateLoggerCustomerSlice'
 import {  updateLoggerProductReducer  } from './slices/logger/UpdateLoggerProductSlice'
 
+import { createUserByTenantReducer } from './slices/userManagement/CreateUserByTenantDataSlice'
+import {  getUsersByTenantReducer } from './slices/userManagement/GetAllUsersByTenantSlice'
+import {   getUserByTenantReducer } from './slices/userManagement/GetUserByTenantSlice'
+import {   updateUserByTenantReducer } from './slices/userManagement/UpdateUserByTenantSlice'
+import {   deleteUserByTenantReducer } from './slices/userManagement/DeleteUserBytenantSlice'
+
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
   reducer: {
@@ -209,6 +215,12 @@ export const store = configureStore({
     update_logger_customer: updateLoggerCustomerReducer,
     update_logger_product: updateLoggerProductReducer,
     
+    // User by tenant
+    create_user_by_tenant: createUserByTenantReducer,
+    users_by_tenant: getUsersByTenantReducer,
+    user_by_tenant: getUserByTenantReducer,
+    update_user_by_tenant: updateUserByTenantReducer,
+    delete_user_by_tenant: deleteUserByTenantReducer,
     
     
     // Other slices can be commented out or removed

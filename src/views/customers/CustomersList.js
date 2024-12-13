@@ -41,7 +41,10 @@ import deleteIcon from '../../assets/images/deleteIcon.svg'
 import editIcon from '../../assets/images/editIcon.svg'
 import { updateCustomer } from '../../actions/CustomerActions'
 import { toggleRightSidebar } from '../../slices/ThemeSlice'
-import { getAllUsersData, deleteUserData, clearUserErrors, filterUserData, searchUserData} from '../../slices/userSlice'
+import { getUsersByTenant, clearUserByTenantErrors, filterUsersByTenant, searchUsersByTenant} from '../../slices/userManagement/GetAllUsersByTenantSlice'
+
+import { deleteUserByTenant } from '../../slices/userManagement/DeleteUserBytenantSlice'
+
 import { filterCustomer, getAllCustomers, searchCustomer,clearCustomerErrors } from '../../slices/customerSlice'
 
 export default function CustomersList() {
@@ -49,7 +52,7 @@ export default function CustomersList() {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const { customers:users, loading } = useSelector((state) => state.customer)
-  const { userList, loading: user_list_loading, error: userListError} = useSelector((state) => state.user)
+  const { users_by_tenant:userList, loading: user_list_loading, error: userListError} = useSelector((state) => state.users_by_tenant)
   const { deletedUserStatus:delete_success} = useSelector((state) => state.user)
   const { updatedCustomerStatus:isUpdated } = useSelector((state) => state.customer)
   const { data_centers } = useSelector((state) => state.data_center)
@@ -74,14 +77,14 @@ export default function CustomersList() {
   
   useEffect(() => {
     if(delete_success){
-      dispatch(clearUserErrors());
+      dispatch(clearUserByTenantErrors());
       dispatch(clearCustomerErrors())
     }
     setSearchParams({
       ...searchParams,
       selectedView,
     })
-    selectedView === 2 && dispatch(getAllUsersData())
+    selectedView === 2 && dispatch(getUsersByTenant())
     
   }, [selectedView,delete_success])
 
@@ -89,7 +92,7 @@ export default function CustomersList() {
     dispatch(searchCustomer(searchTerm))
   }
   const search_email_data = () => {
-    dispatch(searchUserData(searchEmail))
+    dispatch(searchUsersByTenant(searchEmail))
   }
   
 
@@ -107,7 +110,7 @@ export default function CustomersList() {
         delete filters[key]
       }
     })
-    Object.keys(filters).length !== 0 && dispatch(filterUserData(filters))
+    Object.keys(filters).length !== 0 && dispatch(filterUsersByTenant(filters))
     dispatch(toggleRightSidebar(!rightSidebarShow.rightSidebarShow))
   }
   useEffect(() => {
@@ -143,7 +146,7 @@ export default function CustomersList() {
     dispatch(updateCustomer(id, data))
   }
   const deleteUserHandler = (id) => {
-    dispatch(deleteUserData(id))
+    dispatch(deleteUserByTenant(id))
   }
   const partnerUser = users
     ? users.filter((user) => user.type === CONSTANTS.CUSTOMER_TYPE.PARTNER)
