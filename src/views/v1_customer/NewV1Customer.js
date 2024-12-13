@@ -11,21 +11,23 @@ import SelectBox from '../../components/Form/SelectBox'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import MultiSelectBox from '../../components/Form/MultiSelectBox'
-import {
-  create_V1_customer,
-  V1_customer,
-  clearErrors,
-  createV1CustomerProduct,
-} from '../../actions/V1CustomerActions'
+// import {
+//   createV1Customer,
+//   V1_customer,
+//   clearErrors,
+//   createV1CustomerProduct,
+// } from '../../actions/V1CustomerActions'
+
+import { clearErrors, createV1Customer } from '../../slices/v1Customer/CreateV1Customerslice'
 
 export default function NewV1Customer({ toggleSidebar }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { error, success, loading } = useSelector((state) => state.create_V1_customer)
+  const { error, success, loading } = useSelector((state) => state.createV1Customer)
   const { V1_products, loading: V1_products_loading } = useSelector((state) => state.V1_products)
   const { l3_customers: users, loading: users_loading } = useSelector((state) => state.l3_customers)
-  const { V1_customer } = useSelector((state) => state.create_V1_customer)
+  const { V1_customer } = useSelector((state) => state.createV1Customer)
 
   let V1_customer_initial_state = {
     customer: '',
@@ -85,7 +87,7 @@ export default function NewV1Customer({ toggleSidebar }) {
 
   const submit = () => {
     if (validate_required_keys(user, setValidationError) && validateV1CustomerProduct()) {
-      dispatch(create_V1_customer(user))
+      dispatch(createV1Customer(user))
     }
   }
 

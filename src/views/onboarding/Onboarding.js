@@ -21,7 +21,10 @@ import { CONSTANTS } from '../../utils/constants'
 import { Colors } from '../../utils/colors'
 import Loader from '../../components/Loader'
 import { SubHeaders } from '../../helpers/SubHeaders'
-import { getAllSOARCustomers, updateSOARCustomer } from '../../actions/SOARCustomerActions'
+//import { getAllSOARCustomers, updateSOARCustomer } from '../../actions/SOARCustomerActions'
+import { getAllSOARCustomers } from '../../slices/SOARCustomer/GetAllSOARCustomersSlice'
+import { updateSOARCustomer } from '../../slices/SOARCustomer/UpdateSOARCustomerSlice'
+
 import { handleSort, sortData } from '../../helpers/SortHelpers'
 import sortArrow from '../../assets/images/sortArrow.svg'
 import sortByIcon from '../../assets/images/sortByIcon.svg'
@@ -37,25 +40,39 @@ import EditV1Product from '../V1_product/EditV1Product'
 import TextInput from '../../components/Form/TextInput'
 import AWSIcon from '../../assets/images/AWS_icon.png'
 import TrendMicroIcon from '../../assets/images/trend_micro_icon.png'
-import { getAllAWSCustomers, updateAWSCustomer } from '../../actions/AWSCustomerActions'
+//import { getAllAWSCustomers, updateAWSCustomer } from '../../actions/AWSCustomerActions'
+import { getAllAWSCustomers } from '../../slices/awsCustomer/GetAllAWSCustomersSlice'
+import { updateAWSCustomer } from '../../slices/awsCustomer/UpdateAWSCustomerSlice'
+
 import { readableDateFromString } from '../../helpers/DateHelpers'
 import { getAllO365Customers, updateO365Customer } from '../../actions/O365CustomerActions'
-import { getAllV1Products, updateV1Product } from '../../actions/V1ProductActions'
+//import { getAllV1Products, updateV1Product } from '../../actions/V1ProductActions'
+import {getAllV1Products} from '../../slices/v1Product/GetAllV1ProductSlice'
+import {updateV1Product} from '../../slices/v1Product/UpdateV1ProductSlice'
+
 import Pagination from '../../components/Pagination'
 import NewV1Customer from '../v1_customer/NewV1Customer'
 import EditV1Customer from '../v1_customer/EditV1Customer'
-import {
-  getAllV1CustomerProducts,
-  updateV1CustomerProduct,
-} from '../../actions/V1CustomerProductActions'
+// import {
+//   getAllV1CustomerProducts,
+//   updateV1CustomerProduct,
+// } from '../../actions/V1CustomerProductActions'
+
+import {getAllV1CustomerProducts} from '../../slices/v1CustomerProduct/GetAllV1CustomerProductSlice'
+import {updateV1CustomerProduct} from '../../slices/v1CustomerProduct/UpdateV1CustomerProductSlice'
+
 import EditAWSCustomer from '../aws_customer/EditAWSCustomer'
 import EditO365Customer from '../O365_customer/EditO365Customer'
 import EditSOARCustomer from '../soar_customer/EditSOARCustomer'
-import {
-  getAllLoggerCustomers,
-  getAllLoggerProducts,
-  updateLoggerCustomer,
-} from '../../actions/LoggerActions'
+// import {
+//   getAllLoggerCustomers,
+//   getAllLoggerProducts,
+//   updateLoggerCustomer,
+// } from '../../actions/LoggerActions'
+import {getAllLoggerCustomers} from '../../slices/logger/GetAllLoggerCustomersSlice'
+import {getAllLoggerProducts} from '../../slices/logger/GetAllLoggerProductsSlice'
+import {updateLoggerCustomer} from '../../slices/logger/UpdateLoggerCustomerSlice'
+
 import NewLoggerCustomer from '../logger/NewLoggerCustomer'
 import EditLoggerCustomer from '../logger/EditLoggerCustomer'
 import NewLoggerProduct from '../logger/NewLoggerProduct'
@@ -66,6 +83,8 @@ export default function Onboarding() {
   const navigate = useNavigate()
 
   const [searchParams, setSearchParams] = useSearchParams()
+  const data = useSelector((state) => state)
+  console.log(data,"onboarding")
   const { aws_customer: create_aws_customer } = useSelector((state) => state.create_aws_customer)
   const { loading: aws_customer_loading, aws_customers } = useSelector(
     (state) => state.all_aws_customers,
@@ -87,7 +106,7 @@ export default function Onboarding() {
     (state) => state.update_V1_product,
   )
 
-  const { V1_customer_products } = useSelector((state) => state.all_V1_customer_products)
+  const { V1_customer_products } = useSelector((state) => state.V1_customer_products_for_customer)
   const { loading: update_V1_customer_product_loading, V1_customer_product } = useSelector(
     (state) => state.update_V1_customer_product,
   )

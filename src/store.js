@@ -19,7 +19,7 @@ import {
   updateFeedEntryReducer,
 } from './slices/feedEntrySlice'
 import { rightSidebarReducer, sidebarReducer, themeReducer } from './slices/ThemeSlice'
-import { createSOARCustomerReducer, getAllSOARCustomersReducer, getSOARCustomerReducer, updateSOARCustomerReducer } from './slices/soarCustomerSlice'
+//import { createSOARCustomerReducer, getAllSOARCustomersReducer, getSOARCustomerReducer, updateSOARCustomerReducer } from './slices/soarCustomerSlice'
 import soarProductReducer from './slices/soarProductSlice'; // make sure this path is correct
 import { RssFeedReducer } from './slices/rssFeedSlice'
 //import { createArtifactReducer, getArtifactReducer, getArtifactsReducer, testArtifactsReducer, updateArtifactReducer } from './slices/Artifactslice'
@@ -40,7 +40,6 @@ import { l1CustomersReducer } from './slices/l1CustomerSlice'
 import { l2CustomersReducer } from './slices/l2CustomerSlice'
 import { create_V1_customer, update_V1_customer, V1_customer, V1_customers, V1CustomerReducer } from './slices/V1Customerslice';
 import { V1CustomerProductReducer } from './slices/V1CustomerProduct';
-=======
 import { l3CustomersReducer } from './slices/l3CustomerSlice'
 
 import { createAWSCustomerReducer } from './slices/awsCustomer/CreateAWSCustomerSlice'
@@ -54,6 +53,40 @@ import { getArtifactReducer } from './slices/Artifact/GetArtifactSlice'
 import { testArtifactReducer } from './slices/Artifact/TestArtifactSlice'
 import { updateArtifactReducer } from './slices/Artifact/UpdateArtifactSlice'
 
+import { createV1CustomerReducer } from './slices/v1Customer/CreateV1Customerslice'
+import { getAllV1CustomersReducer } from './slices/v1Customer/GetAllV1Customerslice'
+import { getV1CustomerReducer } from './slices/v1Customer/GetV1Customerslice'
+import { updateV1CustomerReducer } from './slices/v1Customer/UpdateV1Customerslice'
+
+import { createV1CustomerProductReducer } from './slices/v1CustomerProduct/CreateV1CustomerProductSlice'
+import { getAllV1CustomerProductsReducer } from './slices/v1CustomerProduct/GetAllV1CustomerProductSlice'
+import { getV1CustomerProductReducer } from './slices/v1CustomerProduct/GetV1CustomerProductSlice'
+import { updateV1CustomerProductReducer } from './slices/v1CustomerProduct/UpdateV1CustomerProductSlice'
+
+import { getAllV1ProductsReducer } from './slices/v1Product/GetAllV1ProductSlice'
+import { getV1ProductReducer } from './slices/v1Product/GetV1ProductSlice'
+import { updateV1ProductReducer } from './slices/v1Product/UpdateV1ProductSlice'
+import { createV1ProductReducer } from './slices/v1Product/CreateV1Product'
+
+import { createSOARCustomerReducer } from './slices/SOARCustomer/CreateSOARCustomerSlice'
+import {  getAllSOARCustomersReducer } from './slices/SOARCustomer/GetAllSOARCustomersSlice'
+import {   getSOARCustomerReducer } from './slices/SOARCustomer/GetSOARCustomerSlice'
+import {   updateSOARCustomerReducer } from './slices/SOARCustomer/UpdateSOARCustomerSlice'
+
+import { createSOARProductReducer } from './slices/SOARProduct/CreateSOARProductSlice'
+import {  getAllSOARProductsReducer } from './slices/SOARProduct/GetAllSOARProductsSlice'
+import {   getSOARProductReducer } from './slices/SOARProduct/GetSOARProductSlice'
+import {   updateSOARProductReducer } from './slices/SOARProduct/UpdateSOARProductSlice'
+
+
+import { createLoggerCustomerReducer } from './slices/logger/CreateLoggerCustomerSlice'
+import { createLoggerProductReducer  } from './slices/logger/CreateLoggerProductSlice'
+import {  getAllLoggerCustomersReducer } from './slices/logger/GetAllLoggerCustomersSlice'
+import {  getAllLoggerProductsReducer  } from './slices/logger/GetAllLoggerProductsSlice'
+import { getLoggerCustomerReducer } from './slices/logger/GetLoggerCustomerSlice'
+import {  getLoggerProductReducer } from './slices/logger/GetLoggerProductSlice'
+import { updateLoggerCustomerReducer   } from './slices/logger/UpdateLoggerCustomerSlice'
+import {  updateLoggerProductReducer  } from './slices/logger/UpdateLoggerProductSlice'
 
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
@@ -80,13 +113,21 @@ export const store = configureStore({
     sideBarShow: sidebarReducer,
 
     // SOAR Customer
-    createSOARCustomer: createSOARCustomerReducer,
-    allSOARCustomers: getAllSOARCustomersReducer,
-    SOARCustomer: getSOARCustomerReducer,
-    updateSOARCustomer: updateSOARCustomerReducer,
+    //createSOARCustomer: createSOARCustomerReducer,
+    //allSOARCustomers: getAllSOARCustomersReducer,
+    //SOARCustomer: getSOARCustomerReducer,
+    //updateSOARCustomer: updateSOARCustomerReducer,
+    
+    create_SOAR_customer: createSOARCustomerReducer,
+    SOAR_customers: getAllSOARCustomersReducer,
+    SOAR_customer: getSOARCustomerReducer,
+    update_SOAR_customer: updateSOARCustomerReducer,
 
     // SOAR Product
-    soarProducts: soarProductReducer,
+    create_SOAR_product: createSOARProductReducer,
+    SOAR_products: getAllSOARProductsReducer,
+    SOAR_product: getSOARProductReducer,
+    update_SOAR_product: updateSOARProductReducer,
 
     // RSS Feed
     create_rss_feed: RssFeedReducer,
@@ -100,8 +141,6 @@ export const store = configureStore({
     artifacts: getAllArtifactsReducer,
     artifact: getArtifactReducer,
     update_artifact: updateArtifactReducer,
-    test_artifacts: testArtifactsReducer,
-
     test_artifacts: testArtifactReducer,
     
     // create_artifact: createArtifactReducer,
@@ -137,10 +176,41 @@ export const store = configureStore({
     tenants_by_tenancy_level: tenantsSliceReducer,
     data_center: dataCenterReducer,
     customer: customerReducer,
-    l0_customer: l0CustomersReducer,
-    l1_customer: l1CustomersReducer,
-    l2_customer: l2CustomersReducer,
-    l3_customer: l3CustomersReducer
+    l0_customers: l0CustomersReducer,
+    l1_customers: l1CustomersReducer,
+    l2_customers: l2CustomersReducer,
+    l3_customers: l3CustomersReducer,
+
+    // v1 customer
+    create_V1_customer: createV1CustomerReducer,
+    V1_customers: getAllV1CustomersReducer,
+    V1_customer: getV1CustomerReducer,
+    update_V1_customer: updateV1CustomerReducer,
+    
+     // v1 product
+    create_V1_product: createV1ProductReducer,
+    V1_products: getAllV1ProductsReducer,
+    V1_product: getV1ProductReducer,
+    update_V1_product: updateV1ProductReducer,
+
+    // V1 Customer Product
+    create_V1_customer_product: createV1CustomerProductReducer,
+    V1_customer_products_for_customer: getAllV1CustomerProductsReducer,
+    V1_customer_product: getV1CustomerProductReducer,
+    update_V1_customer_product: updateV1CustomerProductReducer,
+    
+    // logger 
+    create_logger_customer: createLoggerCustomerReducer,
+    create_logger_product: createLoggerProductReducer,
+    logger_customers: getAllLoggerCustomersReducer,
+    logger_products: getAllLoggerProductsReducer,
+    logger_customer: getLoggerCustomerReducer,
+    logger_product: getLoggerProductReducer,
+    update_logger_customer: updateLoggerCustomerReducer,
+    update_logger_product: updateLoggerProductReducer,
+    
+    
+    
     // Other slices can be commented out or removed
     /*
 

@@ -138,5 +138,3 @@ const V1CustomerSlice = createSlice({
 
 export const { clearErrors } = V1CustomerSlice.actions
 export const V1CustomerReducer = V1CustomerSlice.reducer
-
-export { create_V1_customer, V1_customers, V1_customer, update_V1_customer }

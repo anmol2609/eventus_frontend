@@ -64,8 +64,9 @@ const AppHeader = ({ name }) => {
         </CHeaderToggler>
         <div>
           <p style={{ fontSize: '14px', height: '30px', marginBottom: '0', paddingTop: '4px' }}>
-            {name}
+            {name} 
           </p>
+          <a href="https://uatiammodule.eventussecurity.com/static/index.html">link</a>
         </div>
       </CContainer>
     </CHeader>

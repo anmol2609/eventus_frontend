@@ -18,7 +18,7 @@ export const getL3Customer = createAsyncThunk(
 const l3CustomersSlice = createSlice({
   name: 'l2CustomersSlice',
   initialState: {
-    l2_customers: [],
+    l3_customers: [],
     loading: false,
     success: false,
     error: null,
@@ -39,7 +39,7 @@ const l3CustomersSlice = createSlice({
       
       state.loading = false
       state.success = true
-      state.l2_customers = action.payload
+      state.l3_customers = action.payload
     })
     .addCase(getL3Customer.rejected, (state, action) => {
       state.loading = false
