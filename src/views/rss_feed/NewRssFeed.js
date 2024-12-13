@@ -8,6 +8,8 @@ import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import { clearErrors, configureRssFeed, createRssFeed } from '../../actions/RssFeedActions'
+import { configureRssFeed } from '../../slices/rssFeed/ConfigureRssFeedSlice'
+import { clearErrors, createRssFeed } from '../../slices/rssFeed/CreateRssFeedSlice'
 
 export default function NewRssFeed({ toggleSidebar }) {
   const dispatch = useDispatch()

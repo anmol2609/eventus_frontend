@@ -9,7 +9,8 @@ import SelectBox from '../../components/Form/SelectBox'
 import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
-import { clearErrors, getRssFeed, updateRssFeed } from '../../actions/RssFeedActions'
+import { getRssFeed } from '../../slices/rssFeed/GetRssFeedSlice'
+import { clearErrors, updateRssFeed } from '../../slices/rssFeed/UpdateRssFeedSlice'
 
 export default function EditRssFeed() {
   const dispatch = useDispatch()

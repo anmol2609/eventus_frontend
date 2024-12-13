@@ -8,7 +8,7 @@ import { CForm, CCol, CRow, CButton, CCloseButton } from '@coreui/react'
 import TextInput from '../../components/Form/TextInput'
 import SelectBox from '../../components/Form/SelectBox'
 import { validate_required_keys } from '../../utils/validators/required_key'
-import { clearErrors, createSOARProduct } from '../../actions/SOARProductActions'
+import { clearErrors, createSOARProduct } from '../../slices/SOARProduct/CreateSOARProductSlice'
 import Loader from '../../components/Loader'
 
 export default function NewSOARProduct({ toggleSidebar }) {

@@ -4,17 +4,19 @@ import { useDispatch, useSelector } from 'react-redux'
 // import { useNavigate, useParams } from 'react-router-dom'
 import { CRow, CCol, CButton, CForm, CCloseButton } from '@coreui/react'
 import Alert from '../../components/Alerts/Alert'
-import { getL3Customer } from '../../actions/CustomerActions'
+import { getL3Customer } from '../../slices/l3CustomerSlice'
 import SelectBox from '../../components/Form/SelectBox'
 import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
-import { clearErrors, getV1Customer, updateV1Customer } from '../../actions/V1CustomerActions'
+import { clearErrors, updateV1Customer } from '../../slices/v1Customer/UpdateV1Customerslice'
 import Loader from '../../components/Loader'
 import MultiSelectBox from '../../components/Form/MultiSelectBox'
 import {
   createV1CustomerProduct,
+} from '../../slices/v1CustomerProduct/CreateV1CustomerProductSlice'
+import {
   updateV1CustomerProduct,
-} from '../../actions/V1CustomerProductActions'
+} from '../../slices/v1CustomerProduct/UpdateV1CustomerProductSlice'
 import { CONSTANTS } from '../../utils/constants'
 
 export default function EditV1Customer({ toggleSidebar, V1_customer_product }) {

@@ -59,7 +59,8 @@ import { getV1CustomerReducer } from './slices/v1Customer/GetV1Customerslice'
 import { updateV1CustomerReducer } from './slices/v1Customer/UpdateV1Customerslice'
 
 import { createV1CustomerProductReducer } from './slices/v1CustomerProduct/CreateV1CustomerProductSlice'
-import { getAllV1CustomerProductsReducer } from './slices/v1CustomerProduct/GetAllV1CustomerProductSlice'
+import { getAllV1CustomerProductsReducer } from './slices/v1CustomerProduct/GetV1CustomerProductsSlice'
+import { getV1CustomerProductForCustomerReducer } from './slices/v1CustomerProduct/GetV1CustomerProductForCustomerSlice'
 import { getV1CustomerProductReducer } from './slices/v1CustomerProduct/GetV1CustomerProductSlice'
 import { updateV1CustomerProductReducer } from './slices/v1CustomerProduct/UpdateV1CustomerProductSlice'
 
@@ -204,6 +205,7 @@ export const store = configureStore({
     V1_customer_products_for_customer: getAllV1CustomerProductsReducer,
     V1_customer_product: getV1CustomerProductReducer,
     update_V1_customer_product: updateV1CustomerProductReducer,
+    V1_customer_products_for_customer: getV1CustomerProductForCustomerReducer,
     
     // logger 
     create_logger_customer: createLoggerCustomerReducer,

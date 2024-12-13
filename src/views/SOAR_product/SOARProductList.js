@@ -20,13 +20,13 @@ import TextInput from '../../components/Form/TextInput'
 import { CONSTANTS } from '../../utils/constants'
 import Enums from '../../utils/Enums'
 import { readableDateFromString } from '../../helpers/DateHelpers'
-import { toggleRightSidebar } from '../../actions/ThemeActions'
+import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import '../index.css'
 import {
   filterSOARProduct,
   getAllSOARProducts,
   searchSOARProduct,
-} from '../../actions/SOARProductActions'
+} from '../../slices/SOARProduct/GetAllSOARProductsSlice'
 import Loader from '../../components/Loader'
 import { cilMagnifyingGlass } from '@coreui/icons'
 import { getSearchParams } from '../../helpers/GetSearchParams'

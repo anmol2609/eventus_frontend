@@ -20,11 +20,13 @@ import Alert from '../../components/Alerts/Alert'
 import { CONSTANTS } from '../../utils/constants'
 import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
-import { clearErrors, getSOARProduct, updateSOARProduct } from '../../actions/SOARProductActions'
+//import { clearErrors, getSOARProduct, updateSOARProduct } from '../../actions/SOARProductActions'
 import Loader from '../../components/Loader'
 import deleteIcon from '../../assets/images/deleteIcon.svg'
 import editIcon from '../../assets/images/editIcon.svg'
 import { Colors } from '../../utils/colors'
+import { getSOARProduct } from '../../slices/SOARProduct/GetSOARProductSlice'
+import { clearErrors, updateSOARProduct } from '../../slices/SOARProduct/UpdateSOARProductSlice'
 
 export default function EditSOARProduct({ toggleSidebar, id }) {
   const dispatch = useDispatch()

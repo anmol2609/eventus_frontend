@@ -7,9 +7,9 @@ import { CForm, CCol, CRow, CButton, CCard, CCardBody, CCardHeader } from '@core
 import SelectBox from '../../components/Form/SelectBox'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
-import { getAllV1Products } from '../../actions/V1ProductActions'
-import { getV1Customer } from '../../actions/V1CustomerActions'
-import { clearErrors, createV1CustomerProduct } from '../../actions/V1CustomerProductActions'
+import { getAllV1Products } from '../../slices/v1Product/GetAllV1ProductSlice'
+import { getV1Customer } from '../../slices/v1Customer/GetV1Customerslice'
+import { clearErrors, createV1CustomerProduct } from '../../slices/v1CustomerProduct/CreateV1CustomerProductSlice'
 
 export default function NewV1CustomerProduct() {
   const dispatch = useDispatch()

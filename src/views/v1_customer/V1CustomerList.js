@@ -19,15 +19,15 @@ import { AppRightSidebar } from '../../components'
 import TextInput from '../../components/Form/TextInput'
 import { CONSTANTS } from '../../utils/constants'
 import Enums from '../../utils/Enums'
-import { getAllCustomers } from '../../actions/CustomerActions'
+import { getAllCustomers } from '../../slices/customerSlice'
 import { readableDateFromString } from '../../helpers/DateHelpers'
-import { toggleRightSidebar } from '../../actions/ThemeActions'
+import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import '../index.css'
 import {
   getAllV1Customers,
   filterV1Customer,
   searchV1Customer,
-} from '../../actions/V1CustomerActions'
+} from '../../slices/v1Customer/GetAllV1Customerslice'
 import { Colors } from '../../utils/colors'
 import Loader from '../../components/Loader'
 import { cilMagnifyingGlass } from '@coreui/icons'

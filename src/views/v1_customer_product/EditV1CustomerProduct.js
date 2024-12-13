@@ -8,10 +8,12 @@ import SelectBox from '../../components/Form/SelectBox'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import {
-  clearErrors,
   getV1CustomerProduct,
+} from '../../slices/v1CustomerProduct/GetV1CustomerProductSlice'
+import {
+  clearErrors,
   updateV1CustomerProduct,
-} from '../../actions/V1CustomerProductActions'
+} from '../../slices/v1CustomerProduct/UpdateV1CustomerProductSlice'
 
 export default function EditV1CustomerProduct() {
   const dispatch = useDispatch()

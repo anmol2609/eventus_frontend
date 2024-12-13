@@ -58,7 +58,7 @@ import EditV1Customer from '../v1_customer/EditV1Customer'
 //   updateV1CustomerProduct,
 // } from '../../actions/V1CustomerProductActions'
 
-import {getAllV1CustomerProducts} from '../../slices/v1CustomerProduct/GetAllV1CustomerProductSlice'
+import {getAllV1CustomerProducts} from '../../slices/v1CustomerProduct/GetV1CustomerProductsSlice'
 import {updateV1CustomerProduct} from '../../slices/v1CustomerProduct/UpdateV1CustomerProductSlice'
 
 import EditAWSCustomer from '../aws_customer/EditAWSCustomer'
