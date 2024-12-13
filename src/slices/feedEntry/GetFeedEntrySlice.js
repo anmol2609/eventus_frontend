@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { managementAxiosInstance } from 'src/config/Axios'
+import { tiAxiosInstance } from 'src/config/Axios'
 //async function for get All Customers
-export const updateArtifact = createAsyncThunk(
-  'updateArtifact',
-  async (payload, { rejectWithValue }) => {
+export const getFeedEntry = createAsyncThunk(
+  'getFeedEntry',
+  async (id, { rejectWithValue }) => {
     try {
       // Simulate an API call
-      const { data } = await managementAxiosInstance.put(`/aws_customer/${payload.id}/update`, payload.user)
+      const { data } = await tiAxiosInstance.get(`/feed_entry/${id}/get`)
       return data.data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.message)
@@ -14,10 +14,10 @@ export const updateArtifact = createAsyncThunk(
   },
 )
 // AWS Customer Create Slice
-const updateArtifactSlice = createSlice({
-    name: 'updateArtifact',
+const getFeedEntrySlice = createSlice({
+    name: 'getFeedEntry',
     initialState: { 
-      artifact: {}, 
+      feed_entry: {}, 
       loading: false, 
       success: false, 
       error: null 
@@ -30,19 +30,19 @@ const updateArtifactSlice = createSlice({
     },
     extraReducers: (builder) => {
       builder
-      .addCase(updateArtifact.pending, (state) => {
+      .addCase(getFeedEntry.pending, (state) => {
         state.loading = true
       })
-      .addCase(updateArtifact.fulfilled, (state, action) => {
+      .addCase(getFeedEntry.fulfilled, (state, action) => {
         state.loading = false
         state.success = true
-        state.artifact = action.payload
+        state.feed_entry = action.payload
       })
-      .addCase(updateArtifact.rejected, (state, action) => {
+      .addCase(getFeedEntry.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload
       })
     }
   })
-export const { clearErrors } = updateArtifactSlice.actions
-export const updateArtifactReducer = updateArtifactSlice.reducer
+export const { clearErrors } = getFeedEntrySlice.actions
+export const getFeedEntryReducer = getFeedEntrySlice.reducer

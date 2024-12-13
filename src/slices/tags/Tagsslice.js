@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
+import { tiAxiosInstance } from 'src/config/Axios'
 export const getAllTags = createAsyncThunk(
   'getAllTags',
   async (feed_id, { rejectWithValue }) => {

@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import { CONSTANTS } from '../../utils/constants'
 import Alert from '../../components/Alerts/Alert'
 import { CForm, CCol, CRow, CButton, CCloseButton } from '@coreui/react'
-import { getL3Customer } from '../../actions/CustomerActions'
+//import { getL3Customer } from '../../actions/CustomerActions'
 import TextInput from '../../components/Form/TextInput'
 import SelectBox from '../../components/Form/SelectBox'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
-import { createSOARCustomer, clearErrors } from '../../actions/SOARCustomerActions'
-
+import { createSOARCustomer, clearErrors } from '../../slices/SOARCustomer/CreateSOARCustomerSlice'
+import { getL3Customer } from '../../slices/l3CustomerSlice'
 export default function NewSOARCustomer({ toggleSidebar }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()

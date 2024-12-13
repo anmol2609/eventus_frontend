@@ -28,7 +28,7 @@ import { tagsReducer } from './slices/tags/Tagsslice'
 import { mitreReducer } from './slices/Mitreslice'
 //import { createDataCenterReducer, getAllDataCentersReducer, getDataCenterReducer, updateDataCenterReducer } from './slices/DataCenterslice'
 //import { awsCustomerCreateReducer, getAllAWSCustomersReducer, getAWSCustomerReducer, updateAWSCustomerReducer } from './slices/AWSCustomerslice'
-import { O365CustomerSliceReducer } from './slices/O365Customerslice'
+//import { O365CustomerSliceReducer } from './slices/O365Customerslice'
 
 import { userSliceReducer } from './slices/userSlice'
 import { tenantsSliceReducer } from './slices/tenantsSlice'
@@ -93,6 +93,11 @@ import {  getUsersByTenantReducer } from './slices/userManagement/GetAllUsersByT
 import {   getUserByTenantReducer } from './slices/userManagement/GetUserByTenantSlice'
 import {   updateUserByTenantReducer } from './slices/userManagement/UpdateUserByTenantSlice'
 import {   deleteUserByTenantReducer } from './slices/userManagement/DeleteUserBytenantSlice'
+
+import { createO365CustomerReducer } from './slices/O365Customers/CreateO365CustomerSlice'
+import {  getAllO365CustomersReducer } from './slices/O365Customers/GetAllO365CustomersSlice'
+import {   getO365CustomerReducer } from './slices/O365Customers/GetO365CustomerSlice'
+import {   updateO365CustomerReducer } from './slices/O365Customers/UpdateO365CustomerSlice'
 
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
@@ -172,12 +177,7 @@ export const store = configureStore({
     update_aws_customer: updateAWSCustomerReducer,
     all_aws_customers: getAllAWSCustomersReducer,
 
-    // O365 Customer
-    create_O365_customer: O365CustomerSliceReducer,
-    O365_customers: O365CustomerSliceReducer,
-    O365_customer: O365CustomerSliceReducer,
-    update_O365_customer: O365CustomerSliceReducer,
-
+    
     user: userSliceReducer,
     tenants_by_tenancy_level: tenantsSliceReducer,
     data_center: dataCenterReducer,
@@ -222,7 +222,12 @@ export const store = configureStore({
     update_user_by_tenant: updateUserByTenantReducer,
     delete_user_by_tenant: deleteUserByTenantReducer,
     
-    
+    // O365 Customer
+    create_O365_customer: createO365CustomerReducer,
+    O365_customers: getAllO365CustomersReducer,
+    O365_customer: getO365CustomerReducer,
+    update_O365_customer: updateO365CustomerReducer,
+
     // Other slices can be commented out or removed
     /*
 

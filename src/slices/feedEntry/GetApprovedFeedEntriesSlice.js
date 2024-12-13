@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { tiAxiosInstance } from 'src/config/Axios'
 //async function for get All Customers
-export const testArtifact = createAsyncThunk(
-  'testArtifact',
-  async (artifacts, { rejectWithValue }) => {
+export const getApprovedFeedEntries = createAsyncThunk(
+  'getApprovedFeedEntries',
+  async (_, { rejectWithValue }) => {
     try {
       // Simulate an API call
-      const { data } = await tiAxiosInstance.post(`/artifact/test`, { artifacts })
+      const { data } = await tiAxiosInstance.get(`/feed_entry/approved_completed`)
       return data.data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.message)
@@ -14,10 +14,10 @@ export const testArtifact = createAsyncThunk(
   },
 )
 // AWS Customer Create Slice
-const testArtifactSlice = createSlice({
-    name: 'testArtifact',
+const getApprovedFeedEntriesSlice = createSlice({
+    name: 'getApprovedFeedEntries',
     initialState: { 
-      artifact: {}, 
+      approved_feed_entries: [], 
       loading: false, 
       success: false, 
       error: null 
@@ -30,19 +30,19 @@ const testArtifactSlice = createSlice({
     },
     extraReducers: (builder) => {
       builder
-      .addCase(testArtifact.pending, (state) => {
+      .addCase(getApprovedFeedEntries.pending, (state) => {
         state.loading = true
       })
-      .addCase(testArtifact.fulfilled, (state, action) => {
+      .addCase(getApprovedFeedEntries.fulfilled, (state, action) => {
         state.loading = false
         state.success = true
-        state.artifact = action.payload
+        state.approved_feed_entries = action.payload
       })
-      .addCase(testArtifact.rejected, (state, action) => {
+      .addCase(getApprovedFeedEntries.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload
       })
     }
   })
-export const { clearErrors } = testArtifactSlice.actions
-export const testArtifactReducer = testArtifactSlice.reducer
+export const { clearErrors } = getApprovedFeedEntriesSlice.actions
+export const getApprovedFeedEntriesReducer = getApprovedFeedEntriesSlice.reducer

@@ -8,12 +8,20 @@ import TextInput from '../../components/Form/TextInput'
 import SelectBox from '../../components/Form/SelectBox'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
+// import {
+//   clearErrors,
+//   createLoggerProduct,
+//   getLoggerProduct,
+//   updateLoggerProduct,
+// } from '../../actions/LoggerActions'
 import {
-  clearErrors,
-  createLoggerProduct,
-  getLoggerProduct,
   updateLoggerProduct,
-} from '../../actions/LoggerActions'
+  clearErrors
+} from '../../slices/logger/UpdateLoggerProductSlice'
+import {
+  getLoggerProduct,
+} from '../../slices/logger/GetLoggerProductSlice'
+
 import deleteIcon from '../../assets/images/deleteIcon.svg'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
