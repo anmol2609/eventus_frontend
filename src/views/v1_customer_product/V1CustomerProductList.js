@@ -20,18 +20,26 @@ import TextInput from '../../components/Form/TextInput'
 import { CONSTANTS } from '../../utils/constants'
 import Enums from '../../utils/Enums'
 import { readableDateFromString } from '../../helpers/DateHelpers'
-import { toggleRightSidebar } from '../../actions/ThemeActions'
+import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import '../index.css'
-import { filterV1Customer } from '../../actions/V1CustomerActions'
+import { filterV1Customer } from '../../slices/v1Customer/GetAllV1Customerslice'
 import Loader from '../../components/Loader'
 import { cilMagnifyingGlass } from '@coreui/icons'
 import { getSearchParams } from '../../helpers/GetSearchParams'
 import ShowAllFilters from '../../components/ShowAllFilters'
+// import {
+//   getV1CustomerProductForCustomer,
+//   searchV1CustomerProduct,
+// } from '../../actions/V1CustomerProductActions'
+import {
+  getV1CustomerProductForCustomer,
+} from '../../slices/v1CustomerProduct/GetV1CustomerProductForCustomerSlice'
 import {
   getV1CustomerProductForCustomer,
   searchV1CustomerProduct,
-} from '../../actions/V1CustomerProductActions'
-import { getAllV1Products } from '../../actions/V1ProductActions'
+} from '../../slices/v1CustomerProduct/GetV1CustomerProductsSlice'
+//import { getAllV1Products } from '../../actions/V1ProductActions'
+import { getAllV1Products } from '../../slices/v1Product/GetAllV1ProductSlice'
 
 export default function V1CustomerProductList() {
   const dispatch = useDispatch()

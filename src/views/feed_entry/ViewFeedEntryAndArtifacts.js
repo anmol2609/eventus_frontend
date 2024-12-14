@@ -21,10 +21,14 @@ import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import {
   clearErrors,
-  getFeedEntry,
   updateFeedEntry,
+} from '../../slices/feedEntry/UpdateFeedEntrySlice'
+import {
   updateFeedEntryByCurrentValue,
-} from '../../actions/FeedEntryActions'
+} from '../../slices/feedEntry/UpdateFeedEntryByCurrentValueSlice'
+import {
+  getFeedEntry
+} from '../../slices/feedEntry/GetFeedEntrySlice'
 import TextArea from '../../components/Form/TextArea'
 import TextInput from '../../components/Form/TextInput'
 import { Colors } from '../../utils/colors'
@@ -32,15 +36,18 @@ import CIcon from '@coreui/icons-react'
 import { cilCheckAlt, cilCopy } from '@coreui/icons'
 import '../index.css'
 import Alert from '../../components/Alerts/Alert'
-import { getArtifactByFeedEntry, testArtifact, updateArtifact } from '../../actions/ArtifactActions'
+import { getArtifactByFeedEntry } from '../../slices/Artifact/GetAllArtifactsSlice'
+import { testArtifact } from '../../slices/Artifact/TestArtifactSlice'
+import { updateArtifact } from '../../slices/Artifact/UpdateArtifactSlice'
 import { AppRightSidebar } from '../../components'
-import { toggleRightSidebar } from '../../actions/ThemeActions'
+import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import LockIcon from '../../assets/images/padlock.png'
 import deleteIcon from '../../assets/images/deleteIcon.svg'
 import { getAllTags } from '../../slices/tags/Tagsslice'
-import { getAllMitre } from '../../actions/MitreActions'
+import { getAllMitre } from '../../slices/mitre/GetAllMitreSlice'
 import { cilPlus } from '@coreui/icons'
-import { getMlModel, updateMlModel } from '../../actions/MlModelActions'
+import { updateMlModel } from '../../slices/mlModel/UpdateMlModelSlice'
+import { getMlModel } from '../../slices/mlModel/GetMlModelSlice'
 
 export default function ViewFeedEntryAndArtifacts() {
   const dispatch = useDispatch()

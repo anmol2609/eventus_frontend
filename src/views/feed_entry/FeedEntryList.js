@@ -34,8 +34,8 @@ import {
   getCompletedFeedEntries,
   searchFeedEntry,
 } from '../../actions/FeedEntryActions'
-import { getAllRssFeeds } from '../../actions/RssFeedActions'
-import { getArtifactByFeedEntry } from '../../actions/ArtifactActions'
+import { getAllRssFeeds } from '../../slices/rssFeed/GetRssFeedsSlice'
+import { getArtifactByFeedEntry } from '../../slices/Artifact/GetAllArtifactsSlice'
 import { CONSTANTS } from '../../utils/constants'
 import { ratingStyles } from '../../helpers/CSSHelpers'
 import Pagination from '../../components/Pagination'
@@ -45,9 +45,9 @@ import sortArrow from '../../assets/images/sortArrow.svg'
 import filterIcon from '../../assets/images/filterIcon.svg'
 import sortByIcon from '../../assets/images/sortByIcon.svg'
 import { SubHeaders } from '../../helpers/SubHeaders'
-import { getMlModel } from '../../actions/MlModelActions'
+import { getMlModel } from '../../slices/mlModel/GetMlModelSlice'
 import FeedEntryHTMLFile from './FeedEntryHTMLFile'
-import { getAllMitre } from '../../actions/MitreActions'
+import { getAllMitre } from '../../slices/mitre/GetAllMitreSlice'
 
 export default function FeedEntryList() {
   const dispatch = useDispatch()

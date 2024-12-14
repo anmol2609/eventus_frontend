@@ -6,9 +6,9 @@ import { CForm, CCol, CRow, CButton, CCard, CCardBody, CCardHeader } from '@core
 import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
-import { clearErrors, createFeedEntry } from '../../actions/FeedEntryActions'
+import { clearErrors, createFeedEntry } from '../../slices/feedEntry/CreateFeedEntrySlice'
 import SelectBox from '../../components/Form/SelectBox'
-import { getAllRssFeeds } from '../../actions/RssFeedActions'
+import { getAllRssFeeds } from '../../slices/rssFeed/GetRssFeedsSlice'
 import TextArea from '../../components/Form/TextArea'
 import { CONSTANTS } from '../../utils/constants'
 

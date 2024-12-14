@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { tiAxiosInstance } from 'src/config/Axios'
 //async function for get All Customers
-export const getMlModel = createAsyncThunk(
-  'getMlModel',
-  async (id, { rejectWithValue }) => {
+export const getAllMitre = createAsyncThunk(
+  'getAllMitre',
+  async (_, { rejectWithValue }) => {
     try {
       // Simulate an API call
-      const { data } = await tiAxiosInstance.get(`/ml_model/${id}/get`)
+      const { data } = await tiAxiosInstance.get('/api/mitre')
       return data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.message)
@@ -14,10 +14,10 @@ export const getMlModel = createAsyncThunk(
   },
 )
 // AWS Customer Create Slice
-const getMlModelSlice = createSlice({
-  name: 'getMlModel',
+const getAllMitreSlice = createSlice({
+  name: 'getAllMitre',
   initialState: { 
-    model: {},
+    mitres: {},
     loading: false, 
     success: false, 
     error: null 
@@ -30,19 +30,19 @@ const getMlModelSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(getMlModel.pending, (state) => {
+    .addCase(getAllMitre.pending, (state) => {
       state.loading = true
     })
-    .addCase(getMlModel.fulfilled, (state, action) => {
+    .addCase(getAllMitre.fulfilled, (state, action) => {
       state.loading = false
       state.success = true
-      state.model = action.payload // Save 
+      state.mitres = action.payload // Save 
     })
-    .addCase(getMlModel.rejected, (state, action) => {
+    .addCase(getAllMitre.rejected, (state, action) => {
       state.loading = false
       state.error = action.payload
     })
   }
 })
-export const { clearErrors } = getMlModelSlice.actions
-export const getMlModelReducer = getMlModelSlice.reducer
+export const { clearErrors } = getAllMitreSlice.actions
+export const getAllMitreReducer = getAllMitreSlice.reducer

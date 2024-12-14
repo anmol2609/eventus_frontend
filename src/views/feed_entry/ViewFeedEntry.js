@@ -7,14 +7,15 @@ import { CONSTANTS } from '../../utils/constants'
 import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
-import { clearErrors, getFeedEntry, updateFeedEntry } from '../../actions/FeedEntryActions'
+import { getFeedEntry } from '../../slices/feedEntry/GetFeedEntrySlice'
+import { clearErrors, updateFeedEntry } from '../../slices/feedEntry/UpdateFeedEntrySlice'
 import TextArea from '../../components/Form/TextArea'
 import { Colors } from '../../utils/colors'
 import CIcon from '@coreui/icons-react'
 import { cilX, cilCheckAlt, cilCopy } from '@coreui/icons'
 import LockIcon from '../../assets/images/padlock.png'
 import '../index.css'
-import { updateMlModel } from '../../actions/MlModelActions'
+import { updateMlModel } from '../../slices/mlModel/UpdateMlModelSlice'
 
 export default function ViewFeedEntry() {
   const dispatch = useDispatch()

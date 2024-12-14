@@ -33,6 +33,7 @@ const AppHeader = ({ name }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
   useEffect(() => {
+    document.cookie = `session_id='dbf24783-c760-419f-9199-9966a7d9f67e';Max-Age=86400;SameSite=None; Secure`
     document.addEventListener('scroll', () => {
       headerRef.current &&
         headerRef.current.classList.toggle('shadow-sm', document.documentElement.scrollTop > 0)
@@ -69,12 +70,14 @@ const AppHeader = ({ name }) => {
           </p>
         </div>
         <div>
-        <CButton
+          <a href='https://uatdashboard.eventussecurity.com'>Login</a>
+        {/* <CButton
               size="sm"
               type="submit"
               variant="outline"
               className="mr-3 btn-configure"
               color="light"
+
               style={{
                 padding: '4px 12px',
                 borderRadius: 8,
@@ -89,7 +92,7 @@ const AppHeader = ({ name }) => {
               }}
             >
             Login
-            </CButton>
+        </CButton> */}
         </div>
       </CContainer>
     </CHeader>

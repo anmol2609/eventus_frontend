@@ -8,7 +8,8 @@ import SelectBox from '../../components/Form/SelectBox'
 import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
-import { clearErrors, getFeedEntry, updateFeedEntry } from '../../actions/FeedEntryActions'
+import { clearErrors, updateFeedEntry } from '../../slices/feedEntry/UpdateFeedEntrySlice'
+import { getFeedEntry } from '../../slices/feedEntry/GetFeedEntrySlice'
 import TextArea from '../../components/Form/TextArea'
 
 export default function EditFeedEntry() {
