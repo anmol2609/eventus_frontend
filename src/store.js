@@ -100,6 +100,9 @@ import {  getAllO365CustomersReducer } from './slices/O365Customers/GetAllO365Cu
 import {   getO365CustomerReducer } from './slices/O365Customers/GetO365CustomerSlice'
 import {   updateO365CustomerReducer } from './slices/O365Customers/UpdateO365CustomerSlice'
 
+
+import {   getUserDetailsBySessionIdReducer } from './slices/userManagement/GetUserDetailsBySessionIdSlice'
+
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
   reducer: {
@@ -202,7 +205,7 @@ export const store = configureStore({
 
     // V1 Customer Product
     create_V1_customer_product: createV1CustomerProductReducer,
-    V1_customer_products_for_customer: getAllV1CustomerProductsReducer,
+    V1_customer_products: getAllV1CustomerProductsReducer,
     V1_customer_product: getV1CustomerProductReducer,
     update_V1_customer_product: updateV1CustomerProductReducer,
     V1_customer_products_for_customer: getV1CustomerProductForCustomerReducer,
@@ -223,6 +226,7 @@ export const store = configureStore({
     user_by_tenant: getUserByTenantReducer,
     update_user_by_tenant: updateUserByTenantReducer,
     delete_user_by_tenant: deleteUserByTenantReducer,
+    user_details: getUserDetailsBySessionIdReducer,
     
     // O365 Customer
     create_O365_customer: createO365CustomerReducer,

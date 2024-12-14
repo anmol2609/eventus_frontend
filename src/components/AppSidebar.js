@@ -27,6 +27,8 @@ const AppSidebar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
+  const {user_detail} = useSelector((state) => state.user_details)
+  console.log(user_detail,"sidebar")
   const sidebarShow = useSelector((state) => state.sideBarShow)
 
   return (

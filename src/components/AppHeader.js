@@ -24,6 +24,8 @@ import { AppHeaderDropdown } from './header/index'
 import closeSidebar from '../assets/images/closeSidebar.svg'
 import openSidebar from '../assets/images/openSidebar.svg'
 import { Colors } from '../utils/colors'
+import { getUserDetailsBySessionId } from '../slices/userManagement/GetUserDetailsBySessionIdSlice'
+
 const AppHeader = ({ name }) => {
   const headerRef = useRef()
   const { colorMode, setColorMode } = useColorModes('coreui-free-react-admin-template-theme')
@@ -33,7 +35,9 @@ const AppHeader = ({ name }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
   useEffect(() => {
-    document.cookie = `session_id='dbf24783-c760-419f-9199-9966a7d9f67e';Max-Age=86400;SameSite=None; Secure`
+    document.cookie = `session_id=dbf24783-c760-419f-9199-9966a7d9f67e;Max-Age=86400;SameSite=None;Secure`
+    let id = document.cookie.split('; ')[3].split('=')[1]
+    dispatch(getUserDetailsBySessionId(id))
     document.addEventListener('scroll', () => {
       headerRef.current &&
         headerRef.current.classList.toggle('shadow-sm', document.documentElement.scrollTop > 0)
