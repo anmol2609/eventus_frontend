@@ -20,7 +20,7 @@ export default function NewLoggerCustomer({ toggleSidebar }) {
   const { logger_products, loading: logger_products_loading } = useSelector(
     (state) => state.logger_products,
   )
-  const { l3_customers: users, loading: users_loading } = useSelector((state) => state.l3_customers)
+  const { l3_customers: users, loading: users_loading } = useSelector((state) => state.l3_customer)
 
   let initial_state = {
     customer: '',

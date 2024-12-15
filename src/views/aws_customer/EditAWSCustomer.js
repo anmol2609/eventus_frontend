@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {   updateAWSCustomer } from '../../slices/awsCustomer/UpdateAWSCustomerSlice'
-import { clearErrors ,getAWSCustomer  } from '../../slices/awsCustomer/GetAWSCustomerSlice'
+import { clearErrors,  updateAWSCustomer } from '../../slices/awsCustomer/UpdateAWSCustomerSlice'
+import {  getAWSCustomer  } from '../../slices/awsCustomer/GetAWSCustomerSlice'
 // import { useNavigate, useParams } from 'react-router-dom'
 import { CRow, CCol, CButton, CForm, CCloseButton } from '@coreui/react'
 import Alert from '../../components/Alerts/Alert'
@@ -18,7 +18,7 @@ export default function EditAWSCustomer({ toggleSidebar, id }) {
   const { aws_customer, loading: customer_loading } = useSelector((state) => state.aws_customer)
   const { error, isUpdated, loading } = useSelector((state) => state.update_aws_customer)
   // const { users } = useSelector((state) => state.customers)
-  const { l3_customers: users } = useSelector((state) => state.l3_customers)
+  const { l3_customers: users } = useSelector((state) => state.l3_customer)
   // const { id } = useParams()
 
   let initial_state = {
@@ -38,6 +38,7 @@ export default function EditAWSCustomer({ toggleSidebar, id }) {
 
   useEffect(() => {
     dispatch(getAWSCustomer(id))
+
     dispatch(getL3Customer())
   }, [id])
 
@@ -64,24 +65,27 @@ export default function EditAWSCustomer({ toggleSidebar, id }) {
   }, [dispatch, isUpdated, error])
 
   useEffect(() => {
+    console.log(aws_customer)
     if (aws_customer) {
       setAWSUser({
         ...awsUser,
-        customer: aws_customer.customer._id,
-        access_key_id: aws_customer.access_key_id,
-        secret_access_key: aws_customer.secret_access_key,
-        product_name: aws_customer.product_name,
-        product_type: aws_customer.product_type,
-        product_module: aws_customer.product_module,
-        parent_folder: aws_customer.parent_folder,
-        bucket_name: aws_customer.bucket_name,
-        status: aws_customer.status,
+        customer: aws_customer?.customer?._id,
+        access_key_id: aws_customer?.access_key_id,
+        secret_access_key: aws_customer?.secret_access_key,
+        product_name: aws_customer?.product_name,
+        product_type: aws_customer?.product_type,
+        product_module: aws_customer?.product_module,
+        parent_folder: aws_customer?.parent_folder,
+        bucket_name: aws_customer?.bucket_name,
+        status: aws_customer?.status,
       })
     }
   }, [aws_customer])
 
   const submit = () => {
-    dispatch(updateAWSCustomer(id, awsUser))
+    let payload = {id, awsUser}
+
+    dispatch(updateAWSCustomer(payload))
   }
 
   return (

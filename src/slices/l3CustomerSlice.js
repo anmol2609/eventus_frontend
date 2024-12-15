@@ -6,7 +6,8 @@ export const getL3Customer = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       // Simulate an API call
-      const { data } = await managementAxiosInstance.get(`/user/tenancy_level?tenancy_level=L3`)
+      const { data } = await managementAxiosInstance.get(`/user/all`)
+      //const { data } = await managementAxiosInstance.get(`/user/tenancy_level?tenancy_level=L3`)
       return data.data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.message)

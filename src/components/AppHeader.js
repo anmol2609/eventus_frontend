@@ -35,7 +35,7 @@ const AppHeader = ({ name }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
   useEffect(() => {
-    document.cookie = `session_id=dbf24783-c760-419f-9199-9966a7d9f67e;Max-Age=86400;SameSite=None;Secure`
+    document.cookie = `session_id=de0a7fa9-8ff1-4f92-921f-eb094cce5fca;Max-Age=86400;SameSite=None;Secure`
     let id = document.cookie.split('; ')[3].split('=')[1]
     dispatch(getUserDetailsBySessionId(id))
     document.addEventListener('scroll', () => {

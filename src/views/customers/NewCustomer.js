@@ -36,14 +36,15 @@ export default function NewCustomer() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-
+  const data = useSelector((state) => state)
+  console.log(data,"new users")
   const customer_type = location.state.customer_type || CONSTANTS.CUSTOMER_TYPE.PARTNER
   const { error:created_cutomer_error, createdCustomerStatus, loading } = useSelector((state) => state.customer)
   const { l0_customers } = useSelector((state) => state.l0_customer)
   const { l1_customers } = useSelector((state) => state.l1_customer)
   const { l2_customers } = useSelector((state) => state.l2_customer)
   const { data_centers, loading: data_centers_loading } = useSelector((state) => state.data_center)
-
+  
   let initial_state = {
     type: customer_type,
     name: '',

@@ -16,7 +16,7 @@ export default function NewO365Customer({ toggleSidebar }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { error, success, loading } = useSelector((state) => state.create_O365_customer)
-  const { l3_customers: users, loading: users_loading } = useSelector((state) => state.l3_customers)
+  const { l3_customers: users, loading: users_loading } = useSelector((state) => state.l3_customer)
 
   let initial_state = {
     customer: '',

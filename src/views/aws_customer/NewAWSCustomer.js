@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { CONSTANTS } from '../../utils/constants'
-import { clearErrors, createAWSCustomer } from '../../slices/awsCustomer/CreateAWSCustomerSlice'
+//import { clearErrors, createAWSCustomer } from '../../slices/awsCustomer/CreateAWSCustomerSlice'
 import Alert from '../../components/Alerts/Alert'
 import { CForm, CCol, CRow, CButton, CCloseButton } from '@coreui/react'
 import { getL3Customer } from '../../slices/l3CustomerSlice'
@@ -11,11 +11,16 @@ import TextInput from '../../components/Form/TextInput'
 import SelectBox from '../../components/Form/SelectBox'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
+import {
+  clearErrors,
+  createAWSCustomer,
+} from '../../slices/awsCustomer/CreateAWSCustomerSlice'
 
 export default function NewAWSCustomer({ toggleSidebar }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { l3_customers: users } = useSelector((state) => state.l3_customers)
+
+  const { l3_customers: users } = useSelector((state) => state.l3_customer)
   const {
     error: AwsCreateError,
     success: AwsCreateSuccess,

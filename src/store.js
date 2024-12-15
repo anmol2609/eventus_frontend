@@ -186,10 +186,10 @@ export const store = configureStore({
     tenants_by_tenancy_level: tenantsSliceReducer,
     data_center: dataCenterReducer,
     customer: customerReducer,
-    l0_customers: l0CustomersReducer,
-    l1_customers: l1CustomersReducer,
-    l2_customers: l2CustomersReducer,
-    l3_customers: l3CustomersReducer,
+    l0_customer: l0CustomersReducer,
+    l1_customer: l1CustomersReducer,
+    l2_customer: l2CustomersReducer,
+    l3_customer: l3CustomersReducer,
 
     // v1 customer
     create_V1_customer: createV1CustomerReducer,

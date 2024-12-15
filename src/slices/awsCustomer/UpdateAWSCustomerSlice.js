@@ -36,7 +36,7 @@ const updateAWSCustomerSlice = createSlice({
       .addCase(updateAWSCustomer.fulfilled, (state, action) => {
         state.loading = false
         state.success = true
-        state.aws_customers = action.payload
+        state.aws_customer = action.payload
       })
       .addCase(updateAWSCustomer.rejected, (state, action) => {
         state.loading = false

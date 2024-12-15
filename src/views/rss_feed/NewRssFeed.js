@@ -7,7 +7,7 @@ import { CButton, CCloseButton } from '@coreui/react'
 import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
-import { clearErrors, configureRssFeed, createRssFeed } from '../../actions/RssFeedActions'
+//import { clearErrors, configureRssFeed, createRssFeed } from '../../actions/RssFeedActions'
 import { configureRssFeed } from '../../slices/rssFeed/ConfigureRssFeedSlice'
 import { clearErrors, createRssFeed } from '../../slices/rssFeed/CreateRssFeedSlice'
 
