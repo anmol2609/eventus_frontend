@@ -10,7 +10,7 @@ import { validate_required_keys } from '../../utils/validators/required_key'
 import Loader from '../../components/Loader'
 import TextArea from '../../components/Form/TextArea'
 import { clearErrors, updateArtifact } from '../../slices/Artifact/UpdateArtifactSlice'
-import { clearErrors, getArtifact } from '../../slices/Artifact/GetArtifactSlice'
+import {  getArtifact } from '../../slices/Artifact/GetArtifactSlice'
 
 export default function EditArtifacts() {
   const dispatch = useDispatch()

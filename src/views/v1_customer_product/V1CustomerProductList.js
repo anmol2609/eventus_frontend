@@ -35,7 +35,6 @@ import {
   getV1CustomerProductForCustomer,
 } from '../../slices/v1CustomerProduct/GetV1CustomerProductForCustomerSlice'
 import {
-  getV1CustomerProductForCustomer,
   searchV1CustomerProduct,
 } from '../../slices/v1CustomerProduct/GetV1CustomerProductsSlice'
 //import { getAllV1Products } from '../../actions/V1ProductActions'
