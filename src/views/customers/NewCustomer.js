@@ -5,13 +5,13 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { CONSTANTS } from '../../utils/constants'
 import Alert from '../../components/Alerts/Alert'
 import { CForm, CCol, CRow, CButton, CCard, CCardBody, CCardHeader } from '@coreui/react'
-import {
-  //clearCustomerErrors,
-  //createCustomer,
-  // getL0Customer,
-  // getL1Customer,
-  // getL2Customer,
-} from '../../actions/CustomerActions'
+// import {
+//   //clearCustomerErrors,
+//   //createCustomer,
+//   // getL0Customer,
+//   // getL1Customer,
+//   // getL2Customer,
+// } from '../../actions/CustomerActions'
 import TextInput from '../../components/Form/TextInput'
 import SelectBox from '../../components/Form/SelectBox'
 import { v4 as uuidv4 } from 'uuid'

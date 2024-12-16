@@ -20,7 +20,7 @@ import { Colors } from '../utils/colors'
 
 // sidebar nav config
 import navigation from '../_nav'
-import { toggleSidebar } from '../actions/ThemeActions'
+import { toggleSidebar } from '../slices/ThemeSlice'
 import './index.css'
 
 const AppSidebar = () => {

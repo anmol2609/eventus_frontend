@@ -2,16 +2,14 @@ import React from 'react';
 import { Route, Navigate,Outlet } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import { useSelector } from 'react-redux';
-const PrivateRoute = ({ children }) => {
-  
-  return (
-    // <Route
-    //   {...rest}
-    //   render={(props) =>
-    //     user_detail ? <Component {...props} /> : Navigate('/login')
-    //   }
-    // />
-    user_detail  ? children : <Navigate to="/login" />
-  );
-};
-export default PrivateRoute;
+
+export default function PrivateRoute({ children }) {
+  const {user_detail}=useSelector(state=>state.user_details)
+  let id = document.cookie.split('; ')[0].split('=')[1]
+  console.log(user_detail,"fdas",id)
+  if (typeof id !== 'string') {
+    return <Navigate to='/login' />
+  }
+
+  return children;
+}
