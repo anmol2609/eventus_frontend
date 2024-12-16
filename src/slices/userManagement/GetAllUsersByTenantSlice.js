@@ -7,6 +7,7 @@ export const getUsersByTenant = createAsyncThunk(
     try {
       // Simulate an API call
       const { data } = await managementAxiosInstance.get(`/user/list_user`)
+      console.log(data)
       return data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.data)

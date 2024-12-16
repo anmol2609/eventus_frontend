@@ -32,12 +32,13 @@ const AppHeader = ({ name }) => {
 
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sideBarShow)
+  const {user_detail} = useSelector((state) => state.user_details)
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
   useEffect(() => {
-    document.cookie = `session_id=de0a7fa9-8ff1-4f92-921f-eb094cce5fca;Max-Age=86400;SameSite=None;Secure`
-    let id = document.cookie.split('; ')[3].split('=')[1]
-    dispatch(getUserDetailsBySessionId(id))
+    //document.cookie = `session_id=de0a7fa9-8ff1-4f92-921f-eb094cce5fca;Max-Age=86400;SameSite=None;Secure`
+    // let id = document.cookie.split('; ')[3].split('=')[1]
+    //dispatch(getUserDetailsBySessionId("de0a7fa9-8ff1-4f92-921f-eb094cce5fca"))
     document.addEventListener('scroll', () => {
       headerRef.current &&
         headerRef.current.classList.toggle('shadow-sm', document.documentElement.scrollTop > 0)
@@ -74,7 +75,7 @@ const AppHeader = ({ name }) => {
           </p>
         </div>
         <div>
-          <a href='https://uatdashboard.eventussecurity.com'>Login</a>
+          {!user_detail && <a href='https://uatdashboard.eventussecurity.com'>Login</a>}
         {/* <CButton
               size="sm"
               type="submit"

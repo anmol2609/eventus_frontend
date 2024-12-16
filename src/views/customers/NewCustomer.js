@@ -51,9 +51,11 @@ export default function NewCustomer() {
     tenancy_level:
       customer_type === CONSTANTS.CUSTOMER_TYPE.ORGANIZATION ? CONSTANTS.TENANCY_LEVEL.L3 : '',
     tenant_code: '',
-    data_center: '',
+    data_center: '6746bfd50a780fe605c191ba',
     status: CONSTANTS.STATUS.ACTIVE,
     uuid: uuidv4(),
+    provider_name: '',
+    destination: '',
   }
   const [user, setUser] = useState(initial_state)
   const [validationError, setValidationError] = useState('')
@@ -214,7 +216,28 @@ export default function NewCustomer() {
                         </CButton>
                       </CCol>
                     </CRow>
-
+                    <CRow>
+                    <CCol sm={6}>
+                      <TextInput
+                      label="Provider Name"
+                      type="text"
+                      placeholder="Enter Provider Name"
+                      value={user.provider_name}
+                      onChange={(e) => setUser({ ...user, provider_name: e.target.value })}
+                      id="provider_name"
+                      />
+                      </CCol>
+                        <CCol sm={6}>
+                            <TextInput
+                            label="Destination"
+                            type="text"
+                            placeholder="Enter Destination"
+                            value={user.destination}
+                            onChange={(e) => setUser({ ...user, destination: e.target.value })}
+                            id="destination"
+                            />
+                        </CCol>
+                    </CRow>
                     <CRow>
                       <CCol sm={4}>
                         <TextInput

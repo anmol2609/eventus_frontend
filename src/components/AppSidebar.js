@@ -81,7 +81,7 @@ const AppSidebar = () => {
         <img src={sidebarProfile} />
         <div className="d-flex flex-column flex-grow-1" style={{ margin: '0 51px 0 12px' }}>
           <p style={{ margin: '0', fontSize: '14px', lineHeight: '20px', color: Colors.WHITE }}>
-            Username
+            {user_detail?.userName}
           </p>
           <p style={{ margin: '0', fontSize: '12px', lineHeight: '16px', color: Colors.GRAY }}>
             userType

@@ -50,6 +50,8 @@ export default function EditCustomer() {
     data_center: '',
     status: CONSTANTS.STATUS.ACTIVE,
     uuid: '',
+    provider_name: '',
+    destination: '',
   }
   const [user, setUser] = useState(initial_state)
   const [validationError, setValidationError] = useState('')
@@ -93,6 +95,8 @@ export default function EditCustomer() {
         l1_tenancy_partner: customer?.l1_tenancy_partner,
         l2_tenancy_partner: customer?.l2_tenancy_partner,
         status: customer?.status,
+        provider_name: customer?.provider_name,
+      destination: customer?.destination,
       })
       setIsTenancyDisabled(customer.type === CONSTANTS.CUSTOMER_TYPE.ORGANIZATION)
     }
@@ -223,7 +227,28 @@ export default function EditCustomer() {
                         />
                       </CCol>
                     </CRow>
-
+                    <CRow>
+                      <CCol sm={6}>
+                        <TextInput
+                        label="Provider Name"
+                        type="text"
+                        placeholder="Enter Provider Name"
+                        value={user.provider_name}
+                        onChange={(e) => setUser({ ...user, provider_name: e.target.value })}
+                        id="provider_name"
+                        />
+                        </CCol>
+                          <CCol sm={6}>
+                              <TextInput
+                              label="Destination"
+                              type="text"
+                              placeholder="Enter Destination"
+                              value={user.destination}
+                              onChange={(e) => setUser({ ...user, destination: e.target.value })}
+                              id="destination"
+                              />
+                          </CCol>
+                      </CRow>
                     <CRow>
                       <CCol sm={4}>
                         <TextInput

@@ -960,7 +960,7 @@ export default function CustomersList() {
                       </CTableRow>
                     </CTableHead>
                     <CTableBody>
-                      {userList.map((user) => (
+                      {userList && userList.map((user) => (
                         <CTableRow key={user._id}>
                           <CTableDataCell>{user.email}</CTableDataCell>
                           <CTableDataCell>{user.tenancy_level}</CTableDataCell>
