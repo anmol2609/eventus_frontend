@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react'
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import { CSpinner, useColorModes } from '@coreui/react'
@@ -47,11 +47,26 @@ const App = () => {
           <Route exact path="/register" name="Register Page" element={<Register />} />
           <Route exact path="/404" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
-          <Route path="*" name="Home" element={<DefaultLayout />} />
+          <Route path="*" name="Home" 
+            element={
+              //<ProtectedRoute>
+                <DefaultLayout />
+              //</ProtectedRoute>
+            }
+          />
         </Routes>
       </Suspense>
     </BrowserRouter>
   )
 }
+const ProtectedRoute = ({children}) => {
+  let user = localStorage.getItem('user')
+  console.log(user)
+  if(!user) {
+    window.location.href = 'https://uatdashboard.eventussecurity.com';
+  }
+return children
+
+};
 
 export default App
