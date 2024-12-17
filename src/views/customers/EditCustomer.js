@@ -47,7 +47,7 @@ export default function EditCustomer() {
     name: '',
     tenancy_level: '',
     tenant_code: '',
-    data_center: '',
+    data_center: '675293e61334560ab9577ce4',
     status: CONSTANTS.STATUS.ACTIVE,
     uuid: '',
     provider_name: '',
@@ -89,7 +89,7 @@ export default function EditCustomer() {
         name: customer?.name,
         tenancy_level: customer?.tenancy_level,
         tenant_code: customer?.tenant_code,
-        data_center: customer?.data_center?._id,
+        data_center: '675293e61334560ab9577ce4',
         uuid: customer?.uuid,
         l0_tenancy_partner: customer?.l0_tenancy_partner,
         l1_tenancy_partner: customer?.l1_tenancy_partner,
@@ -275,7 +275,7 @@ export default function EditCustomer() {
                           disabled={isTenancyDisabled}
                         />
                       </CCol>
-                      <CCol sm={4}>
+                      {/* <CCol sm={4}>
                         <SelectBox
                           id="data_center"
                           label="Data Center"
@@ -291,7 +291,7 @@ export default function EditCustomer() {
                           }
                           value={user && user.data_center}
                         />
-                      </CCol>
+                      </CCol> */}
                     </CRow>
 
                     <CRow>

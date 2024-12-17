@@ -127,12 +127,12 @@ const _nav = [
         to: '/onboarding',
         icon: <img src={onboardingIcon} className="nav-icon" />,
       },
-      {
-        component: CNavItem,
-        name: 'Data Centers',
-        to: '/data_centers',
-        icon: <img src={dataCenterIcon} className="nav-icon" />,
-      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Data Centers',
+      //   to: '/data_centers',
+      //   icon: <img src={dataCenterIcon} className="nav-icon" />,
+      // },
     ],
   },
   // {

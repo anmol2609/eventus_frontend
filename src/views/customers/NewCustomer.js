@@ -51,7 +51,7 @@ export default function NewCustomer() {
     tenancy_level:
       customer_type === CONSTANTS.CUSTOMER_TYPE.ORGANIZATION ? CONSTANTS.TENANCY_LEVEL.L3 : '',
     tenant_code: '',
-    data_center: '6746bfd50a780fe605c191ba',
+    data_center: '675293e61334560ab9577ce4',
     status: CONSTANTS.STATUS.ACTIVE,
     uuid: uuidv4(),
     provider_name: '',
@@ -271,7 +271,7 @@ export default function NewCustomer() {
                           disabled={isTenancyDisabled}
                         />
                       </CCol>
-                      <CCol sm={4}>
+                      {/* <CCol sm={4}>
                         <SelectBox
                           id="data_center"
                           label="Data Center"
@@ -286,7 +286,7 @@ export default function NewCustomer() {
                             ))
                           }
                         />
-                      </CCol>
+                      </CCol> */}
                     </CRow>
 
                     <CRow>
