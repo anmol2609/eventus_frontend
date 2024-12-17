@@ -1,36 +1,32 @@
 import { configureStore } from '@reduxjs/toolkit'
-
-// Importing only the necessary reducers for customer and feed entry
-// import {
-//   createCustomerReducer,
-//   getAllCustomersReducer,
-//   getCustomerReducer,
-//   l0CustomerReducer,
-//   l1CustomerReducer,
-//   l2CustomerReducer,
-//   updateCustomerReducer,
-// } from './slices/customerSlice'
+import {
+  getAllFeedEntriesReducer,
+} from './slices/feedEntry/GetAllFeedEntriesSlice'
 import {
   createFeedEntryReducer,
-  getAllFeedEntriesReducer,
+} from './slices/feedEntry/CreateFeedEntrySlice'
+import {
   getApprovedFeedEntriesReducer,
+} from './slices/feedEntry/GetApprovedFeedEntriesSlice'
+import {
   getCompletedFeedEntriesReducer,
+} from './slices/feedEntry/GetCompletedFeedEntriesSlice'
+import {
   getFeedEntryReducer,
+} from './slices/feedEntry/GetFeedEntrySlice'
+import {
   updateFeedEntryReducer,
-} from './slices/feedEntrySlice'
+} from './slices/feedEntry/UpdateFeedEntrySlice'
 import { rightSidebarReducer, sidebarReducer, themeReducer } from './slices/ThemeSlice'
-//import { createSOARCustomerReducer, getAllSOARCustomersReducer, getSOARCustomerReducer, updateSOARCustomerReducer } from './slices/soarCustomerSlice'
-import soarProductReducer from './slices/soarProductSlice'; // make sure this path is correct
-import { RssFeedReducer } from './slices/rssFeedSlice'
-//import { createArtifactReducer, getArtifactReducer, getArtifactsReducer, testArtifactsReducer, updateArtifactReducer } from './slices/Artifactslice'
-import { mlModelReducer } from './slices/MIModelslice'
+import { getAllRssFeedsReducer } from './slices/rssFeed/GetRssFeedsSlice'
+import { configureRssFeedReducer } from './slices/rssFeed/ConfigureRssFeedSlice'
+import { createRssFeedReducer } from './slices/rssFeed/CreateRssFeedSlice'
+import { getRssFeedReducer } from './slices/rssFeed/GetRssFeedSlice'
+import { updateRssFeedReducer } from './slices/rssFeed/UpdateRssFeedSlice'
+import { getMlModelReducer } from './slices/mlModel/GetMlModelSlice'
+import { updateMlModelReducer } from './slices/mlModel/UpdateMlModelSlice'
 import { tagsReducer } from './slices/tags/Tagsslice'
-import { mitreReducer } from './slices/Mitreslice'
-//import { createDataCenterReducer, getAllDataCentersReducer, getDataCenterReducer, updateDataCenterReducer } from './slices/DataCenterslice'
-//import { awsCustomerCreateReducer, getAllAWSCustomersReducer, getAWSCustomerReducer, updateAWSCustomerReducer } from './slices/AWSCustomerslice'
-//import { O365CustomerSliceReducer } from './slices/O365Customerslice'
-
-import { userSliceReducer } from './slices/userSlice'
+import { getAllMitreReducer } from './slices/mitre/GetAllMitreSlice'
 import { tenantsSliceReducer } from './slices/tenantsSlice'
 import { dataCenterReducer } from './slices/DataCenterslice'
 import { customerReducer } from './slices/customerSlice'
@@ -38,8 +34,6 @@ import { customerReducer } from './slices/customerSlice'
 import { l0CustomersReducer } from './slices/l0CustomerSlice'
 import { l1CustomersReducer } from './slices/l1CustomerSlice'
 import { l2CustomersReducer } from './slices/l2CustomerSlice'
-import { create_V1_customer, update_V1_customer, V1_customer, V1_customers, V1CustomerReducer } from './slices/V1Customerslice';
-import { V1CustomerProductReducer } from './slices/V1CustomerProduct';
 import { l3CustomersReducer } from './slices/l3CustomerSlice'
 
 import { createAWSCustomerReducer } from './slices/awsCustomer/CreateAWSCustomerSlice'
@@ -145,11 +139,11 @@ export const store = configureStore({
     update_SOAR_product: updateSOARProductReducer,
 
     // RSS Feed
-    create_rss_feed: RssFeedReducer,
-    configured_rss_feed: RssFeedReducer,
-    rss_feeds: RssFeedReducer,
-    rss_feed: RssFeedReducer,
-    update_rss_feed: RssFeedReducer,
+    create_rss_feed: createRssFeedReducer,
+    configured_rss_feed: configureRssFeedReducer,
+    rss_feeds: getAllRssFeedsReducer,
+    rss_feed: getRssFeedReducer,
+    update_rss_feed: updateRssFeedReducer,
 
     // Artifact
     create_artifact: createArtifactReducer,
@@ -165,9 +159,9 @@ export const store = configureStore({
     // test_artifacts: testArtifactsReducer,
     
     // ML Model, Tags, and Mitre
-    ml_model: mlModelReducer,
+    ml_model: getMlModelReducer,
     all_tags: tagsReducer,
-    all_mitre: mitreReducer,
+    all_mitre: getAllMitreReducer,
 
     // Data Center
     // create_data_center: createDataCenterReducer,
@@ -182,7 +176,7 @@ export const store = configureStore({
     all_aws_customers: getAllAWSCustomersReducer,
 
     
-    user: userSliceReducer,
+   
     tenants_by_tenancy_level: tenantsSliceReducer,
     data_center: dataCenterReducer,
     customer: customerReducer,
