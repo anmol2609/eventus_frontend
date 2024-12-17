@@ -15,7 +15,6 @@ import {
 import Alert from '../../components/Alerts/Alert'
 import { CONSTANTS } from '../../utils/constants'
 import { getL3Customer } from '../../slices/l3CustomerSlice'
-//import { getL3Customer } from '../../actions/CustomerActions'
 import SelectBox from '../../components/Form/SelectBox'
 import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'

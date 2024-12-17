@@ -121,6 +121,7 @@ export default function NewCustomer() {
         user_id: user._id,
         update_fields: info
       }
+      console.log(info)
       dispatch(updateUserByTenant(updatedFieldRecords))
     }
   }

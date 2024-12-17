@@ -9,7 +9,7 @@ export const updateUserByTenant = createAsyncThunk(
       const { data } = await managementAxiosInstance.put(`/user/update_user`, payload)
       return data // Return product data on success
     } catch (error) {
-      return rejectWithValue(error.response.data)
+      return rejectWithValue(error.response.data.message)
     }
   },
 )

@@ -20,7 +20,7 @@ import SelectBox from '../../components/Form/SelectBox'
 import { AppRightSidebar } from '../../components'
 import TextInput from '../../components/Form/TextInput'
 import { readableDateTimeFromString } from '../../helpers/DateHelpers'
-import { toggleRightSidebar } from '../../actions/ThemeActions'
+import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import '../index.css'
 import { Colors } from '../../utils/colors'
 import Loader from '../../components/Loader'
@@ -28,12 +28,12 @@ import { cilMagnifyingGlass } from '@coreui/icons'
 import download_csv from '../../assets/images/download_csv.svg'
 import download_html from '../../assets/images/download_html.svg'
 import {
-  filterFeedEntry,
-  getAllFeedEntries,
-  getApprovedFeedEntries,
   getCompletedFeedEntries,
-  searchFeedEntry,
-} from '../../actions/FeedEntryActions'
+} from '../../slices/feedEntry/GetCompletedFeedEntriesSlice'
+import {
+  getApprovedFeedEntries,
+} from '../../slices/feedEntry/GetApprovedFeedEntriesSlice'
+import { filterFeedEntry,getAllFeedEntries,searchFeedEntry } from '../../slices/feedEntry/GetAllFeedEntriesSlice'
 import { getAllRssFeeds } from '../../slices/rssFeed/GetRssFeedsSlice'
 import { getArtifactByFeedEntry } from '../../slices/Artifact/GetAllArtifactsSlice'
 import { CONSTANTS } from '../../utils/constants'

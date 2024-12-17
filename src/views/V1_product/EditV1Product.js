@@ -8,7 +8,8 @@ import { CONSTANTS } from '../../utils/constants'
 import SelectBox from '../../components/Form/SelectBox'
 import TextInput from '../../components/Form/TextInput'
 import { validate_required_keys } from '../../utils/validators/required_key'
-import { clearErrors, getV1Product, updateV1Product } from '../../actions/V1ProductActions'
+import { clearErrors, updateV1Product } from '../../slices/v1Product/UpdateV1ProductSlice'
+import { getV1Product } from '../../slices/v1Product/GetV1ProductSlice'
 import Loader from '../../components/Loader'
 
 export default function EditV1Product({ toggleSidebar, id }) {

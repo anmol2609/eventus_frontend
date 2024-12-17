@@ -7,6 +7,9 @@ export const createUserByTenant = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       // Simulate an API call
+      if(payload['user_type'] === "IDP" ){
+        payload['password'] = ""
+      }
       const { data } = await managementAxiosInstance.post(`/user/create_user`, payload)
       return data // Return product data on success
     } catch (error) {

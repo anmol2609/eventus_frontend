@@ -20,7 +20,7 @@ import TextInput from '../../components/Form/TextInput'
 import { CONSTANTS } from '../../utils/constants'
 import Enums from '../../utils/Enums'
 import { readableDateFromString } from '../../helpers/DateHelpers'
-import { toggleRightSidebar } from '../../actions/ThemeActions'
+import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import '../index.css'
 // import {
 //   filterDataCenter,

@@ -21,13 +21,13 @@ import { CONSTANTS } from '../../utils/constants'
 import Enums from '../../utils/Enums'
 import { getAllCustomers } from '../../slices/customerSlice'
 import { readableDateFromString } from '../../helpers/DateHelpers'
-import { toggleRightSidebar } from '../../actions/ThemeActions'
+import { toggleRightSidebar } from '../../slices/ThemeSlice'
 import '../index.css'
 import {
   filterO365Customer,
   getAllO365Customers,
   searchO365Customer,
-} from '../../actions/O365CustomerActions'
+} from '../../slices/O365Customers/GetAllO365CustomersSlice'
 import Loader from '../../components/Loader'
 import { cilMagnifyingGlass } from '@coreui/icons'
 import ShowAllFilters from '../../components/ShowAllFilters'

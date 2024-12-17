@@ -8,7 +8,7 @@ import { CForm, CCol, CRow, CButton, CCloseButton } from '@coreui/react'
 import TextInput from '../../components/Form/TextInput'
 import SelectBox from '../../components/Form/SelectBox'
 import { validate_required_keys } from '../../utils/validators/required_key'
-import { clearErrors, createV1Product } from '../../actions/V1ProductActions'
+import { clearErrors, createV1Product } from '../../slices/v1Product/CreateV1Product'
 import Loader from '../../components/Loader'
 
 export default function NewV1Product({ toggleSidebar }) {

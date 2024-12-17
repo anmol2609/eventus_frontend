@@ -45,7 +45,8 @@ import { getAllAWSCustomers } from '../../slices/awsCustomer/GetAllAWSCustomersS
 import { updateAWSCustomer } from '../../slices/awsCustomer/UpdateAWSCustomerSlice'
 
 import { readableDateFromString } from '../../helpers/DateHelpers'
-import { getAllO365Customers, updateO365Customer } from '../../actions/O365CustomerActions'
+import { getAllO365Customers } from '../../slices/O365Customers/GetAllO365CustomersSlice'
+import { updateO365Customer } from '../../slices/O365Customers/UpdateO365CustomerSlice'
 //import { getAllV1Products, updateV1Product } from '../../actions/V1ProductActions'
 import {getAllV1Products} from '../../slices/v1Product/GetAllV1ProductSlice'
 import {updateV1Product} from '../../slices/v1Product/UpdateV1ProductSlice'

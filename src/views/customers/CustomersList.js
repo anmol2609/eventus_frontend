@@ -970,7 +970,7 @@ export default function CustomersList() {
                             <CButton
                               style={{ padding: '2px' }}
                               onClick={() => {
-                                navigate(`/users/${user._id}/edit`)
+                                navigate(`/users/${user.user_id}/edit`)
                               }}
                             >
                               {<img src={editIcon} />}
