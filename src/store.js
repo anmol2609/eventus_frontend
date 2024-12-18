@@ -96,6 +96,7 @@ import {   updateO365CustomerReducer } from './slices/O365Customers/UpdateO365Cu
 
 
 import {   getUserDetailsBySessionIdReducer } from './slices/userManagement/GetUserDetailsBySessionIdSlice'
+import {  getTenantInfoReducer  } from './slices/tenant/TenantInfoSlice'
 
 // Configure the store with only customer and feed entry reducers
 export const store = configureStore({
@@ -227,7 +228,7 @@ export const store = configureStore({
     O365_customers: getAllO365CustomersReducer,
     O365_customer: getO365CustomerReducer,
     update_O365_customer: updateO365CustomerReducer,
-
+    get_tenant_info:getTenantInfoReducer
     // Other slices can be commented out or removed
     /*
 

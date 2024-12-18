@@ -51,16 +51,20 @@ export default function NewCustomer() {
 
   useEffect(() => {
     if (isUpdated) {
-      dispatch(clearUpdateUserByTenantErrors())
+      setTimeout(() => {
+        dispatch(clearUpdateUserByTenantErrors())
       dispatch(clearGetUserByTenantError())
       navigate(
         `/customers?selectedView=${2}`,
       )
+      }, 2000)
+      
     }
 
     if (error) {
       setTimeout(() => {
-        dispatch(clearUserErrors())
+        dispatch(clearUpdateUserByTenantErrors())
+        dispatch(clearGetUserByTenantError())
         dispatch(getUserByTenant(id))
       }, 2000)
     }

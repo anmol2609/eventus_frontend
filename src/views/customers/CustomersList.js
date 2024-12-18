@@ -982,7 +982,7 @@ export default function CustomersList() {
                                   'Are you sure you want to delete this?',
                                 )
                                 if (isConfirmed) {
-                                  deleteUserHandler(user._id)
+                                  deleteUserHandler(user.user_id)
                                 }
                               }}
                             >

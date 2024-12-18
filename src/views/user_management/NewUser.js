@@ -19,6 +19,9 @@ import {
 import {
   getTenantByTenancyLevel
 } from '../../slices/tenantsSlice'
+import {
+  getTenantInfo
+} from '../../slices/tenant/TenantInfoSlice'
 export default function NewCustomer() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -26,6 +29,7 @@ export default function NewCustomer() {
 
   const { error:created_user_error, success:createdUserStatus, loading } = useSelector((state) => state.create_user_by_tenant)
   const {tenants, loading: tenants_loading } = useSelector((state) => state.tenants_by_tenancy_level)
+  const {tenants:tenants_info, loading: tenants_info_loading } = useSelector((state) => state.get_tenant_info)
   let initial_state = {
     firstName: '',
     lastName: '',
@@ -46,6 +50,9 @@ export default function NewCustomer() {
   )
 
   useEffect(() => {
+    if(tenants_info.length > 0) {
+      setUser({...user, providerName: tenants_info[0].provider_name, destination: tenants_info[0].destination})
+    }
     if (createdUserStatus || created_user_error) {
       setTimeout(() => {
         dispatch(clearCreateUserByTenantErrors())
@@ -62,7 +69,7 @@ export default function NewCustomer() {
         setUser(initial_state)
       }
     }
-  }, [dispatch, created_user_error, createdUserStatus])
+  }, [dispatch, created_user_error, createdUserStatus,tenants_info])
 
   const submit = () => {
     let info = user.user_type === 'IDP' 
@@ -184,7 +191,16 @@ export default function NewCustomer() {
                           id="tenant"
                           label="Tenant"
                           defaultOption="Select Tenant"
-                          onChange={(e) => setUser({ ...user, tenant: e.target.value })}
+                          onChange={(e) => {
+                            console.log("Tenant")
+                            let data = {
+                              tenancy_level:user.tenancy_level,
+                              tenant_code:e.target.value.split(".")[1]
+                            }
+                            dispatch(getTenantInfo(data))
+                            setUser({ ...user, tenant: e.target.value })
+                            console.log(tenants_info,"tenants")
+                          }}
                           options={
                             !tenants_loading 
                             && tenants
@@ -330,6 +346,7 @@ export default function NewCustomer() {
                                 value={user.providerName}
                                 onChange={(e) => setUser({ ...user, providerName: e.target.value })}
                                 id="providerName"
+                                disabled
                                 />
                           </CCol>
                           <CCol sm={6}>
@@ -340,6 +357,7 @@ export default function NewCustomer() {
                               value={user.destination}
                               onChange={(e) => setUser({ ...user, destination: e.target.value })}
                               id="destination"
+                              disabled
                               />
                           </CCol>
                         </CRow>

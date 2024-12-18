@@ -48,13 +48,13 @@ const AppHeader = ({ name }) => {
   return (
     <CHeader position="sticky" className="mb-2 p-0" ref={headerRef} style={{ zIndex: '0' }}>
       <CContainer
-        className="d-flex align-items-center justify-content-between border-bottom px-4"
+        className="d-flex align-items-center justify-content-start border-bottom px-4"
         style={{
           backgroundColor: '#141414',
         }}
         fluid
       >
-        {/* <CHeaderToggler
+        <CHeaderToggler
           onClick={() => {
             setSidebarOpen(!sidebarOpen)
             dispatch(toggleSidebar(!sidebarShow.sidebarShow))
@@ -68,36 +68,11 @@ const AppHeader = ({ name }) => {
             src={sidebarOpen ? closeSidebar : openSidebar}
             style={{ width: '24px', height: '24px' }}
           />
-        </CHeaderToggler> */}
+        </CHeaderToggler>
         <div>
           <p style={{ fontSize: '14px', height: '30px', marginBottom: '0', paddingTop: '4px' }}>
             {name}
           </p>
-        </div>
-        <div>
-          {id && <a href='https://uatdashboard.eventussecurity.com'>Login</a>}
-        {/* <CButton
-              size="sm"
-              type="submit"
-              variant="outline"
-              className="mr-3 btn-configure"
-              color="light"
-
-              style={{
-                padding: '4px 12px',
-                borderRadius: 8,
-                height: 36,
-                backgroundColor: Colors.BLUE,
-                borderColor: Colors.BLUE,
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: 2,
-              }}
-            >
-            Login
-        </CButton> */}
         </div>
       </CContainer>
     </CHeader>
