@@ -662,16 +662,16 @@ export default function CustomersList() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        backgroundColor: '#f0f0f0', // Use a neutral color
-                        border: '1px solid #ccc', // Subtle border for better visibility
-                        borderRadius: '8px', // Slightly larger border-radius for modern look
-                        padding: '0 12px', // Add horizontal padding for better spacing
-                        height: windowWidth <= 370 ? '36px' : '44px', // Adjust height for responsiveness
+                        backgroundColor: '#f0f0f0',
+                        border: '1px solid #ccc',
+                        borderRadius: '8px',
+                        padding: '0 12px',
+                        height: windowWidth <= 370 ? '36px' : '44px',
                         cursor: 'pointer',
-                        transition: 'background-color 0.3s ease, transform 0.2s ease', // Smooth hover effect
+                        transition: 'background-color 0.3s ease, transform 0.2s ease',
                       }}
-                      onMouseEnter={(e) => (e.target.style.backgroundColor = '#e0e0e0')} // Hover effect
-                      onMouseLeave={(e) => (e.target.style.backgroundColor = '#f0f0f0')} // Restore color
+                      onMouseEnter={(e) => (e.target.style.backgroundColor = '#e0e0e0')}
+                      onMouseLeave={(e) => (e.target.style.backgroundColor = '#f0f0f0')}
                     >
                       <img
                         src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3JtNTMzLWljb24tMjlfMS5wbmc.png"
@@ -729,23 +729,62 @@ export default function CustomersList() {
                     {typeof userListError === 'undefined' ? userList.length : 0}
                   </span>
                 </div>
-                <TextInput
-                  type="text"
-                  placeholder="Search here...."
-                  value={searchEmail}
-                  onChange={(e) => setSearchEmail(e.target.value)}
-                  id="search"
+                <div
                   style={{
-                    flexGrow: 2,
-                    minWidth: '180px',
-                    maxWidth: '400px',
-                    backgroundColor: 'rgb(31, 31, 31)',
-                    height: '40px',
-                    marginBottom: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    position: 'relative',
                   }}
-                  trailIcon={cilMagnifyingGlass}
-                  trailIconClick={search_email_data}
-                />
+                >
+                  <input
+                    type="text"
+                    placeholder="Search here...."
+                    value={searchEmail}
+                    onChange={(e) => setSearchEmail(e.target.value)}
+                    id="search"
+                    style={{
+                      flexGrow: 2,
+                        minWidth:
+                          windowWidth <= 370 ? '10px' : windowWidth <= 768 ? '100%' : '180px',
+                        maxWidth: windowWidth <= 768 ? '100%' : '400px',
+                        width: windowWidth <= 370 ? '120px' : 'auto',
+                        height: windowWidth <= 370 ? '30px' : '40px',
+
+                        padding: '8px',
+                        borderRadius: '4px',
+                        border: '1px solid #ccc',
+                    }}
+
+                  />
+                  <button
+                    onClick={search_email_data}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: '#f0f0f0',
+                      border: '1px solid #ccc',
+                      borderRadius: '8px',
+                      padding: '0 12px',
+                      height: windowWidth <= 370 ? '36px' : '44px',
+                      cursor: 'pointer',
+                      transition: 'background-color 0.3s ease, transform 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => (e.target.style.backgroundColor = '#e0e0e0')}
+                    onMouseLeave={(e) => (e.target.style.backgroundColor = '#f0f0f0')}
+                  >
+                  <img
+                        src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3JtNTMzLWljb24tMjlfMS5wbmc.png"
+                        alt="Search Icon"
+                        style={{
+                          width: '20px',
+                          height: '20px',
+                          display: 'block', // Ensures no inline spacing
+                        }}
+                      />
+                  </button>
+                </div>
               </div>
             )}
 
