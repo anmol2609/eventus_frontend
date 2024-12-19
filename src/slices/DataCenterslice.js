@@ -7,6 +7,7 @@ export const getAllDataCenters = createAsyncThunk(
     try {
       // Simulate an API call
       const { data } = await managementAxiosInstance.get(`/data_center/all`)
+
       return data.data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.message)
@@ -25,7 +26,7 @@ export const createDataCenter = createAsyncThunk(
       return rejectWithValue(error.response.data.message)
     }
   },
-) 
+)
 //async function for update Data Center
 export const updateDataCenter = createAsyncThunk(
   'updateDataCenter',
@@ -37,7 +38,7 @@ export const updateDataCenter = createAsyncThunk(
       return rejectWithValue(error.response.data.message)
     }
   },
-) 
+)
 
 //async function for filter Data Center
 export const filterDataCenter = createAsyncThunk(
@@ -45,7 +46,7 @@ export const filterDataCenter = createAsyncThunk(
   async (filters, { rejectWithValue }) => {
     try {
       // Simulate an API call
-      
+
       const { data } = await managementAxiosInstance.get(`/data_center/filter`, {
         params: filters,
       })
@@ -61,7 +62,7 @@ export const searchDataCenter = createAsyncThunk(
   async (term, { rejectWithValue }) => {
     try {
       // Simulate an API call
-      
+
       const { data } = await managementAxiosInstance.get(`/data_center/search`, {
         params: { term },
       })
@@ -93,7 +94,7 @@ const dataCenterSlice = createSlice({
     loading: false,
     success: false,
     error: null,
-    createdDataCenterStatus: false, 
+    createdDataCenterStatus: false,
     updatedDataCenterStatus: false,
     fetch_data_center_status:false,
     data_center: {}
@@ -114,7 +115,7 @@ const dataCenterSlice = createSlice({
         state.loading = true
       })
       .addCase(getAllDataCenters.fulfilled, (state, action) => {
-        
+
         state.loading = false
         state.success = true
         state.data_centers = action.payload
@@ -123,13 +124,13 @@ const dataCenterSlice = createSlice({
         state.loading = false
         state.error = action.payload
       })
-    
+
       //search Data Center
       .addCase(searchDataCenter.pending, (state) => {
         state.loading = true
       })
       .addCase(searchDataCenter.fulfilled, (state, action) => {
-        
+
         state.loading = false
         state.success = true
         state.userList = action.payload
@@ -152,7 +153,7 @@ const dataCenterSlice = createSlice({
         state.loading = false
         state.error = action.payload
       })
-      
+
       //create Data Center
       .addCase(createDataCenter.pending, (state) => {
         state.loading = true
@@ -180,7 +181,7 @@ const dataCenterSlice = createSlice({
         state.loading = false
         state.error = action.payload
       })
-    //get User By Tenant 
+    //get User By Tenant
       .addCase(getDataCenter.pending, (state) => {
         state.loading = true
       })
