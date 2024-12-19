@@ -12,7 +12,7 @@ export const deleteUserByTenant = createAsyncThunk(
           "user_id": id
         }
         
-        const { data } = await managementAxiosInstance.delete(`/user/delete_user`,obj)
+        const { data } = await managementAxiosInstance.delete(`/user/delete_user?user_id=${id}`)
         return data // Return product data on success
       } catch (error) {
         return rejectWithValue(error.response)

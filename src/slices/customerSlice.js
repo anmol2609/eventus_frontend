@@ -31,7 +31,10 @@ export const updateCustomer = createAsyncThunk(
   'updateCustomer',
   async (payload, { rejectWithValue }) => {
     try {
-      const data = await managementAxiosInstance.put(`/user/${payload.id}/update`, payload.user);
+      console.log(payload)
+      //const { data } = await managementAxiosInstance.put(`/user/update_user`, payload)
+      
+      const data = await managementAxiosInstance.put(`/user/${payload.user_id}/modify`, payload.update_fields);
       return data.data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.data.message)

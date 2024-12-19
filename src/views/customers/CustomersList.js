@@ -143,9 +143,14 @@ export default function CustomersList() {
   const search_params_for_list = getSearchParams(searchParams)
 
   const submit = (id, data) => {
-    dispatch(updateCustomer(id, data))
+    let updatedFieldRecords = {
+      user_id: id,
+      update_fields: data
+    }
+    dispatch(updateCustomer(updatedFieldRecords))
   }
   const deleteUserHandler = (id) => {
+    console.log('deleting user)', id)
     dispatch(deleteUserByTenant(id))
   }
   const partnerUser = users
@@ -154,7 +159,9 @@ export default function CustomersList() {
   const organizationUser = users
     ? users.filter((user) => user.type === CONSTANTS.CUSTOMER_TYPE.ORGANIZATION)
     : []
-
+  const endUser = userList ? userList.filter(item => item.user_type == "IDP" || item.user_type == "LOCAL") 
+  : []
+    
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber)
   }
@@ -213,6 +220,20 @@ export default function CustomersList() {
   const organizationUser_length = organizationUser ? organizationUser.length : 0
   const organizationUser_pages = Math.ceil(organizationUser_length / itemsPerPage)
 
+  const endUser_items = endUser
+  ? endUser
+      .sort((a, b) => {
+        let aValue = new Date(a['user_type'])
+        let bValue = new Date(b['user_type'])
+        if (aValue < bValue) return timeColOrder === 'asc' ? -1 : 1
+        if (aValue > bValue) return timeColOrder === 'asc' ? 1 : -1
+        return 0
+      })
+      .slice(indexOfFirstItem, indexOfLastItem)
+  : []
+const endUser_length = endUser ? endUser.length : 0
+const endUser_pages = Math.ceil(endUser_length / itemsPerPage)
+
   const [sortColumn, setSortColumn] = useState('name')
   const [sortOrder, setSortOrder] = useState('asc')
 
@@ -222,6 +243,10 @@ export default function CustomersList() {
   const sortedOrganizationUsers = organizationUser_items
     ? sortData(organizationUser_items, sortColumn, sortOrder, columnToDataMap[0])
     : []
+  const sortedEndUsers = endUser_items
+  ? sortData(endUser_items, sortColumn, sortOrder, columnToUserDataMap[0])
+  : []
+  
 
   return (
     <>
@@ -960,7 +985,7 @@ export default function CustomersList() {
                       </CTableRow>
                     </CTableHead>
                     <CTableBody>
-                      {userList && userList.map((user) => (
+                      {sortedEndUsers && sortedEndUsers.map((user) => (
                         <CTableRow key={user._id}>
                           <CTableDataCell>{user.email}</CTableDataCell>
                           <CTableDataCell>{user.tenancy_level}</CTableDataCell>
@@ -998,9 +1023,9 @@ export default function CustomersList() {
                           {' '}
                           <Pagination
                             currentPage={currentPage}
-                            totalPages={partnerUser_pages}
+                            totalPages={endUser_pages}
                             onPageChange={handlePageChange}
-                            totalItems={partnerUser_length}
+                            totalItems={endUser_length}
                             itemsPerPage={itemsPerPage}
                           />
                         </CTableDataCell>

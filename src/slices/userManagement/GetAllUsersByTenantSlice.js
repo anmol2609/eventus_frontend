@@ -7,9 +7,7 @@ export const getUsersByTenant = createAsyncThunk(
     try {
       // Simulate an API call
       const { data } = await managementAxiosInstance.get(`/user/list_user`)
-      let newData = data.filter(item => item.user_type == "IDP" || item.user_type == "LOCAL")
-      console.log(data)
-      return newData // Return product data on success
+      return data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.data)
     }

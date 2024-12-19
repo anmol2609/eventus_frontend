@@ -113,10 +113,11 @@ export default function EditCustomer() {
 
     if (validate_required_keys(validation_keys, setValidationError))
       console.log("updateCustomer")
-    let data ={
-      id, user
+    let updatedFieldRecords = {
+      user_id: id,
+      update_fields: user
     }
-      dispatch(updateCustomer(data))
+      dispatch(updateCustomer(updatedFieldRecords))
   }
 
   return (
