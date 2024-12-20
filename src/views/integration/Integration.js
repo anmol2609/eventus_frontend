@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import Loader from '../../components/Loader'
 import { SubHeaders } from '../../helpers/SubHeaders'
 import { Colors } from '../../utils/colors'
-import { CButton, CContainer, CRow, CCol } from '@coreui/react'
+import { CButton } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
 import AWSIcon from '../../assets/images/AWS_icon.png'
@@ -14,6 +14,7 @@ import sortByIcon from '../../assets/images/sortByIcon.svg'
 import deleteIcon from '../../assets/images/deleteIcon.svg'
 import editIcon from '../../assets/images/editIcon.svg'
 import '../index.css'
+//import { getAllSOARProducts, updateSOARProduct } from '../../actions/SOARProductActions'
 import { updateSOARProduct } from '../../slices/SOARProduct/UpdateSOARProductSlice'
 import { getAllSOARProducts } from '../../slices/SOARProduct/GetAllSOARProductsSlice'
 import { CONSTANTS } from '../../utils/constants'
@@ -48,42 +49,24 @@ export default function Integration() {
   const [sideBarToShow, setSideBarToShow] = useState('new')
 
   const styles = `
-    @keyframes slideIn {
-      from { transform: translateX(100%); }
-      to { transform: translateX(0); }
-    }
-    @keyframes slideOut {
-      from { transform: translateX(0); }
-      to { transform: translateX(100%); }
-    }
-    .slide-in {
-      animation: slideIn 0.3s ease-in-out forwards;
-    }
-    .slide-out {
-      animation: slideOut 0.3s ease-in-out forwards;
-    }
-    .hidden-sidebar {
-      visibility: hidden;
-    }
-    
-    @media (max-width: 768px) {
-      .sidebar-overlay {
-        width: 100vw !important;
-      }
-      .data-brick {
-        width: 100% !important;
-        margin-right: 0 !important;
-      }
-      .header-container {
-        flex-direction: column !important;
-        gap: 1rem;
-      }
-      .action-buttons {
-        width: 100%;
-        justify-content: flex-end !important;
-      }
-    }
-  `
+  @keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes slideOut {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+  }
+  .slide-in {
+    animation: slideIn 0.3s ease-in-out forwards;
+  }
+  .slide-out{
+    animation: slideOut 0.3s ease-in-out forwards;
+  }
+  .hidden-sidebar{
+    visibility: hidden;
+  }
+`
 
   const updateSOARProducts = (id, data) => {
     dispatch(updateSOARProduct(id, data))
@@ -91,42 +74,30 @@ export default function Integration() {
 
   const DataBrick = ({ id, title, subTitle, icon, index }) => (
     <div
-      className="clickable data-brick"
+      className="clickable"
       style={{
         backgroundColor: Colors.BG_LIGHT_2,
-        padding: '12px',
-        marginTop: '8px',
-        marginRight: '16px',
-        borderRadius: '7px',
+        padding: 12,
+        marginTop: 8,
+        marginRight: 16,
+        borderRadius: 7,
         border: `1px solid ${Colors.BG_LIGHT}`,
-        width: 'calc(50% - 16px)', // Make it take up half the container width minus margin
-        minWidth: '250px', // Minimum width to maintain readability
-        maxWidth: '100%', // Ensure it doesn't overflow on small screens
       }}
     >
-      <div className="d-flex justify-content-between align-items-center flex-wrap">
-        <div className="d-flex align-items-center" style={{ marginBottom: '8px' }}>
+      <span className="d-flex justify-content-between align-items-center">
+        <span className="d-flex align-items-center">
           <div
             style={{
               borderRadius: '5px',
               width: '30px',
               height: '30px',
-              marginRight: '8px',
             }}
           >
-            <img
-              src={icon}
-              style={{
-                height: '20px',
-                width: '20px',
-                objectFit: 'contain',
-              }}
-              alt={title}
-            />
+            <img src={icon} style={{ height: '20px', width: '20px' }}></img>
           </div>
-          <div style={{ fontSize: '16px', wordBreak: 'break-word' }}>{title}</div>
-        </div>
-        <div className="d-flex align-items-center gap-2">
+          <div style={{ fontSize: 16 }}>{title}</div>
+        </span>
+        <span className="d-flex align-items-center">
           <CButton
             style={{ padding: '2px' }}
             onClick={() => {
@@ -135,48 +106,39 @@ export default function Integration() {
               setSideBarToShow('edit')
             }}
           >
-            <img src={editIcon} alt="Edit" />
+            {<img src={editIcon} />}
           </CButton>
           <CButton
             style={{ padding: '2px', color: Colors.RED }}
             onClick={() => {
               const isConfirmed = window.confirm('Are you sure you want to delete this?')
               if (isConfirmed) {
-                updateSOARProducts(id, { is_deleted: true })
+                const data = {
+                  is_deleted: true,
+                }
+                updateSOARProducts(id, data)
               }
             }}
           >
-            <img src={deleteIcon} alt="Delete" />
+            {<img src={deleteIcon} />}
           </CButton>
-        </div>
-      </div>
-      <div
-        style={{
-          fontSize: '13px',
-          fontWeight: 300,
-          color: Colors.WHITE_70,
-          wordBreak: 'break-word',
-        }}
-      >
-        {subTitle}
-      </div>
+        </span>
+      </span>
+      <div style={{ fontSize: 13, fontWeight: 300, color: Colors.WHITE_70 }}>{subTitle}</div>
     </div>
   )
 
   return (
-    <CContainer fluid className="p-0">
+    <>
       {loading || update_SOAR_product_loading ? (
         <Loader />
       ) : (
         <>
           <div
-            className="header-container d-flex justify-content-between align-items-center"
-            style={{
-              borderBottom: `1px solid ${Colors.LIGHT_GRAY}`,
-              padding: '1rem',
-            }}
+            className="d-flex justify-content-between align-items-center"
+            style={{ borderBottom: `1px solid ${Colors.LIGHT_GRAY}` }}
           >
-            <div className="d-flex flex-wrap gap-2">
+            <span className="d-flex">
               <SubHeaders
                 title="SOAR Fields"
                 index={0}
@@ -191,10 +153,30 @@ export default function Integration() {
                 setSelectedView={setSelectedView}
                 setCurrentPage={setCurrentPage}
               />
-            </div>
+            </span>
 
-            {selectedView == 0 && (
-              <div className="action-buttons d-flex justify-content-start align-items-center gap-2">
+            {selectedView == 0 ? (
+              <div className="d-flex justify-content-start align-items-center gap-2">
+                {/* <CButton
+                  size="sm"
+                  type="submit"
+                  color="primary"
+                  variant="outline"
+                  shape="rounded-pill"
+                  style={{
+                    fontSize: 13,
+                    color: Colors.WHITE,
+                    padding: '5px 10px',
+                  }}
+                  // onClick={() =>
+                  //   timeColOrder === 'asc' ? setTimeColOrder('desc') : setTimeColOrder('asc')
+                  // }
+                >
+                  <div className="d-flex justify-content-start align-items-center gap-1">
+                    <img src={sortByIcon} style={{ height: '16px', width: '16px' }}></img>
+                    {`Sort By: Date`}
+                  </div>
+                </CButton> */}
                 <CButton
                   size="sm"
                   type="button"
@@ -207,15 +189,15 @@ export default function Integration() {
                   }}
                   style={{
                     padding: '4px 12px',
-                    borderRadius: '8px',
-                    height: '36px',
+                    borderRadius: 8,
+                    height: 36,
                     backgroundColor: Colors.BLUE,
                     borderColor: Colors.BLUE,
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    marginBottom: '2px',
+                    marginBottom: 2,
                   }}
                 >
                   <style>{styles}</style>
@@ -228,6 +210,7 @@ export default function Integration() {
                 </CButton>
                 {
                   <>
+                    {/* Overlay to darken the background */}
                     {sidebarVisible === 1 && (
                       <div
                         style={{
@@ -241,14 +224,15 @@ export default function Integration() {
                         }}
                       />
                     )}
+                    {/* Sidebar component */}
                     <div
-                      className={`sidebar-overlay ${
+                      className={
                         sidebarVisible === 1
                           ? 'slide-in'
                           : sidebarVisible === 2
                             ? 'slide-out'
                             : 'hidden-sidebar'
-                      }`}
+                      }
                       style={{
                         position: 'fixed',
                         top: 0,
@@ -260,7 +244,6 @@ export default function Integration() {
                         zIndex: 10,
                         display: 'flex',
                         flexDirection: 'column',
-                        overflowY: 'auto',
                       }}
                     >
                       {sideBarToShow === 'edit' ? (
@@ -272,17 +255,11 @@ export default function Integration() {
                   </>
                 }
               </div>
-            )}
+            ) : null}
           </div>
 
-          {selectedView == 0 && (
-            <div
-              className="d-flex flex-row flex-wrap"
-              style={{
-                padding: '1rem',
-                gap: '1rem',
-              }}
-            >
+          {selectedView == 0 ? (
+            <div className="d-flex flex-row flex-wrap">
               {SOAR_products.map((item, index) => (
                 <DataBrick
                   id={item._id}
@@ -294,9 +271,9 @@ export default function Integration() {
                 />
               ))}
             </div>
-          )}
+          ) : null}
         </>
       )}
-    </CContainer>
+    </>
   )
 }

@@ -7,7 +7,7 @@ export const getAllCustomers = createAsyncThunk(
     try {
       // Simulate an API call
       const { data } = await managementAxiosInstance.get(`/user/all`)
-      return data // Return product data on success
+      return data.data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.message)
     }
@@ -25,7 +25,7 @@ export const createCustomer = createAsyncThunk(
       return rejectWithValue(error.response.data.message)
     }
   },
-)
+) 
 //async function for update Customer
 export const updateCustomer = createAsyncThunk(
   'updateCustomer',
@@ -33,14 +33,14 @@ export const updateCustomer = createAsyncThunk(
     try {
       console.log(payload)
       //const { data } = await managementAxiosInstance.put(`/user/update_user`, payload)
-
+      
       const data = await managementAxiosInstance.put(`/user/${payload.user_id}/modify`, payload.update_fields);
       return data.data // Return product data on success
     } catch (error) {
       return rejectWithValue(error.response.data.message)
     }
   },
-)
+) 
 
 //async function for filter Customer
 export const filterCustomer = createAsyncThunk(
@@ -48,7 +48,7 @@ export const filterCustomer = createAsyncThunk(
   async (filters, { rejectWithValue }) => {
     try {
       // Simulate an API call
-
+      
       const { data } = await managementAxiosInstance.get(`/user/filter`, {
         params: filters,
       })
@@ -64,7 +64,7 @@ export const searchCustomer = createAsyncThunk(
   async (term, { rejectWithValue }) => {
     try {
       // Simulate an API call
-
+      
       const { data } = await managementAxiosInstance.get(`/user/search`, {
         params: { term },
       })
@@ -96,7 +96,7 @@ const customerSlice = createSlice({
     loading: false,
     success: false,
     error: null,
-    createdCustomerStatus: false,
+    createdCustomerStatus: false, 
     updatedCustomerStatus: false,
     fetch_customer_status:false,
     customer: {}
@@ -117,7 +117,7 @@ const customerSlice = createSlice({
         state.loading = true
       })
       .addCase(getAllCustomers.fulfilled, (state, action) => {
-
+        
         state.loading = false
         state.success = true
         state.customers = action.payload
@@ -126,13 +126,13 @@ const customerSlice = createSlice({
         state.loading = false
         state.error = action.payload
       })
-
+    
       //search Data Center
       .addCase(searchCustomer.pending, (state) => {
         state.loading = true
       })
       .addCase(searchCustomer.fulfilled, (state, action) => {
-
+        
         state.loading = false
         state.success = true
         state.customers = action.payload
@@ -155,7 +155,7 @@ const customerSlice = createSlice({
         state.loading = false
         state.error = action.payload
       })
-
+      
       //create Data Center
       .addCase(createCustomer.pending, (state) => {
         state.loading = true
@@ -183,7 +183,7 @@ const customerSlice = createSlice({
         state.loading = false
         state.error = action.payload
       })
-    //get User By Tenant
+    //get User By Tenant 
       .addCase(getCustomer.pending, (state) => {
         state.loading = true
       })
