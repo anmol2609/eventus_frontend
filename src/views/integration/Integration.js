@@ -35,17 +35,17 @@ export default function Integration() {
   }, [updated_SOAR_product, SOAR_product])
 
   const [sidebarVisible, setSidebarVisible] = useState(0)
-  const toggleSidebar = () => {
-    setSidebarVisible((prevSidebarVisible) =>
-      prevSidebarVisible === 0 ? 1 : prevSidebarVisible === 1 ? 2 : 1,
-    )
-  }
-
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedView, setSelectedView] = useState(0)
   const [timeColOrder, setTimeColOrder] = useState('desc')
   const [selectedSOARProductId, setSelectedSOARProductId] = useState()
   const [sideBarToShow, setSideBarToShow] = useState('new')
+
+  const toggleSidebar = () => {
+    setSidebarVisible((prevSidebarVisible) =>
+      prevSidebarVisible === 0 ? 1 : prevSidebarVisible === 1 ? 2 : 1,
+    )
+  }
 
   const styles = `
     @keyframes slideIn {
@@ -74,13 +74,13 @@ export default function Integration() {
         width: 100% !important;
         margin-right: 0 !important;
       }
-      .header-container {
+      .header-controls {
         flex-direction: column !important;
-        gap: 1rem;
+        align-items: stretch !important;
+        gap: 1rem !important;
       }
-      .action-buttons {
-        width: 100%;
-        justify-content: flex-end !important;
+      .sub-headers {
+        flex-wrap: wrap !important;
       }
     }
   `
@@ -99,13 +99,12 @@ export default function Integration() {
         marginRight: '16px',
         borderRadius: '7px',
         border: `1px solid ${Colors.BG_LIGHT}`,
-        width: 'calc(50% - 16px)', // Make it take up half the container width minus margin
-        minWidth: '250px', // Minimum width to maintain readability
-        maxWidth: '100%', // Ensure it doesn't overflow on small screens
+        width: 'calc(50% - 16px)', // Makes it responsive
+        minWidth: '250px',
       }}
     >
       <div className="d-flex justify-content-between align-items-center flex-wrap">
-        <div className="d-flex align-items-center" style={{ marginBottom: '8px' }}>
+        <div className="d-flex align-items-center mb-2 mb-sm-0">
           <div
             style={{
               borderRadius: '5px',
@@ -114,20 +113,13 @@ export default function Integration() {
               marginRight: '8px',
             }}
           >
-            <img
-              src={icon}
-              style={{
-                height: '20px',
-                width: '20px',
-                objectFit: 'contain',
-              }}
-              alt={title}
-            />
+            <img src={icon} style={{ height: '20px', width: '20px' }} alt="product icon" />
           </div>
           <div style={{ fontSize: '16px', wordBreak: 'break-word' }}>{title}</div>
         </div>
         <div className="d-flex align-items-center gap-2">
           <CButton
+            size="sm"
             style={{ padding: '2px' }}
             onClick={() => {
               setSelectedSOARProductId(id)
@@ -135,9 +127,10 @@ export default function Integration() {
               setSideBarToShow('edit')
             }}
           >
-            <img src={editIcon} alt="Edit" />
+            <img src={editIcon} alt="edit" />
           </CButton>
           <CButton
+            size="sm"
             style={{ padding: '2px', color: Colors.RED }}
             onClick={() => {
               const isConfirmed = window.confirm('Are you sure you want to delete this?')
@@ -146,20 +139,11 @@ export default function Integration() {
               }
             }}
           >
-            <img src={deleteIcon} alt="Delete" />
+            <img src={deleteIcon} alt="delete" />
           </CButton>
         </div>
       </div>
-      <div
-        style={{
-          fontSize: '13px',
-          fontWeight: 300,
-          color: Colors.WHITE_70,
-          wordBreak: 'break-word',
-        }}
-      >
-        {subTitle}
-      </div>
+      <div style={{ fontSize: '13px', fontWeight: 300, color: Colors.WHITE_70 }}>{subTitle}</div>
     </div>
   )
 
@@ -170,13 +154,10 @@ export default function Integration() {
       ) : (
         <>
           <div
-            className="header-container d-flex justify-content-between align-items-center"
-            style={{
-              borderBottom: `1px solid ${Colors.LIGHT_GRAY}`,
-              padding: '1rem',
-            }}
+            className="header-controls d-flex justify-content-between align-items-center"
+            style={{ borderBottom: `1px solid ${Colors.LIGHT_GRAY}`, padding: '1rem 0' }}
           >
-            <div className="d-flex flex-wrap gap-2">
+            <div className="sub-headers d-flex">
               <SubHeaders
                 title="SOAR Fields"
                 index={0}
@@ -193,8 +174,8 @@ export default function Integration() {
               />
             </div>
 
-            {selectedView == 0 && (
-              <div className="action-buttons d-flex justify-content-start align-items-center gap-2">
+            {selectedView === 0 && (
+              <div className="d-flex justify-content-start align-items-center gap-2 flex-wrap">
                 <CButton
                   size="sm"
                   type="button"
@@ -212,88 +193,83 @@ export default function Integration() {
                     backgroundColor: Colors.BLUE,
                     borderColor: Colors.BLUE,
                     display: 'flex',
-                    flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
                     marginBottom: '2px',
                   }}
                 >
-                  <style>{styles}</style>
                   <CIcon
                     icon={cilPlus}
                     customClassName="nav-icon"
-                    style={{ height: 16, marginRight: 4 }}
+                    style={{ height: '16px', marginRight: '4px' }}
                   />
                   Add New
                 </CButton>
-                {
-                  <>
-                    {sidebarVisible === 1 && (
-                      <div
-                        style={{
-                          position: 'fixed',
-                          top: 0,
-                          left: 0,
-                          width: '100vw',
-                          height: '100vh',
-                          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                          zIndex: 9,
-                        }}
-                      />
-                    )}
-                    <div
-                      className={`sidebar-overlay ${
-                        sidebarVisible === 1
-                          ? 'slide-in'
-                          : sidebarVisible === 2
-                            ? 'slide-out'
-                            : 'hidden-sidebar'
-                      }`}
-                      style={{
-                        position: 'fixed',
-                        top: 0,
-                        right: 0,
-                        bottom: 0,
-                        width: '40vw',
-                        backgroundColor: '#1a1a1a',
-                        boxShadow: '-2px 0 5px rgba(0,0,0,0.5)',
-                        zIndex: 10,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        overflowY: 'auto',
-                      }}
-                    >
-                      {sideBarToShow === 'edit' ? (
-                        <EditSOARProduct toggleSidebar={toggleSidebar} id={selectedSOARProductId} />
-                      ) : (
-                        <NewSOARProduct toggleSidebar={toggleSidebar} />
-                      )}
-                    </div>
-                  </>
-                }
               </div>
             )}
           </div>
 
-          {selectedView == 0 && (
-            <div
-              className="d-flex flex-row flex-wrap"
-              style={{
-                padding: '1rem',
-                gap: '1rem',
-              }}
-            >
+          {selectedView === 0 && (
+            <CRow className="g-3">
               {SOAR_products.map((item, index) => (
-                <DataBrick
-                  id={item._id}
-                  key={index}
-                  title={item.product_name}
-                  subTitle="Enterprise cybersecurity platform powered by & ..."
-                  icon={index === 0 ? TrendMicroIcon : TrendMicroIcon}
-                  index={index}
-                />
+                <CCol xs={12} md={6} key={item._id}>
+                  <DataBrick
+                    id={item._id}
+                    title={item.product_name}
+                    subTitle="Enterprise cybersecurity platform powered by & ..."
+                    icon={TrendMicroIcon}
+                    index={index}
+                  />
+                </CCol>
               ))}
-            </div>
+            </CRow>
+          )}
+
+          <style>{styles}</style>
+
+          {sidebarVisible > 0 && (
+            <>
+              {sidebarVisible === 1 && (
+                <div
+                  style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100vw',
+                    height: '100vh',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    zIndex: 9,
+                  }}
+                  onClick={toggleSidebar}
+                />
+              )}
+              <div
+                className={
+                  sidebarVisible === 1
+                    ? 'slide-in sidebar-overlay'
+                    : sidebarVisible === 2
+                      ? 'slide-out sidebar-overlay'
+                      : 'hidden-sidebar'
+                }
+                style={{
+                  position: 'fixed',
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  width: '40vw',
+                  backgroundColor: '#1a1a1a',
+                  boxShadow: '-2px 0 5px rgba(0,0,0,0.5)',
+                  zIndex: 10,
+                  overflowY: 'auto',
+                }}
+              >
+                {sideBarToShow === 'edit' ? (
+                  <EditSOARProduct toggleSidebar={toggleSidebar} id={selectedSOARProductId} />
+                ) : (
+                  <NewSOARProduct toggleSidebar={toggleSidebar} />
+                )}
+              </div>
+            </>
           )}
         </>
       )}
