@@ -17,7 +17,7 @@ export const createV1Customer = createAsyncThunk(
 const createV1CustomerSlice = createSlice({
     name: 'createV1Customer',
     initialState: { 
-      aws_customer: {},
+      V1_customer: {},
       loading: false, 
       success: false, 
       error: null 
@@ -36,7 +36,7 @@ const createV1CustomerSlice = createSlice({
       .addCase(createV1Customer.fulfilled, (state, action) => {
         state.loading = false
         state.success = true
-        state.aws_customer = action.payload // Save 
+        state.V1_customer = action.payload // Save 
       })
       .addCase(createV1Customer.rejected, (state, action) => {
         state.loading = false

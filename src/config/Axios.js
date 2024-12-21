@@ -29,7 +29,7 @@ const setHeaders = (config) => {
 
   config.headers.Authorization = token
     ? `${token}`
-    : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE1Y2NlYjhlOGIzYzk1NjJmZTMzY2MiLCJleHAiOjI1OTM5NjgxODB9.nS7WncDHezLgYARGMS69B22IrK5aGgLOhFBVQ8P1aHE'
+    : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmYyNmFiNWU5NDAwZjI0YTZlMGU2MDgiLCJleHAiOjE4MjExNTc3MjB9.QsPxUevOSpXWZtcZm21GoLzm92QB05nr8nBUgFq9gpw'
   config.headers['Content-Type'] = 'application/json'
   return config
 }

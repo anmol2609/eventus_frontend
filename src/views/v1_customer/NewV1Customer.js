@@ -24,10 +24,10 @@ export default function NewV1Customer({ toggleSidebar }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { error, success, loading } = useSelector((state) => state.createV1Customer)
+  const { error, success, loading } = useSelector((state) => state.create_V1_customer)
   const { V1_products, loading: V1_products_loading } = useSelector((state) => state.V1_products)
-  const { l3_customers: users, loading: users_loading } = useSelector((state) => state.l3_customers)
-  const { V1_customer } = useSelector((state) => state.createV1Customer)
+  const { l3_customers: users, loading: users_loading } = useSelector((state) => state.l3_customer)
+  const { V1_customer } = useSelector((state) => state.create_V1_customer)
 
   let V1_customer_initial_state = {
     customer: '',

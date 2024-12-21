@@ -57,8 +57,8 @@ export const CONSTANTS = {
     },
   },
   HOSTS: {
-    MANAGEMENT: 'http://127.0.0.1:5000',
-    TI: 'http://127.0.0.1:4000',
+    MANAGEMENT: 'http://144.24.124.242:8083',
+    TI: 'http://144.24.124.242:8080',
     ML_MODEL: 'http://127.0.0.1:5001',
   },
   USER_TYPE: {
